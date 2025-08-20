@@ -1,0 +1,8 @@
+services:
+  salary-calculator:
+    container_name: salary-calculator-ui
+    image: salary-calculator
+    build:
+      context: .
+    ports:
+      - '4200:4200'
