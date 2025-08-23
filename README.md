@@ -1,15 +1,9 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
+ <img width=200px height=200px src="public/salary.png" alt="Salary Calculator Logo"></a>
 </p>
 
-<h3 align="center">Project Title</h3>
-
-<div align="center">
-
-  [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
-
-</div>
+<h3 align="center">Salary Calculator</h3>
 
 ---
 
