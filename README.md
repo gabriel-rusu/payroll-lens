@@ -3,7 +3,7 @@
  <img width=200px height=200px src="public/salary.png" alt="Salary Calculator Logo"></a>
 </p>
 
-<h3 align="center">Salary Calculator</h3>
+<h3 align="center">Payroll Lens</h3>
 
 <p align="center"> A salary calculator tool intended to help employees and 
 employers in seeking information or clarification on how to calculate from gross to net salary.
