@@ -1,0 +1,67 @@
+<form class="flex items-center justify-center h-[70vh]" #salaryForm="ngForm">
+  <div class="bg-white dark:bg-gray-800 rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5 col-span-2">
+    <div class="flex justify-center">
+      <img src="salary.png" class="w-36 p-4 rounded-md border-white" alt="Payroll Lens logo"/>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-2">
+      <div class="m-2">
+        <label for="incomeType" class="dark:text-green-500 block">Salary Type:</label>
+        <select name="period" id="incomeType" class="rounded-lg text-green-800 w-full p-1 text-center" [(ngModel)]="income.type" name="type">
+          <option value="Gross" class="rounded-lg">Gross</option>
+          <option value="Net" class="rounded-lg">Net</option>
+        </select>
+      </div>
+
+      <div class="m-2">
+        <label class="dark:text-green-500 block" for="currency">Currency:</label>
+        <select name="currency" id="currency" class="rounded-lg text-green-800 w-full p-1 text-center">
+          <option value="euro" class="rounded-lg">Euro</option>
+          <option value="usd" class="rounded-lg">US Dollar</option>
+          <option value="ron" class="rounded-lg">RON</option>
+        </select>
+      </div>
+
+<!--      <div class="m-2">-->
+<!--        <label for="hours" class="dark:text-green-500 block">Hours per week:</label>-->
+<!--        <input type="text" id="hours" class="p-1 rounded-lg text-center w-full text-gray-500" [defaultValue]="40" [(ngModel)]="income.hoursPerWeek" name="hoursPerWeek">-->
+<!--      </div>-->
+
+<!--      <div class="m-2">-->
+<!--        <label for="days" class="dark:text-gray-200 block">Days per week:</label>-->
+<!--        <input type="text" id="days" class="p-1 rounded-lg text-center w-full text-gray-500" [defaultValue]="5" [(ngModel)]="income.daysPerWeek" name="daysPerWeek">-->
+<!--      </div>-->
+
+<!--      <div class="m-2">-->
+<!--        <label for="holidays" class="dark:text-gray-200 block">Holidays per year:</label>-->
+<!--        <input type="text" id="hours" class="p-1 rounded-lg text-center w-full text-gray-500" [defaultValue]="10" [(ngModel)]="income.holidays" name="holidays">-->
+<!--      </div>-->
+
+<!--      <div class="m-2">-->
+<!--        <label for="hours" class="dark:text-gray-200 block">Vacation days per year:</label>-->
+<!--        <input type="text" id="hours" class="p-1 rounded-lg text-center w-full text-gray-500" [defaultValue]="21" [(ngModel)]="income.vacationDays" name="vacationDays">-->
+<!--      </div>-->
+
+      <div class="m-2">
+        <label for="salary" class="dark:text-green-500 block">Salary:</label>
+        <input type="text" id="salary" class="p-1 rounded-lg text-center w-full text-green-800" [(ngModel)]="income.value" name="vacationDays">
+      </div>
+
+      <div class="m-2">
+        <label class="dark:text-green-500 block" for="period">Per:</label>
+        <select name="period" id="period" class="rounded-lg text-green-800 w-full p-1 text-center">
+          <option value="Monthly" class="rounded-lg">Month</option>
+          <option value="Yearly" class="rounded-lg">Year</option>
+          <option value="Daily" class="rounded-lg">Day</option>
+          <option value="Weekly" class="rounded-lg">Week</option>
+        </select>
+      </div>
+
+
+    </div>
+    <div class="text-right">
+      <!--      <button class="bg-blue-600 p-1 rounded-lg mx-2 text-right"></button>-->
+      <button class="bg-green-800 p-1 rounded-lg mx-2 text-right dark:text-gray-200">Calculate</button>
+    </div>
+  </div>
+
+</form>
