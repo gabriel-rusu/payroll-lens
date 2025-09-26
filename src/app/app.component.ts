@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {CalculatorComponent} from './components/calculator/calculator.component';
 import {SalaryBreakdownComponent} from './components/salary-breakdown/salary-breakdown.component';
+import {Income} from './shared/model/income.model';
 
 @Component({
   selector: 'app-root',
@@ -13,4 +14,5 @@ import {SalaryBreakdownComponent} from './components/salary-breakdown/salary-bre
 })
 export class AppComponent {
   title = 'salary-calculator';
+  income?: Income;
 }

@@ -1,2 +1,2 @@
-<app-calculator></app-calculator>
-<app-salary-breakdown></app-salary-breakdown>
+<app-calculator (salary)="income = $event"></app-calculator>
+<app-salary-breakdown [income]="income"></app-salary-breakdown>

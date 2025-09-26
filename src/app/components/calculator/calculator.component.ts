@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, model, output, signal} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import {Income} from '../../shared/model/income.model';
+
+
 
 @Component({
   selector: 'app-calculator',
@@ -10,24 +13,10 @@ import {FormsModule} from '@angular/forms';
   styleUrl: './calculator.component.css'
 })
 export class CalculatorComponent {
-  income: {
-    type: string;
-    value: number;
-    daysPerWeek: number;
-    hoursPerWeek: number;
-    holidays: number;
-    vacationDays: number;
-    frequency: string;
-    currency: string;
-  } = {
-    type: "Gross",
-    value: 0,
-    daysPerWeek: 5,
-    hoursPerWeek: 40,
-    holidays: 10,
-    vacationDays: 21,
-    frequency: "Month",
-    currency: "RON"
-  };
+  income = new Income("Gross", "RON", 0, "Month");
+  salary =  output<Income>();
 
+  computeTaxes() {
+    this.salary.emit(JSON.parse(JSON.stringify(this.income)));
+  }
 }

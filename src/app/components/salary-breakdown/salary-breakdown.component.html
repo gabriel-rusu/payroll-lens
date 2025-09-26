@@ -30,11 +30,27 @@
               class="border-b border-gray-100 p-4 pl-8 text-gray-500 dark:border-gray-700 dark:text-gray-400">{{ tax.quota + "%" }}
             </td>
             <td
-              class="border-b border-gray-100 p-4 pl-8 text-gray-500 dark:border-gray-700 dark:text-gray-400">{{ tax.value }}
+              class="border-b border-gray-100 p-4 pl-8 text-gray-500 dark:border-gray-700 dark:text-gray-400">{{ tax.value|number:'1.0-2' }}
             </td>
           </tr>
         }
       </tbody>
+      <tfoot>
+      <tr>
+        <td
+          class="border-t border-gray-200 p-4 pt-3 pb-3 pl-8 text-left font-medium text-gray-400 dark:border-gray-600 dark:text-gray-200">
+          Net income
+        </td>
+        <td
+          class="border-t border-gray-200 p-4 pt-3 pb-3 pl-8 text-left font-medium text-gray-400 dark:border-gray-600 dark:text-gray-200">
+          {{(result.percentage|number:'1.0-2') + '%'}}
+        </td>
+        <td
+          class="border-t border-gray-200 p-4 pt-3 pb-3 pl-8 text-left font-medium text-gray-400 dark:border-gray-600 dark:text-gray-200">
+          {{result.value|number:'1.0-2'}}
+        </td>
+      </tr>
+      </tfoot>
     </table>
   </div>
 </div>

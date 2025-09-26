@@ -6,7 +6,8 @@
     <div class="grid sm:grid-cols-2 lg:grid-cols-2">
       <div class="m-2">
         <label for="incomeType" class="dark:text-green-500 block">Salary Type:</label>
-        <select name="period" id="incomeType" class="rounded-lg text-green-800 w-full p-1 text-center" [(ngModel)]="income.type" name="type">
+        <select [style]="{height: '30px'}" id="incomeType" class="rounded-lg text-green-800 w-full p-1 text-center" [(ngModel)]="income.type"
+                name="type">
           <option value="Gross" class="rounded-lg">Gross</option>
           <option value="Net" class="rounded-lg">Net</option>
         </select>
@@ -14,9 +15,10 @@
 
       <div class="m-2">
         <label class="dark:text-green-500 block" for="currency">Currency:</label>
-        <select name="currency" id="currency" class="rounded-lg text-green-800 w-full p-1 text-center">
-          <option value="euro" class="rounded-lg">Euro</option>
-          <option value="usd" class="rounded-lg">US Dollar</option>
+        <select name="currency" id="currency" class="rounded-lg text-green-800 w-full p-1 text-center"
+                [style]="{height: '30px'}" [(ngModel)]="income.currency">
+          <option value="euro" class="rounded-lg">EURO</option>
+          <option value="usd" class="rounded-lg">USD</option>
           <option value="ron" class="rounded-lg">RON</option>
         </select>
       </div>
@@ -43,12 +45,14 @@
 
       <div class="m-2">
         <label for="salary" class="dark:text-green-500 block">Salary:</label>
-        <input type="text" id="salary" class="p-1 rounded-lg text-center w-full text-green-800" [(ngModel)]="income.value" name="vacationDays">
+        <input type="text" id="salary" [style]="{height: '30px'}" class="p-1 rounded-lg text-center w-full text-green-800"
+               [(ngModel)]="income.value" name="salary">
       </div>
 
       <div class="m-2">
         <label class="dark:text-green-500 block" for="period">Per:</label>
-        <select name="period" id="period" class="rounded-lg text-green-800 w-full p-1 text-center">
+        <select name="period" id="period" class="rounded-lg text-green-800 w-full p-1 text-center"
+                [style]="{height: '30px'}" [(ngModel)]="income.frequency">
           <option value="Monthly" class="rounded-lg">Month</option>
           <option value="Yearly" class="rounded-lg">Year</option>
           <option value="Daily" class="rounded-lg">Day</option>
@@ -60,7 +64,8 @@
     </div>
     <div class="text-right">
       <!--      <button class="bg-blue-600 p-1 rounded-lg mx-2 text-right"></button>-->
-      <button class="bg-green-800 p-1 rounded-lg mx-2 text-right dark:text-gray-200">Calculate</button>
+      <button class="bg-green-800 p-1 rounded-lg mx-2 mt-4 text-right dark:text-gray-200"
+      (click)="computeTaxes()">Calculate</button>
     </div>
   </div>
 
