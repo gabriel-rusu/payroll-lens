@@ -29,7 +29,6 @@ export class SalaryBreakdownComponent implements OnInit {
     effect(() => {
       if (this.income()) {
         this.taxes.sort((a, b) => a.order - b.order);
-        console.log('---------------------------');
         let referenceIncome = this.income()?.value;
         for (let tax of this.taxes) {
           if (referenceIncome) {
