@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {CalculatorComponent} from './components/calculator/calculator.component';
-import {SalaryBreakdownComponent} from './components/salary-breakdown/salary-breakdown.component';
+import {CalculatorComponent} from './component/calculator/calculator.component';
+import {SalaryBreakdownComponent} from './component/salary-breakdown/salary-breakdown.component';
 import {Income} from './shared/model/income.model';
 
 @Component({
