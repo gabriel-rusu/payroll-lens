@@ -7,6 +7,7 @@ import {map} from 'rxjs';
 import {PaydayFrequency, TaxOrder, TaxType} from '../../shared/constants';
 import {TaxedIncome} from '../../shared/model/taxed-income.model';
 import {WorkdayCounterService} from '../../shared/service/workday-counter.service';
+import {LocalizationService} from '../../shared/service/localization.service';
 
 class Pay {
   constructor(public remaining: number, public gross: number) {
@@ -30,7 +31,8 @@ export class SalaryBreakdownComponent implements OnInit {
   employerTaxes: Tax[] = [];
   result: TaxedIncome = new TaxedIncome(0, 0);
 
-  constructor(private httpClient: HttpClient, private workdayCounter: WorkdayCounterService) {
+  constructor(private httpClient: HttpClient, private workdayCounter: WorkdayCounterService,
+              private localizationService: LocalizationService,) {
     effect(() => {
       if (this.hasSubmittedIncome()) {
         this.taxes.sort((a, b) => a.order - b.order);
@@ -66,7 +68,8 @@ export class SalaryBreakdownComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.workdayCounter.daysOff(2025, 'US').subscribe(daysOff => {
+    console.log('User country: '+ this.localizationService.getCountry());
+    this.workdayCounter.daysOff(2025, this.localizationService.getCountryCode()).subscribe(daysOff => {
       console.log(daysOff);
     })
     this.httpClient.get<Tax[]>("./taxes.json").pipe(
