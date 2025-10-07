@@ -7,7 +7,6 @@ import {map} from 'rxjs';
 import {PaydayFrequency, TaxOrder, TaxType} from '../../shared/constants';
 import {TaxedIncome} from '../../shared/model/taxed-income.model';
 import {WorkdayCounterService} from '../../shared/service/workday-counter.service';
-import {LocalizationService} from '../../shared/service/localization.service';
 
 class Pay {
   constructor(public remaining: number, public gross: number) {
@@ -20,19 +19,19 @@ class Pay {
     DecimalPipe,
     PercentPipe
   ],
-  templateUrl: './salary-breakdown.component.html',
-  styleUrl: './salary-breakdown.component.css'
+  templateUrl: './salary-breakdown.html',
+  styleUrl: './salary-breakdown.css'
 })
-export class SalaryBreakdownComponent implements OnInit {
+export class SalaryBreakdown implements OnInit {
   currency = input<string>('RON');
   income = input<Income>();
+
   taxes: Tax[] = [];
   employeeTaxes: Tax[] = [];
   employerTaxes: Tax[] = [];
   result: TaxedIncome = new TaxedIncome(0, 0);
 
-  constructor(private httpClient: HttpClient, private workdayCounter: WorkdayCounterService,
-              private localizationService: LocalizationService,) {
+  constructor(private httpClient: HttpClient, private workdayCounter: WorkdayCounterService) {
     effect(() => {
       if (this.hasSubmittedIncome()) {
         this.taxes.sort((a, b) => a.order - b.order);
@@ -50,14 +49,14 @@ export class SalaryBreakdownComponent implements OnInit {
             }
           }
         }
-        this.result = new TaxedIncome(pay.remaining, pay.remaining / pay.gross * 100.0)
+        this.result = new TaxedIncome(pay.remaining, pay.remaining / pay.gross)
       }
     });
   }
 
   private payAmount(income: Income | undefined): Pay {
     let gross: number = Number(income?.value);
-    if (income?.frequency == PaydayFrequency.DAY){
+    if (income?.frequency == PaydayFrequency.DAY) {
       gross *= 30;
     }
     return new Pay(gross, gross);
@@ -68,10 +67,10 @@ export class SalaryBreakdownComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('User country: '+ this.localizationService.getCountry());
-    this.workdayCounter.daysOff(2025, this.localizationService.getCountryCode()).subscribe(daysOff => {
-      console.log(daysOff);
-    })
+
+    this.workdayCounter.getNumberOfWorkingDays().subscribe(workingDays => {
+      console.log('workingDays: ', workingDays);
+    });
     this.httpClient.get<Tax[]>("./taxes.json").pipe(
       map(res => res.map(tax => Tax.from(tax)))
     ).subscribe({

@@ -49,6 +49,20 @@
           {{result.value | number:'1.0-2'}}
         </td>
       </tr>
+        <tr>
+          <td
+            class="border-t border-gray-200 p-4 pt-3 pb-3 pl-8 text-left font-medium text-gray-400 dark:border-gray-600 dark:text-gray-200">
+            {{ income()?.type == 'Net' ? 'Gross' : 'Net' }} income
+          </td>
+          <td
+            class="border-t border-gray-200 p-4 pt-3 pb-3 pl-8 text-left font-medium text-gray-400 dark:border-gray-600 dark:text-gray-200">
+            {{result.percentage | percent:'1.0-2'}}
+          </td>
+          <td
+            class="border-t border-gray-200 p-4 pt-3 pb-3 pl-8 text-left font-medium text-gray-400 dark:border-gray-600 dark:text-gray-200">
+            {{result.value | number:'1.0-2'}}
+          </td>
+        </tr>
         @for (tax of employerTaxes; track tax.name) {
           <tr>
             <td
@@ -63,9 +77,6 @@
           </tr>
         }
       </tbody>
-      <tfoot>
-
-      </tfoot>
     </table>
   </div>
 </div>

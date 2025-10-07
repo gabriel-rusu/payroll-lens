@@ -1,1 +1,0 @@
-All the images in this folder should be compressed without loss to make the loading expericene better
