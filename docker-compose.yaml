@@ -1,7 +1,7 @@
 services:
-  salary-calculator:
-    container_name: salary-calculator-ui
-    image: salary-calculator
+  payroll-lens:
+    container_name: payroll-lens-ui
+    image: payroll-lens
     build:
       context: .
     ports:
