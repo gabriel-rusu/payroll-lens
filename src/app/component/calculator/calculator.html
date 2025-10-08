@@ -54,7 +54,7 @@
       <div class="m-2">
         <label class="dark:text-green-500 block" for="period">Per:</label>
         <select name="period" id="period" class="rounded-lg text-green-800 w-full p-1 text-center"
-                 [(ngModel)]="defaultIncome.frequency" name="freq">
+                 [(ngModel)]="defaultIncome.frequency">
           @for (freq of enumerate(PaydayFrequency); track freq) {
             <option [value]="freq" class="rounded-lg">{{ freq }}</option>
           }
@@ -66,12 +66,12 @@
         <div class="m-2">
           <label class="dark:text-green-500 block" for="period">Meal tickets:</label>
           <input type="text" class="p-1 rounded-lg text-center w-full text-green-800"
-                 id="mealTickets" [(ngModel)]="defaultBenefits.mealTickets.value" name="value">
+                 id="mealTickets" [(ngModel)]="defaultBenefits.mealTickets.value" name="mealTicketValue">
         </div>
         <div class="m-2">
           <label class="dark:text-green-500 block" for="period">Per:</label>
-          <select name="period" id="period" class="rounded-lg text-green-800 w-full p-1 text-center"
-                   [(ngModel)]="defaultBenefits.mealTickets.frequency" name="mealFreq">
+          <select id="period" class="rounded-lg text-green-800 w-full p-1 text-center"
+                   [(ngModel)]="defaultBenefits.mealTickets.frequency" name="mealTicketPeriod">
             @for (freq of enumerate(PaydayFrequency); track freq) {
               <option [value]="freq" class="rounded-lg">{{ freq }}</option>
             }
@@ -94,9 +94,7 @@
           Hide benefits
         </button>
       }
-      <button class="bg-green-800 p-2 rounded-lg mx-2 mt-4 text-right dark:text-gray-200"
-              (click)="computeTaxes()">Compare offers
-      </button>
+      <button class="bg-green-800 p-2 rounded-lg mx-2 mt-4 text-right dark:text-gray-200">Compare offers</button>
     </div>
   </div>
 

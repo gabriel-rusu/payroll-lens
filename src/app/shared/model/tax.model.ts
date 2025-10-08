@@ -6,6 +6,7 @@ export class Tax {
               public quota: number, public order: TaxOrder, public value: number) {
   }
 
+
   computeValue(income: number): number {
     const taxValue = income * (Number(this.quota) / 100.0);
     this.value = taxValue;
@@ -14,5 +15,9 @@ export class Tax {
 
   static from(json: any) {
     return Object.assign(new Tax('', '', TaxType.EMPLOYEE, 0, TaxOrder.GROSS, 0), json);
+  }
+
+  static clone(tax: Tax): Tax {
+    return new Tax(tax.name, tax.symbol, tax.type, tax.quota, tax.order, tax.value);
   }
 }

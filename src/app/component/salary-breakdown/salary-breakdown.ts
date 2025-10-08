@@ -7,11 +7,8 @@ import {map} from 'rxjs';
 import {PaydayFrequency, TaxOrder, TaxType} from '../../shared/constants';
 import {TaxedIncome} from '../../shared/model/taxed-income.model';
 import {WorkdayCounterService} from '../../shared/service/workday-counter.service';
+import {CalculatorFactory} from '../../shared/strategy/calculator.factory';
 
-class Pay {
-  constructor(public remaining: number, public gross: number) {
-  }
-}
 
 @Component({
   selector: 'app-salary-breakdown',
@@ -27,6 +24,7 @@ export class SalaryBreakdown implements OnInit {
   income = input<Income>();
 
   taxes: Tax[] = [];
+  employerTotal: number = 0;
   employeeTaxes: Tax[] = [];
   employerTaxes: Tax[] = [];
   result: TaxedIncome = new TaxedIncome(0, 0);
@@ -34,33 +32,17 @@ export class SalaryBreakdown implements OnInit {
   constructor(private httpClient: HttpClient, private workdayCounter: WorkdayCounterService) {
     effect(() => {
       if (this.hasSubmittedIncome()) {
-        this.taxes.sort((a, b) => a.order - b.order);
-        let pay = this.payAmount(this.income());
-        for (let tax of this.taxes) {
-          if (tax.order == TaxOrder.GROSS) {
-            tax.computeValue(pay.gross);
-            if (tax.type == 1) {
-              pay.remaining -= tax.value;
-            }
-          } else if (tax.order == TaxOrder.REMAINING) {
-            tax.computeValue(pay.remaining);
-            if (tax.type == TaxType.EMPLOYEE) {
-              pay.remaining -= tax.value;
-            }
-          }
-        }
-        this.result = new TaxedIncome(pay.remaining, pay.remaining / pay.gross)
+        let calculator = CalculatorFactory.get(this.income()?.type);
+        let incomeBreakdown = calculator.computeTaxRates(this.income(), this.taxes);
+        this.employeeTaxes = incomeBreakdown.taxRates.filter(tax => tax.type == TaxType.EMPLOYEE);
+        this.employerTaxes = incomeBreakdown.taxRates.filter(tax => tax.type == TaxType.EMPLOYER);
+        this.result = new TaxedIncome(incomeBreakdown.netIncome, incomeBreakdown.netToGrossRation);
+        this.employerTotal = this.employerTaxes.map(tax => tax.value)
+          .reduce((total: number, current: number) => total + current) + incomeBreakdown.grossIncome;
       }
     });
   }
 
-  private payAmount(income: Income | undefined): Pay {
-    let gross: number = Number(income?.value);
-    if (income?.frequency == PaydayFrequency.DAY) {
-      gross *= 30;
-    }
-    return new Pay(gross, gross);
-  }
 
   private hasSubmittedIncome = () => {
     return this.income() != null && this.income()?.value != null;
@@ -76,17 +58,8 @@ export class SalaryBreakdown implements OnInit {
     ).subscribe({
         next: (taxes: Tax[]) => {
           this.taxes = taxes;
-          for (const tax of this.taxes) {
-            if (tax.type == TaxType.EMPLOYEE) {
-              this.employeeTaxes.push(tax);
-            } else {
-              this.employerTaxes.push(tax);
-            }
-          }
         }
       }
     );
   }
-
-
 }
