@@ -3,6 +3,7 @@ import {Income} from '../model/income.model';
 import {Tax} from '../model/tax.model';
 import {IncomeBreakdown} from '../model/income-breakdown.model';
 import {TaxOrder, TaxType} from '../constants';
+import {NetCalculatorStrategy} from './net-calculator.strategy';
 
 export class GrossCalculatorStrategy extends BaseCalculatorStrategy {
   computeTaxRates(income: Income | undefined, taxes: Tax[]): IncomeBreakdown {
@@ -17,9 +18,9 @@ export class GrossCalculatorStrategy extends BaseCalculatorStrategy {
       }
     }
     pay.gross = pay.remaining * 100/grossPercent;
-    console.log(pay.gross);
-
-    return new IncomeBreakdown(0, 0, 0, []);
+    income = Income.clone(income as Income);
+    income.value = pay.gross;
+    return new NetCalculatorStrategy().computeTaxRates(income, taxes)
   }
 
 }

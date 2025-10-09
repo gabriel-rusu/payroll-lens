@@ -22,6 +22,12 @@
         </tr>
         </thead>
         <tbody class="bg-white dark:bg-gray-800">
+        <tr class="font-medium text-gray-400 dark:text-gray-200 border-t border-gray-100 dark:border-gray-700">
+          <td class="border-t border-gray-100 p-4 pl-8 dark:border-gray-700">Gross income</td>
+          <td class="p-4 pl-8">-</td>
+          <td class="border-t border-gray-100 p-4 pl-8 dark:border-gray-700">{{incomeBreakdown.grossIncome | number:'1.0-2'}}
+          </td>
+        </tr>
           @for (tax of employeeTaxes; track tax.name) {
             <tr>
               <td
@@ -36,9 +42,9 @@
             </tr>
           }
         <tr class="font-medium text-gray-400 dark:text-gray-200 border-t border-gray-100 dark:border-gray-700">
-          <td class="border-t border-gray-100 p-4 dark:border-gray-700">{{ income()?.type == 'Net' ? 'Gross' : 'Net' }} income</td>
-          <td class=" p-4 ">{{result.percentage | percent:'1.0-2'}}</td>
-          <td class="border-t border-gray-100 p-4 dark:border-gray-700">{{result.value | number:'1.0-2'}}
+          <td class="border-t border-gray-100 p-4 pl-8 dark:border-gray-700">Net income</td>
+          <td class="p-4 pl-8">{{incomeBreakdown.netToGrossRation | percent:'1.0-2'}}</td>
+          <td class="border-t border-gray-100 p-4 pl-8 dark:border-gray-700">{{incomeBreakdown.netIncome | number:'1.0-2'}}
           </td>
         </tr>
           @for (tax of employerTaxes; track tax.name) {
@@ -55,9 +61,9 @@
             </tr>
           }
         <tr class="font-medium text-gray-400 dark:text-gray-200 border-t border-gray-100 dark:border-gray-700">
-          <td class="border-t border-gray-100 p-4 dark:border-gray-700">{{ 'Employeer total pay:' }}</td>
-          <td class=" p-4 ">{{ '-' }}</td>
-          <td class="border-t border-gray-100 p-4 dark:border-gray-700">{{ employerTotal|number:'1.0-2' }}
+          <td class="border-t border-gray-100 p-4 pl-8 dark:border-gray-700">{{ 'Employeer total pay:' }}</td>
+          <td class="p-4 pl-8">{{ '-' }}</td>
+          <td class="border-t border-gray-100 p-4 pl-8 dark:border-gray-700">{{ employerTotal|number:'1.0-2' }}
           </td>
         </tr>
         </tbody>

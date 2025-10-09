@@ -4,10 +4,10 @@ import {Income} from '../../shared/model/income.model';
 import {Tax} from '../../shared/model/tax.model';
 import {DecimalPipe, PercentPipe} from '@angular/common';
 import {map} from 'rxjs';
-import {PaydayFrequency, TaxOrder, TaxType} from '../../shared/constants';
-import {TaxedIncome} from '../../shared/model/taxed-income.model';
+import {TaxType} from '../../shared/constants';
 import {WorkdayCounterService} from '../../shared/service/workday-counter.service';
 import {CalculatorFactory} from '../../shared/strategy/calculator.factory';
+import {IncomeBreakdown} from '../../shared/model/income-breakdown.model';
 
 
 @Component({
@@ -27,18 +27,17 @@ export class SalaryBreakdown implements OnInit {
   employerTotal: number = 0;
   employeeTaxes: Tax[] = [];
   employerTaxes: Tax[] = [];
-  result: TaxedIncome = new TaxedIncome(0, 0);
+  incomeBreakdown = new IncomeBreakdown(0, 0, 0, []);
 
   constructor(private httpClient: HttpClient, private workdayCounter: WorkdayCounterService) {
     effect(() => {
       if (this.hasSubmittedIncome()) {
         let calculator = CalculatorFactory.get(this.income()?.type);
-        let incomeBreakdown = calculator.computeTaxRates(this.income(), this.taxes);
-        this.employeeTaxes = incomeBreakdown.taxRates.filter(tax => tax.type == TaxType.EMPLOYEE);
-        this.employerTaxes = incomeBreakdown.taxRates.filter(tax => tax.type == TaxType.EMPLOYER);
-        this.result = new TaxedIncome(incomeBreakdown.netIncome, incomeBreakdown.netToGrossRation);
+        this.incomeBreakdown = calculator.computeTaxRates(this.income(), this.taxes);
+        this.employeeTaxes = this.incomeBreakdown.taxRates.filter(tax => tax.type == TaxType.EMPLOYEE);
+        this.employerTaxes = this.incomeBreakdown.taxRates.filter(tax => tax.type == TaxType.EMPLOYER);
         this.employerTotal = this.employerTaxes.map(tax => tax.value)
-          .reduce((total: number, current: number) => total + current) + incomeBreakdown.grossIncome;
+          .reduce((total: number, current: number) => total + current) + this.incomeBreakdown.grossIncome;
       }
     });
   }

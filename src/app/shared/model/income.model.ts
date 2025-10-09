@@ -4,4 +4,9 @@ export class Income {
               public daysPerWeek?: number, public hoursPerWeek?: number, public holidays?: number, public vacationDays?: number) {
 
   }
+
+  static clone(income: Income) {
+    return new Income(income.type, income.currency, income.value, income.frequency, income.daysPerWeek,
+      income.hoursPerWeek, income.holidays, income.vacationDays);
+  }
 }
