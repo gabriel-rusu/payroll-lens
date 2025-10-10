@@ -20,19 +20,19 @@ import {IncomeBreakdown} from '../../shared/model/income-breakdown.model';
   styleUrl: './salary-breakdown.css'
 })
 export class SalaryBreakdown implements OnInit {
-  currency = input<string>('RON');
-  income = input<Income>();
-
   taxes: Tax[] = [];
   employerTotal: number = 0;
   employeeTaxes: Tax[] = [];
   employerTaxes: Tax[] = [];
+  income = input<Income>();
+  currency = input<string>('RON');
   incomeBreakdown = new IncomeBreakdown(0, 0, 0, []);
 
-  constructor(private httpClient: HttpClient, private workdayCounter: WorkdayCounterService) {
+
+  constructor(private httpClient: HttpClient, workdayCounter: WorkdayCounterService) {
     effect(() => {
       if (this.hasSubmittedIncome()) {
-        let calculator = CalculatorFactory.get(this.income()?.type);
+        let calculator = CalculatorFactory.get(workdayCounter, this.income()?.type);
         this.incomeBreakdown = calculator.computeTaxRates(this.income(), this.taxes);
         this.employeeTaxes = this.incomeBreakdown.taxRates.filter(tax => tax.type == TaxType.EMPLOYEE);
         this.employerTaxes = this.incomeBreakdown.taxRates.filter(tax => tax.type == TaxType.EMPLOYER);
@@ -48,10 +48,6 @@ export class SalaryBreakdown implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.workdayCounter.getNumberOfWorkingDays().subscribe(workingDays => {
-      console.log('workingDays: ', workingDays);
-    });
     this.httpClient.get<Tax[]>("./taxes.json").pipe(
       map(res => res.map(tax => Tax.from(tax)))
     ).subscribe({

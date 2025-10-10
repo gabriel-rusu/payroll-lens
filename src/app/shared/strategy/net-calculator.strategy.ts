@@ -3,8 +3,13 @@ import {Income} from '../model/income.model';
 import {Tax} from '../model/tax.model';
 import {TaxOrder, TaxType} from '../constants';
 import {IncomeBreakdown} from '../model/income-breakdown.model';
+import {WorkdayCounterService} from '../service/workday-counter.service';
 
 export class NetCalculatorStrategy extends BaseCalculatorStrategy {
+  constructor(workdayCounter: WorkdayCounterService) {
+    super(workdayCounter);
+  }
+
   computeTaxRates(income: Income | undefined, taxes: Tax[]): IncomeBreakdown {
     let pay = this.payAmount(income);
     let taxRates: Tax[] = this.processTaxes(taxes)

@@ -4,8 +4,14 @@ import {Tax} from '../model/tax.model';
 import {IncomeBreakdown} from '../model/income-breakdown.model';
 import {TaxOrder, TaxType} from '../constants';
 import {NetCalculatorStrategy} from './net-calculator.strategy';
+import {WorkdayCounterService} from '../service/workday-counter.service';
 
 export class GrossCalculatorStrategy extends BaseCalculatorStrategy {
+
+  constructor(workdayCounter: WorkdayCounterService) {
+    super(workdayCounter);
+  }
+
   computeTaxRates(income: Income | undefined, taxes: Tax[]): IncomeBreakdown {
     let pay = this.payAmount(income);
     let grossPercent = 100;
@@ -20,7 +26,7 @@ export class GrossCalculatorStrategy extends BaseCalculatorStrategy {
     pay.gross = pay.remaining * 100/grossPercent;
     income = Income.clone(income as Income);
     income.value = pay.gross;
-    return new NetCalculatorStrategy().computeTaxRates(income, taxes)
+    return new NetCalculatorStrategy(this.workdayCounter).computeTaxRates(income, taxes)
   }
 
 }

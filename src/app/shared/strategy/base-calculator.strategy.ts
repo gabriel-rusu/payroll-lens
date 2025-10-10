@@ -3,8 +3,11 @@ import {Tax} from '../model/tax.model';
 import {IncomeBreakdown} from '../model/income-breakdown.model';
 import {Pay} from '../model/pay.model';
 import {PaydayFrequency} from '../constants';
+import {WorkdayCounterService} from '../service/workday-counter.service';
 
 export abstract class BaseCalculatorStrategy {
+
+  constructor(protected workdayCounter: WorkdayCounterService) {}
 
   abstract computeTaxRates(income: Income | undefined, taxes: Tax[]): IncomeBreakdown;
 
@@ -15,7 +18,7 @@ export abstract class BaseCalculatorStrategy {
   protected payAmount(income: Income | undefined): Pay {
     let gross: number = Number(income?.value);
     if (income?.frequency == PaydayFrequency.DAY) {
-      gross *= 30;
+      gross *= this.workdayCounter.getWorkingDaysInMonth(new Date().getFullYear(), new Date().getMonth())?.length;
     }
     return new Pay(gross, gross);
   }
