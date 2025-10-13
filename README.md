@@ -1,59 +1,99 @@
-# PayrollLens
+<p align="center">
+  <a href="" rel="noopener">
+ <img width=200px height=200px src="public/salary.png" alt="Salary Calculator Logo"></a>
+</p>
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.4.
+<h3 align="center">Payroll Lens</h3>
 
-## Development server
+<p align="center"> A salary calculator tool intended to help employees and 
+employers in seeking information or clarification on how to calculate from gross to net salary.
+It also help employees to determine how RSU (Restricted Stock Units) modify the monthly take home or annual earnings.
+    <br> 
+</p>
 
-To start a local development server, run:
+## 📝 Table of Contents
 
-```bash
-ng serve
+- [About](#about)
+- [Getting Started](#getting_started)
+- [Deployment](#deployment)
+- [Usage](#usage)
+- [Built Using](#built_using)
+- [TODO](./TODO.md)
+- [Authors](#authors)
+- [Acknowledgments](#acknowledgement)
+
+## 🧐 About <a name = "about"></a>
+
+Write about 1-2 paragraphs describing the purpose of your project.
+
+## 🏁 Getting Started <a name = "getting_started"></a>
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+
+### Prerequisites
+
+What things you need to install the software and how to install them.
+
+```
+Give examples
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Installing
 
-## Code scaffolding
+A step by step series of examples that tell you how to get a development env running.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Say what the step will be
 
-```bash
-ng generate component component-name
+```
+Give the example
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+And repeat
 
-```bash
-ng generate --help
+```
+until finished
 ```
 
-## Building
+End with an example of getting some data out of the system or using it for a little demo.
 
-To build the project run:
+## 🔧 Running the tests <a name = "tests"></a>
 
-```bash
-ng build
+Explain how to run the automated tests for this system.
+
+### Break down into end to end tests
+
+Explain what these tests test and why
+
+```
+Give an example
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### And coding style tests
 
-## Running unit tests
+Explain what these tests test and why
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+```
+Give an example
 ```
 
-## Running end-to-end tests
+## 🎈 Usage <a name="usage"></a>
 
-For end-to-end (e2e) testing, run:
+Add notes about how to use the system.
 
-```bash
-ng e2e
-```
+## 🚀 Deployment <a name = "deployment"></a>
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Add additional notes about how to deploy this on a live system.
 
-## Additional Resources
+## ⛏️ Built Using <a name = "built_using"></a>
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [MongoDB](https://www.mongodb.com/) - Database
+
+## ✍️ Authors <a name = "authors"></a>
+
+- [@gabriel-rusu](https://github.com/gabriel-rusu) - Idea & Initial work
+
+## 🎉 Acknowledgements <a name = "acknowledgement"></a>
+
+- Hat tip to anyone whose code was used
+- Inspiration
+- References
