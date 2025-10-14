@@ -82,7 +82,150 @@ Add notes about how to use the system.
 
 ## 🚀 Deployment <a name = "deployment"></a>
 
-Add additional notes about how to deploy this on a live system.
+### ✅ Prerequisites
+
+Make sure you have the following installed:
+
+| Tool             | Version Command      |
+| ---------------- | -------------------- |
+| **Node.js**      | `node -v`            |
+| **npm**          | `npm -v`             |
+| **Angular CLI**  | `ng version`         |
+| **Firebase CLI** | `firebase --version` |
+
+If not installed:
+
+```bash
+npm install -g @angular/cli
+npm install -g firebase-tools
+```
+
+---
+
+### 🔧 Step 1: Create Angular App (skip if you already have one)
+
+```bash
+ng new my-angular-app
+cd my-angular-app
+```
+
+✅ Choose `Yes` for Angular routing and your preferred stylesheet format (CSS, SCSS, etc.)
+
+---
+
+## 🛠 Step 2: Build Angular App
+
+Angular 20 uses **standalone configuration**, so the build command is:
+
+```bash
+ng build
+```
+
+> This will output your build into `dist/my-angular-app/`
+
+---
+
+### 🔥 Step 3: Initialize Firebase in Your Project
+
+```bash
+firebase login
+firebase init
+```
+
+You’ll see a menu of options. Use spacebar to select:
+
+✅ **Hosting: Configure files for Firebase Hosting**
+
+Then press **Enter**.
+
+### 📋 Firebase CLI Prompts:
+
+| Prompt                        | What to Answer                    |
+| ----------------------------- | --------------------------------- |
+| **Select a Firebase project** | Choose your project or create one |
+| **Public directory**          | `dist/my-angular-app/browser`     |
+| **Single-page app rewrite?**  | `Yes`                             |
+| **Overwrite index.html?**     | `No`                              |
+
+> 🟡 Replace `my-angular-app` with your real project name if it's different.
+
+---
+
+### 🚀 Step 4: Deploy to Firebase Hosting
+
+```bash
+firebase deploy
+```
+
+You'll see output like:
+
+```
+✔ Deploy complete!
+Hosting URL: https://your-project-name.web.app
+```
+
+🎉 Your Angular 20 app is live on Firebase Hosting!
+
+---
+
+### 📂 Example Project Folder Structure After Build
+
+```
+my-angular-app/
+├── dist/
+│   └── my-angular-app/
+│       └── browser/
+├── firebase.json
+├── angular.json
+├── ...
+```
+
+---
+
+### 📄 Example `firebase.json`
+
+Firebase automatically generates this, but it should look like:
+
+```json
+{
+  "hosting": {
+    "public": "dist/my-angular-app/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
+```
+
+---
+
+### 🌐 Step 5 (Optional): Add a Custom Domain
+
+1. Go to [Firebase Console](https://console.firebase.google.com)
+2. Select your project → Hosting → "Add custom domain"
+3. Enter your domain (e.g., `www.example.com`)
+4. Follow instructions to add **A** and **TXT** records to your DNS provider
+
+Firebase will manage SSL automatically.
+
+---
+
+### ✅ Recap
+
+| Step               | Command           |
+| ------------------ | ----------------- |
+| Build Angular      | `ng build`        |
+| Init Firebase      | `firebase init`   |
+| Deploy to Firebase | `firebase deploy` |
+
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
