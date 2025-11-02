@@ -13,7 +13,6 @@
           <option value="Net" class="rounded-lg">Net</option>
         </select>
       </div>
-
       <div class="m-2">
         <label class="dark:text-green-500 block" for="currency">Currency:</label>
         <select name="currency" id="currency" class="rounded-lg text-green-800 w-full p-1 text-center"
@@ -23,34 +22,12 @@
           }
         </select>
       </div>
-
-      <!--      <div class="m-2">-->
-      <!--        <label for="hours" class="dark:text-green-500 block">Hours per week:</label>-->
-      <!--        <input type="text" id="hours" class="p-1 rounded-lg text-center w-full text-gray-500" [defaultValue]="40" [(ngModel)]="income.hoursPerWeek" name="hoursPerWeek">-->
-      <!--      </div>-->
-
-      <!--      <div class="m-2">-->
-      <!--        <label for="days" class="dark:text-gray-200 block">Days per week:</label>-->
-      <!--        <input type="text" id="days" class="p-1 rounded-lg text-center w-full text-gray-500" [defaultValue]="5" [(ngModel)]="income.daysPerWeek" name="daysPerWeek">-->
-      <!--      </div>-->
-
-      <!--      <div class="m-2">-->
-      <!--        <label for="holidays" class="dark:text-gray-200 block">Holidays per year:</label>-->
-      <!--        <input type="text" id="hours" class="p-1 rounded-lg text-center w-full text-gray-500" [defaultValue]="10" [(ngModel)]="income.holidays" name="holidays">-->
-      <!--      </div>-->
-
-      <!--      <div class="m-2">-->
-      <!--        <label for="hours" class="dark:text-gray-200 block">Vacation days per year:</label>-->
-      <!--        <input type="text" id="hours" class="p-1 rounded-lg text-center w-full text-gray-500" [defaultValue]="21" [(ngModel)]="income.vacationDays" name="vacationDays">-->
-      <!--      </div>-->
-
       <div class="m-2">
         <label for="salary" class="dark:text-green-500 block">Salary:</label>
         <input type="text" id="salary"
                class="p-1 rounded-lg text-center w-full text-green-800"
                [(ngModel)]="defaultIncome.value" name="salary">
       </div>
-
       <div class="m-2">
         <label class="dark:text-green-500 block" for="period">Per:</label>
         <select name="period" id="period" class="rounded-lg text-green-800 w-full p-1 text-center"
@@ -62,7 +39,21 @@
       </div>
     </div>
     @if (showBenefits) {
-      <div class="grid sm:grid-cols-2 lg:grid-cols-2">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-2 border-2 rounded-lg border-green-700">
+        <div class="m-2">
+          <label class="dark:text-green-500 block" for="period">Type:</label>
+          <select id="incomeType" class="rounded-lg text-green-800 w-full p-1 text-center"
+                  [(ngModel)]="defaultBenefits.mealTickets.type"
+                  name="mealTicketType">
+            <option value="Gross" class="rounded-lg">Gross</option>
+            <option value="Net" class="rounded-lg">Net</option>
+          </select>
+        </div>
+        <div class="m-2">
+          <label class="dark:text-green-500 block" for="period">Currency:</label>
+          <input type="text" class="p-1 rounded-lg text-center w-full text-green-800"
+                 id="mealTickets" [(ngModel)]="defaultBenefits.mealTickets.currency" name="mealTicketCurrency">
+        </div>
         <div class="m-2">
           <label class="dark:text-green-500 block" for="period">Meal tickets:</label>
           <input type="text" class="p-1 rounded-lg text-center w-full text-green-800"

@@ -1,13 +1,12 @@
 import {Component} from '@angular/core';
-import {Calculator} from './component/calculator/calculator';
-import {SalaryBreakdown} from './component/salary-breakdown/salary-breakdown';
-import {Income} from './shared/model/income.model';
+import {Dashboard} from './page/dashboard/dashboard';
 
 @Component({
   selector: 'app-root',
-  imports: [Calculator, SalaryBreakdown],
+  imports: [
+    Dashboard
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
-    income?: Income;}
+export class App {}

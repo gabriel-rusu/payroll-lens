@@ -19,9 +19,7 @@ export const appConfig: ApplicationConfig = {
       apiKey: "AIzaSyDCfTxwoPrGJxlPzzg81gcSg8ifcnUOg9Q",
       authDomain: "my-staging-ground.firebaseapp.com",
       messagingSenderId: "764201862701",
-      measurementId: "G-6DPW4CK248",
-      projectNumber: "764201862701",
-      version: "2"
+      measurementId: "G-6DPW4CK248"
     })),
     provideFirestore(() => getFirestore())
   ]
