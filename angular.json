@@ -93,6 +93,7 @@
     "packageManager": "pnpm",
     "cache": {
       "enabled": false
-    }
+    },
+    "analytics": false
   }
 }
