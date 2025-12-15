@@ -5,6 +5,7 @@ import {routes} from './app.routes';
 import {provideHttpClient} from '@angular/common/http';
 import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
 import {getFirestore, provideFirestore} from '@angular/fire/firestore';
+import {provideNativeDateAdapter} from '@angular/material/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +22,7 @@ export const appConfig: ApplicationConfig = {
       messagingSenderId: "764201862701",
       measurementId: "G-6DPW4CK248"
     })),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    provideNativeDateAdapter()
   ]
 };
