@@ -46,4 +46,8 @@ export class WorkdayCounterService {
     return this.httpClient.get<LegalDayOff[]>(`https://date.nager.at/api/v3/PublicHolidays/${year}/${country}`)
       .pipe(map(legalDays => legalDays.map(legalDay => parse(legalDay.date, 'yyyy-MM-dd', new Date()))));
   }
+
+  legalDaysOff(year: number, country: string) {
+    return this.httpClient.get<LegalDayOff[]>(`https://date.nager.at/api/v3/PublicHolidays/${year}/${country}`);
+  }
 }

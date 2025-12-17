@@ -1,1 +1,10 @@
-<p>vacation works!</p>
+<form class="flex items-center justify-center h-[100vh]" #salaryForm="ngForm">
+  <div class="bg-white dark:bg-gray-800 rounded-lg px-6 py-8 ring shadow-xl m-auto ring-gray-900/5 col-span-2 lg:w-1/2">
+    <div class="flex justify-center">
+      <img src="beach-chair.png" class="w-36 p-4 rounded-md border-white" alt="Payroll Lens logo"/>
+    </div>
+    <div class="grid sm:grid-cols lg:grid-cols text-white">
+      <full-calendar [options]="calendarOptions" [events]="legalHolidays"></full-calendar>
+    </div>
+  </div>
+</form>
