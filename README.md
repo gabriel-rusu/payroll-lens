@@ -240,3 +240,10 @@ Firebase will manage SSL automatically.
 - Hat tip to anyone whose code was used
 - Inspiration
 - References
+
+
+### Features
+
+- vacation suggestions (based on the number of holidays in a week) + floating days option
+- salary comparisons
+- bonus feature: micro-frontends split, the toolbar component should be a micro-frontend
