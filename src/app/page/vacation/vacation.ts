@@ -7,10 +7,8 @@ import listPlugin from '@fullcalendar/list';
 import {WorkdayCounterService} from '../../shared/service/workday-counter.service';
 import {LocalizationService} from '../../shared/service/localization.service';
 import {FormsModule} from '@angular/forms';
-import {Currency, PaydayFrequency} from '../../shared/constants';
-import {enumerate} from '../../shared/util.functions';
-import {pipe, zipWith} from 'rxjs';
-import {addDays, addYears, eachWeekOfInterval, getDate, isSameDay, isSunday, isWeekend, nextDay, parse} from 'date-fns';
+import {zipWith} from 'rxjs';
+import {addDays, addYears, eachWeekOfInterval, format, isSameDay, isSunday, isWeekend, parse} from 'date-fns';
 
 @Component({
   selector: 'app-vacation',
@@ -39,14 +37,18 @@ export class Vacation implements OnInit {
 
   ngOnInit() {
     this.workdayCounter.legalDaysOff(new Date().getFullYear(), this.localizationService.getCountryCode()).pipe(
-        zipWith(this.workdayCounter.legalDaysOff(new Date().getFullYear()+1, this.localizationService.getCountryCode()))
-      ).subscribe(
+      zipWith(this.workdayCounter.legalDaysOff(new Date().getFullYear() + 1, this.localizationService.getCountryCode()))
+    ).subscribe(
       data => {
-        let [currentYearHolidays,nextYearHolidays] = data;
-        this.legalHolidays.push(...currentYearHolidays.map(entry => { entry.title = entry.name;
-        return entry;}));
-        this.legalHolidays.push(...nextYearHolidays.map(entry => { entry.title = entry.name;
-          return entry;}));
+        let [currentYearHolidays, nextYearHolidays] = data;
+        this.legalHolidays.push(...currentYearHolidays.map(entry => {
+          entry.title = entry.name;
+          return entry;
+        }));
+        this.legalHolidays.push(...nextYearHolidays.map(entry => {
+          entry.title = entry.name;
+          return entry;
+        }));
         this.legalHolidays = [...this.legalHolidays];
         this.holidayDates = this.legalHolidays.map(holiday => parse(holiday.date, 'yyyy-MM-dd', new Date()));
 
@@ -59,20 +61,34 @@ export class Vacation implements OnInit {
         });
 
         let holidaysInWeek = new Map<Date, number>();
-        for(let startingDay of startingWeekDays) {
+        for (let startingDay of startingWeekDays) {
           holidaysInWeek.set(startingDay, 0);
           let holidayCount = 0;
           let currentDay = addDays(startingDay, 1);
           while (!isSunday(currentDay)) {
-            if (!isWeekend(currentDay) && this.holidayDates.some(date => isSameDay(date,currentDay))) {
+            if (!isWeekend(currentDay) && this.holidayDates.some(date => isSameDay(date, currentDay))) {
               holidayCount++;
             }
             holidaysInWeek.set(startingDay, holidayCount);
             currentDay = addDays(currentDay, 1);
           }
-
         }
+
+        for (let key of holidaysInWeek.keys()) {
+          // @ts-ignore
+          if (holidaysInWeek?.has(key) && holidaysInWeek.get(key) >= 2) {
+            let currentDay = addDays(key, 1);
+            while (!isSunday(currentDay)) {
+              if(!this.holidayDates.some(date => isSameDay(date, currentDay)) && !isWeekend(currentDay)) {
+                this.legalHolidays.push({date: format(currentDay, 'yyyy-MM-dd'), color: 'purple', title: 'Suggestion'});
+              }
+              currentDay = addDays(currentDay, 1);
+            }
+          }
+        }
+        this.legalHolidays = [...this.legalHolidays];
         console.log(holidaysInWeek);
+        console.log(this.legalHolidays);
       });
   }
 }
