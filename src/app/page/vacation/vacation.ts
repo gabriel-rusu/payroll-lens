@@ -21,6 +21,7 @@ import {addDays, addYears, eachWeekOfInterval, format, isSameDay, isSunday, isWe
 })
 export class Vacation implements OnInit {
   calendarOptions: CalendarOptions = {
+    firstDay: 1,
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
     initialView: 'dayGridMonth',
     headerToolbar: {
@@ -74,13 +75,14 @@ export class Vacation implements OnInit {
           }
         }
 
-        for (let key of holidaysInWeek.keys()) {
+        for (const key of holidaysInWeek.keys()) {
           // @ts-ignore
-          if (holidaysInWeek?.has(key) && holidaysInWeek.get(key) >= 2) {
+          if (holidaysInWeek?.has(key) && holidaysInWeek.get(key) >= 1) {
             let currentDay = addDays(key, 1);
             while (!isSunday(currentDay)) {
               if(!this.holidayDates.some(date => isSameDay(date, currentDay)) && !isWeekend(currentDay)) {
-                this.legalHolidays.push({date: format(currentDay, 'yyyy-MM-dd'), color: 'purple', title: 'Suggestion'});
+                // @ts-ignore
+                this.legalHolidays.push({date: format(currentDay, 'yyyy-MM-dd'), color: holidaysInWeek.get(key) >= 2 ? 'green': 'purple', title: 'Suggestion'});
               }
               currentDay = addDays(currentDay, 1);
             }
