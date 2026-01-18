@@ -25,10 +25,11 @@ export class Vacation implements OnInit {
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
     initialView: 'dayGridMonth',
     headerToolbar: {
-      left: 'prev,next today',
+      left: 'prev,today,next',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,listWeek'
-    }
+      right: 'dayGridMonth,timeGridWeek,listWeek',
+    },
+    fixedWeekCount: false
   };
   protected legalHolidays: any[] = [];
   private holidayDates: Date[] = [];
@@ -44,53 +45,56 @@ export class Vacation implements OnInit {
         let [currentYearHolidays, nextYearHolidays] = data;
         this.legalHolidays.push(...currentYearHolidays.map(entry => {
           entry.title = entry.name;
+          entry.color = 'green';
           return entry;
         }));
         this.legalHolidays.push(...nextYearHolidays.map(entry => {
           entry.title = entry.name;
+          entry.color = 'green';
           return entry;
         }));
         this.legalHolidays = [...this.legalHolidays];
         this.holidayDates = this.legalHolidays.map(holiday => parse(holiday.date, 'yyyy-MM-dd', new Date()));
 
-        console.log(this.legalHolidays);
-        console.log(this.holidayDates);
-
-        let startingWeekDays = eachWeekOfInterval({
-          start: new Date(),
-          end: addYears(new Date(), 1)
-        });
-
-        let holidaysInWeek = new Map<Date, number>();
-        for (let startingDay of startingWeekDays) {
-          holidaysInWeek.set(startingDay, 0);
-          let holidayCount = 0;
-          let currentDay = addDays(startingDay, 1);
-          while (!isSunday(currentDay)) {
-            if (!isWeekend(currentDay) && this.holidayDates.some(date => isSameDay(date, currentDay))) {
-              holidayCount++;
-            }
-            holidaysInWeek.set(startingDay, holidayCount);
-            currentDay = addDays(currentDay, 1);
-          }
-        }
-
-        for (const key of holidaysInWeek.keys()) {
-          // @ts-ignore
-          if (holidaysInWeek?.has(key) && holidaysInWeek.get(key) >= 1) {
-            let currentDay = addDays(key, 1);
-            while (!isSunday(currentDay)) {
-              if(!this.holidayDates.some(date => isSameDay(date, currentDay)) && !isWeekend(currentDay)) {
-                // @ts-ignore
-                this.legalHolidays.push({date: format(currentDay, 'yyyy-MM-dd'), color: holidaysInWeek.get(key) >= 2 ? 'green': 'purple', title: 'Suggestion'});
-              }
-              currentDay = addDays(currentDay, 1);
-            }
-          }
-        }
-        this.legalHolidays = [...this.legalHolidays];
-        console.log(holidaysInWeek);
-        console.log(this.legalHolidays);
+        this.suggestVacations();
       });
+  }
+
+  private suggestVacations() {
+    let startingWeekDays = eachWeekOfInterval({
+      start: new Date(),
+      end: addYears(new Date(), 1)
+    });
+
+    let holidaysInWeek = new Map<Date, number>();
+    for (let startingDay of startingWeekDays) {
+      holidaysInWeek.set(startingDay, 0);
+      let holidayCount = 0;
+      let currentDay = addDays(startingDay, 1);
+      while (!isSunday(currentDay)) {
+        if (!isWeekend(currentDay) && this.holidayDates.some(date => isSameDay(date, currentDay))) {
+          holidayCount++;
+        }
+        holidaysInWeek.set(startingDay, holidayCount);
+        currentDay = addDays(currentDay, 1);
+      }
+    }
+
+    for (const key of holidaysInWeek.keys()) {
+      // @ts-ignore
+      if (holidaysInWeek?.has(key) && holidaysInWeek.get(key) >= 1) {
+        let currentDay = addDays(key, 1);
+        while (!isSunday(currentDay)) {
+          if (!this.holidayDates.some(date => isSameDay(date, currentDay)) && !isWeekend(currentDay)) {
+            // @ts-ignore
+            this.legalHolidays.push({date: format(currentDay, 'yyyy-MM-dd'), color: 'purple', title: 'Suggestion'});
+          }
+          currentDay = addDays(currentDay, 1);
+        }
+      }
+    }
+    this.legalHolidays = [...this.legalHolidays];
+    console.log(holidaysInWeek);
+    console.log(this.legalHolidays);
   }
 }

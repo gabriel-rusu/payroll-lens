@@ -1,6 +1,7 @@
 export class LegalDayOff {
   counties: string[];
   countryCode: string;
+  color: string;
   date: string;
   fixed: boolean;
   global: boolean;
@@ -21,5 +22,6 @@ export class LegalDayOff {
     this.localName = localName;
     this.name = name;
     this.types = types;
+    this.color = 'green';
   }
 }
