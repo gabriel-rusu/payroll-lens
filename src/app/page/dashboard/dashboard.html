@@ -1,4 +1,4 @@
-<div class="content-center text-center mt-24">
+<div class="content-center text-center">
   @for (tile of dashboardTiles; track tile.name) {
     <app-dashboard-tile [name]="tile.name" [redirect]="tile.redirect" [image]="tile.image"/>
   }

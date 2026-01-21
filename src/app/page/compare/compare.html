@@ -1,81 +1,120 @@
-<form class="flex items-center mt-16 justify-center h-[70vh]" #compareForm="ngForm">
+<form class="flex items-center justify-center" #compareForm="ngForm">
   <div class="bg-white dark:bg-gray-800 rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5 col-span-2">
     <div class="flex justify-center">
       <img src="compare.png" class="w-36 p-4 rounded-md border-white" alt="Payroll Lens logo"/>
     </div>
+
     <div class="grid sm:grid-cols-2 lg:grid-cols-2">
       <div class="m-2">
         <label for="salary" class="dark:text-green-500 block">Company name:</label>
         <input type="text" id="salary"
                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               [(ngModel)]="defaultIncome.value" name="salary">
+               name="salary" placeholder="Company A">
       </div>
       <div class="m-2">
         <label for="salary" class="dark:text-green-500 block">Company name:</label>
         <input type="text" id="salary"
                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               [(ngModel)]="defaultIncome.value" name="salary">
+               name="salary" placeholder="Company B">
+      </div>
+    </div>
+    <details class="border border-transparent open:border-black/10 open:bg-gray-900 rounded-md p-2" open>
+      <summary class="text-sm leading-6 font-semibold text-gray-900 select-none dark:text-green-600 rounded-md p-2 bg-gray-900">Compensation</summary>
+      <div class="mt-3 text-sm leading-6 text-gray-600">
+        <p>The mug is round. The jar is round. They should call it Roundtine.</p>
+      </div>
+    </details>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-2">
+      <div class="m-2">
+        <label for="salary" class="dark:text-green-500 block">Company name:</label>
+        <input type="text" id="salary"
+               class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+               name="salary" placeholder="Company A">
+      </div>
+      <div class="m-2">
+        <label for="salary" class="dark:text-green-500 block">Company name:</label>
+        <input type="text" id="salary"
+               class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+               name="salary" placeholder="Company B">
+      </div>
+      <div class="m-2">
+        <label for="salary" class="dark:text-green-500 block">Company name:</label>
+        <select type="text" id="salary"
+                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                name="">
+          <option>Monthly</option>
+          <option>Yearly</option>
+        </select>
+      </div>
+      <div class="m-2">
+        <label for="salary" class="dark:text-green-500 block">Company name:</label>
+        <select type="text" id="salary"
+                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                name="">
+          <option>Monthly</option>
+          <option>Yearly</option>
+        </select>
       </div>
       <div class="m-2">
         <label for="salary" class="dark:text-green-500 block">Salary:</label>
         <input type="text" id="salary"
                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               [(ngModel)]="defaultIncome.value" name="salary">
+               name="salary">
       </div>
       <div class="m-2">
         <label for="salary" class="dark:text-green-500 block">Salary:</label>
         <input type="text" id="salary"
                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               [(ngModel)]="defaultIncome.value" name="salary">
+               name="salary">
       </div>
       <div class="m-2">
         <label for="salary" class="dark:text-green-500 block">Meal ticket value:</label>
         <input type="text" id="salary"
                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               [(ngModel)]="defaultIncome.value" name="salary">
+               name="salary">
       </div>
       <div class="m-2">
         <label for="salary" class="dark:text-green-500 block">Meal ticket value:</label>
         <input type="text" id="salary"
                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               [(ngModel)]="defaultIncome.value" name="salary">
+               name="salary">
       </div>
       <div class="m-2">
         <label for="salary" class="dark:text-green-500 block">RSU(restricted stock units):</label>
         <input type="text" id="salary"
                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               [(ngModel)]="defaultIncome.value" name="salary">
+               name="salary">
       </div>
       <div class="m-2">
         <label for="salary" class="dark:text-green-500 block">RSU(restricted stock units):</label>
         <input type="text" id="salary"
                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               [(ngModel)]="defaultIncome.value" name="salary">
+               name="salary">
       </div>
       <div class="m-2">
         <label for="salary" class="dark:text-green-500 block">Vesting period:</label>
         <input type="text" id="salary"
                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               [(ngModel)]="defaultIncome.value" name="salary">
+               name="salary">
       </div>
 
       <div class="m-2">
         <label for="salary" class="dark:text-green-500 block">Vesting period:</label>
         <input type="text" id="salary"
                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               [(ngModel)]="defaultIncome.value" name="salary">
+               name="salary">
       </div>
       <div class="m-2">
         <label for="salary" class="dark:text-green-500 block">Bonuses (per year):</label>
         <input type="text" id="salary"
                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               [(ngModel)]="defaultIncome.value" name="salary">
+               name="salary">
       </div>
       <div class="m-2">
         <label for="salary" class="dark:text-green-500 block">Bonuses (per year):</label>
         <input type="text" id="salary"
                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               [(ngModel)]="defaultIncome.value" name="salary">
+               name="salary">
       </div>
     </div>
   </div>
