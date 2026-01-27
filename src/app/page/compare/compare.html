@@ -1,5 +1,5 @@
 <form class="flex items-center justify-center" #compareForm="ngForm">
-  <div class="bg-white dark:bg-gray-800 rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5 col-span-2">
+  <div class="bg-white dark:bg-gray-800 rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5 col-span-2 min-w-2xl max-w-2xl">
     <div class="flex justify-center">
       <img src="compare.png" class="w-36 p-4 rounded-md border-white" alt="Payroll Lens logo"/>
     </div>
@@ -20,137 +20,84 @@
     </div>
     <app-collapsible-section title="Compenstion" [formGroup]="compensationForm">
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-2">
+      <div class="grid sm:grid-cols-4 lg:grid-cols-4">
         <app-dropdown label="Currency" [options]="currencyOptions" formControlName="currencyA"></app-dropdown>
+
+        <app-dropdown label="Salary type" [options]="salaryTypeOptions"
+                      formControlName="salaryTypeCompanyA"></app-dropdown>
         <app-dropdown label="Currency" [options]="currencyOptions" formControlName="currencyB"></app-dropdown>
-        <app-dropdown label="Salary type" [options]="salaryTypeOptions" formControlName="salaryTypeCompanyA"></app-dropdown>
-        <app-dropdown label="Salary type" [options]="salaryTypeOptions" formControlName="salaryTypeCompanyB"></app-dropdown>
-        <app-dropdown label="Salary period" [options]="salaryPeriodOptions" formControlName="salaryPeriodA"></app-dropdown>
-        <app-dropdown label="Salary period" [options]="salaryPeriodOptions" formControlName="salaryPeriodB"></app-dropdown>
+        <app-dropdown label="Salary type" [options]="salaryTypeOptions"
+                      formControlName="salaryTypeCompanyB"></app-dropdown>
+        <app-dropdown label="Salary period" [options]="salaryPeriodOptions"
+                      formControlName="salaryPeriodA"></app-dropdown>
         <div class="m-2">
           <label for="salary" class="dark:text-green-500 block">Salary:</label>
           <input type="text" id="salary"
                  class="p-1 rounded-lg text-center w-full text-green-800 bg-white h-8"
                  name="salary">
         </div>
+        <app-dropdown label="Salary period" [options]="salaryPeriodOptions"
+                      formControlName="salaryPeriodB"></app-dropdown>
+
         <div class="m-2">
           <label for="salary" class="dark:text-green-500 block">Salary:</label>
           <input type="text" id="salary"
                  class="p-1 rounded-lg text-center w-full text-green-800 bg-white h-8"
                  name="salary">
         </div>
+
         <div class="m-2">
-          <label for="timeFrame" class="dark:text-green-500 block">Currency:</label>
-          <select id="incomeType" class="rounded-lg text-green-800 w-full p-1 text-center h-8 bg-white"
-                  name="type">
-            <option value="EUR" class="rounded-lg">EUR (€)</option>
-            <option value="USD" class="rounded-lg">USD ($)</option>
-            <option value="RON" class="rounded-lg">RON (RON)</option>
-          </select>
+          <label for="salary" class="dark:text-green-500 block">Meal ticket value:</label>
+          <input type="text" id="salary"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                 name="salary">
         </div>
         <div class="m-2">
-          <label for="timeFrame" class="dark:text-green-500 block">Currency:</label>
-          <select id="incomeType" class="rounded-lg text-green-800 w-full p-1 text-center h-8 bg-white"
-                  name="type">
-            <option value="EUR" class="rounded-lg">EUR (€)</option>
-            <option value="USD" class="rounded-lg">USD ($)</option>
-            <option value="RON" class="rounded-lg">RON (RON)</option>
-          </select>
+          <label for="salary" class="dark:text-green-500 block">Meal ticket value:</label>
+          <input type="text" id="salary"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                 name="salary">
+        </div>
+        <div class="m-2">
+          <label for="salary" class="dark:text-green-500 block">RSU(restricted stock units):</label>
+          <input type="text" id="salary"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                 name="salary">
+        </div>
+        <div class="m-2">
+          <label for="salary" class="dark:text-green-500 block">RSU(restricted stock units):</label>
+          <input type="text" id="salary"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                 name="salary">
+        </div>
+        <div class="m-2">
+          <label for="salary" class="dark:text-green-500 block">Vesting period:</label>
+          <input type="text" id="salary"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                 name="salary">
+        </div>
+
+        <div class="m-2">
+          <label for="salary" class="dark:text-green-500 block">Vesting period:</label>
+          <input type="text" id="salary"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                 name="salary">
+        </div>
+        <div class="m-2">
+          <label for="salary" class="dark:text-green-500 block">Bonuses (per year):</label>
+          <input type="text" id="salary"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                 name="salary">
+        </div>
+        <div class="m-2">
+          <label for="salary" class="dark:text-green-500 block">Bonuses (per year):</label>
+          <input type="text" id="salary"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                 name="salary">
         </div>
       </div>
     </app-collapsible-section>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-2">
-      <div class="m-2">
-        <label for="salary" class="dark:text-green-500 block">Company name:</label>
-        <input type="text" id="salary"
-               class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               name="salary" placeholder="Company A">
-      </div>
-      <div class="m-2">
-        <label for="salary" class="dark:text-green-500 block">Company name:</label>
-        <input type="text" id="salary"
-               class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               name="salary" placeholder="Company B">
-      </div>
-      <div class="m-2">
-        <label for="salary" class="dark:text-green-500 block">Company name:</label>
-        <select type="text" id="salary"
-                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                name="">
-          <option>Monthly</option>
-          <option>Yearly</option>
-        </select>
-      </div>
-      <div class="m-2">
-        <label for="salary" class="dark:text-green-500 block">Company name:</label>
-        <select type="text" id="salary"
-                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                name="">
-          <option>Monthly</option>
-          <option>Yearly</option>
-        </select>
-      </div>
-      <div class="m-2">
-        <label for="salary" class="dark:text-green-500 block">Salary:</label>
-        <input type="text" id="salary"
-               class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               name="salary">
-      </div>
-      <div class="m-2">
-        <label for="salary" class="dark:text-green-500 block">Salary:</label>
-        <input type="text" id="salary"
-               class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               name="salary">
-      </div>
-      <div class="m-2">
-        <label for="salary" class="dark:text-green-500 block">Meal ticket value:</label>
-        <input type="text" id="salary"
-               class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               name="salary">
-      </div>
-      <div class="m-2">
-        <label for="salary" class="dark:text-green-500 block">Meal ticket value:</label>
-        <input type="text" id="salary"
-               class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               name="salary">
-      </div>
-      <div class="m-2">
-        <label for="salary" class="dark:text-green-500 block">RSU(restricted stock units):</label>
-        <input type="text" id="salary"
-               class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               name="salary">
-      </div>
-      <div class="m-2">
-        <label for="salary" class="dark:text-green-500 block">RSU(restricted stock units):</label>
-        <input type="text" id="salary"
-               class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               name="salary">
-      </div>
-      <div class="m-2">
-        <label for="salary" class="dark:text-green-500 block">Vesting period:</label>
-        <input type="text" id="salary"
-               class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               name="salary">
-      </div>
 
-      <div class="m-2">
-        <label for="salary" class="dark:text-green-500 block">Vesting period:</label>
-        <input type="text" id="salary"
-               class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               name="salary">
-      </div>
-      <div class="m-2">
-        <label for="salary" class="dark:text-green-500 block">Bonuses (per year):</label>
-        <input type="text" id="salary"
-               class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               name="salary">
-      </div>
-      <div class="m-2">
-        <label for="salary" class="dark:text-green-500 block">Bonuses (per year):</label>
-        <input type="text" id="salary"
-               class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               name="salary">
-      </div>
-    </div>
   </div>
+
 </form>
