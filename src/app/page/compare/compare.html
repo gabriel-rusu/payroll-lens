@@ -18,12 +18,63 @@
                name="salary" placeholder="Company B">
       </div>
     </div>
-    <details class="border border-transparent open:border-black/10 open:bg-gray-900 rounded-md p-2" open>
-      <summary class="text-sm leading-6 font-semibold text-gray-900 select-none dark:text-green-600 rounded-md p-2 bg-gray-900">Compensation</summary>
-      <div class="mt-3 text-sm leading-6 text-gray-600">
-        <p>The mug is round. The jar is round. They should call it Roundtine.</p>
+    <app-collapsible-section title="Compenstion" [formGroup]="compensationForm">
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-2">
+        <app-dropdown label="Currency" [options]="currencyOptions" formControlName="currencyA"></app-dropdown>
+        <app-dropdown label="Currency" [options]="currencyOptions" formControlName="currencyB"></app-dropdown>
+        <app-dropdown label="Salary Type" [options]="salaryType" formControlName="salaryTypeCompanyA"></app-dropdown>
+        <app-dropdown label="Salary Type" [options]="salaryType" formControlName="salaryTypeCompanyB"></app-dropdown>
+        <div class="m-2">
+          <label for="timeFrame" class="dark:text-green-500 block">Per:</label>
+          <select id="incomeType" class="rounded-lg text-green-800 w-full p-1 text-center h-8 bg-white"
+                  name="type">
+            <option value="Gross" class="rounded-lg">Month</option>
+            <option value="Net" class="rounded-lg">Year</option>
+            <option value="Net" class="rounded-lg">Hour</option>
+          </select>
+        </div>
+        <div class="m-2">
+          <label for="timeFrame" class="dark:text-green-500 block">Per:</label>
+          <select id="incomeType" class="rounded-lg text-green-800 w-full p-1 text-center h-8 bg-white"
+                  name="type">
+            <option value="Gross" class="rounded-lg">Month</option>
+            <option value="Net" class="rounded-lg">Year</option>
+            <option value="Hour" class="rounded-lg">Hour</option>
+          </select>
+        </div>
+        <div class="m-2">
+          <label for="salary" class="dark:text-green-500 block">Salary:</label>
+          <input type="text" id="salary"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white h-8"
+                 name="salary">
+        </div>
+        <div class="m-2">
+          <label for="salary" class="dark:text-green-500 block">Salary:</label>
+          <input type="text" id="salary"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white h-8"
+                 name="salary">
+        </div>
+        <div class="m-2">
+          <label for="timeFrame" class="dark:text-green-500 block">Currency:</label>
+          <select id="incomeType" class="rounded-lg text-green-800 w-full p-1 text-center h-8 bg-white"
+                  name="type">
+            <option value="EUR" class="rounded-lg">EUR (€)</option>
+            <option value="USD" class="rounded-lg">USD ($)</option>
+            <option value="RON" class="rounded-lg">RON (RON)</option>
+          </select>
+        </div>
+        <div class="m-2">
+          <label for="timeFrame" class="dark:text-green-500 block">Currency:</label>
+          <select id="incomeType" class="rounded-lg text-green-800 w-full p-1 text-center h-8 bg-white"
+                  name="type">
+            <option value="EUR" class="rounded-lg">EUR (€)</option>
+            <option value="USD" class="rounded-lg">USD ($)</option>
+            <option value="RON" class="rounded-lg">RON (RON)</option>
+          </select>
+        </div>
       </div>
-    </details>
+    </app-collapsible-section>
     <div class="grid sm:grid-cols-2 lg:grid-cols-2">
       <div class="m-2">
         <label for="salary" class="dark:text-green-500 block">Company name:</label>
