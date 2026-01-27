@@ -18,16 +18,17 @@ import {DictionaryTypeId} from '../../shared/model/constant';
   styleUrl: './compare.css'
 })
 export class Compare implements OnInit {
-  protected salaryType: DictionaryValue[] = [];
   protected currencyOptions:DictionaryValue[] = [];
-  protected salaryRateOptions: DictionaryValue[]=[];
+  protected salaryPeriodOptions: DictionaryValue[]=[];
   protected salaryTypeOptions: DictionaryValue[]=[];
 
   protected compensationForm: FormGroup = new FormGroup({
-    'salaryTypeCompanyA': new FormControl('', Validators.required),
-    'salaryTypeCompanyB': new FormControl('', Validators.required),
-    'currencyA': new FormControl('', Validators.required),
-    'currencyB': new FormControl('', Validators.required),
+    salaryTypeCompanyA: new FormControl('', Validators.required),
+    salaryTypeCompanyB: new FormControl('', Validators.required),
+    currencyA: new FormControl('', Validators.required),
+    currencyB: new FormControl('', Validators.required),
+    salaryPeriodA: new FormControl('', Validators.required),
+    salaryPeriodB: new FormControl('', Validators.required),
   });
 
 
@@ -43,7 +44,7 @@ export class Compare implements OnInit {
     this.httpClient.get<DictionaryValue[][]>('./dropdown.json').subscribe({
       next: data => {
         this.currencyOptions = data[DictionaryTypeId.CURRENCY]
-        this.salaryRateOptions = data[DictionaryTypeId.FREQUENCY]
+        this.salaryPeriodOptions = data[DictionaryTypeId.FREQUENCY]
         this.salaryTypeOptions = data[DictionaryTypeId.SALARY_TYPE]
 
         console.log(data);

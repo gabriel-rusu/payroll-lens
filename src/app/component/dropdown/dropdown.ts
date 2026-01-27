@@ -22,17 +22,11 @@ export class Dropdown implements ControlValueAccessor {
   onChange: any;
   onTouched: any;
 
-  protected value = signal<DictionaryValue|null>(null);
+  protected value = signal<DictionaryValue | null>(null);
   protected isDisabled: boolean = false;
 
   label = input.required<string>();
   options = input.required<DictionaryValue[]>();
-
-  constructor() {
-    effect(() => {
-      this.writeValue(this.options()[0]);
-    });
-  }
 
   writeValue(obj: any): void {
     this.value.set(obj);

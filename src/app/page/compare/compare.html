@@ -23,26 +23,10 @@
       <div class="grid sm:grid-cols-2 lg:grid-cols-2">
         <app-dropdown label="Currency" [options]="currencyOptions" formControlName="currencyA"></app-dropdown>
         <app-dropdown label="Currency" [options]="currencyOptions" formControlName="currencyB"></app-dropdown>
-        <app-dropdown label="Salary Type" [options]="salaryType" formControlName="salaryTypeCompanyA"></app-dropdown>
-        <app-dropdown label="Salary Type" [options]="salaryType" formControlName="salaryTypeCompanyB"></app-dropdown>
-        <div class="m-2">
-          <label for="timeFrame" class="dark:text-green-500 block">Per:</label>
-          <select id="incomeType" class="rounded-lg text-green-800 w-full p-1 text-center h-8 bg-white"
-                  name="type">
-            <option value="Gross" class="rounded-lg">Month</option>
-            <option value="Net" class="rounded-lg">Year</option>
-            <option value="Net" class="rounded-lg">Hour</option>
-          </select>
-        </div>
-        <div class="m-2">
-          <label for="timeFrame" class="dark:text-green-500 block">Per:</label>
-          <select id="incomeType" class="rounded-lg text-green-800 w-full p-1 text-center h-8 bg-white"
-                  name="type">
-            <option value="Gross" class="rounded-lg">Month</option>
-            <option value="Net" class="rounded-lg">Year</option>
-            <option value="Hour" class="rounded-lg">Hour</option>
-          </select>
-        </div>
+        <app-dropdown label="Salary type" [options]="salaryTypeOptions" formControlName="salaryTypeCompanyA"></app-dropdown>
+        <app-dropdown label="Salary type" [options]="salaryTypeOptions" formControlName="salaryTypeCompanyB"></app-dropdown>
+        <app-dropdown label="Salary period" [options]="salaryPeriodOptions" formControlName="salaryPeriodA"></app-dropdown>
+        <app-dropdown label="Salary period" [options]="salaryPeriodOptions" formControlName="salaryPeriodB"></app-dropdown>
         <div class="m-2">
           <label for="salary" class="dark:text-green-500 block">Salary:</label>
           <input type="text" id="salary"
