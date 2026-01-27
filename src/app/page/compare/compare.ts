@@ -30,6 +30,7 @@ export class Compare implements OnInit {
     salaryPeriodA: new FormControl('', Validators.required),
     salaryPeriodB: new FormControl('', Validators.required),
   });
+  protected benefitsForm: FormGroup = new FormGroup({});
 
 
   constructor(private httpClient: HttpClient) {
