@@ -5,6 +5,7 @@ import {Dropdown} from '../../component/dropdown/dropdown';
 import {DictionaryValue} from '../../shared/model/dictionary.value';
 import {HttpClient} from '@angular/common/http';
 import {DictionaryTypeId} from '../../shared/model/constant';
+import {Switch} from '../../component/switch/switch';
 
 @Component({
   selector: 'app-compare',
@@ -12,7 +13,8 @@ import {DictionaryTypeId} from '../../shared/model/constant';
     FormsModule,
     ReactiveFormsModule,
     CollapsibleSection,
-    Dropdown
+    Dropdown,
+    Switch
   ],
   templateUrl: './compare.html',
   styleUrl: './compare.css'
