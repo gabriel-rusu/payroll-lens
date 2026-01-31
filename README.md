@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="public/salary.png" alt="Salary Calculator Logo"></a>
+ <img width=200px height=200px src="public/pay-day.png" alt="Salary Calculator Logo"></a>
 </p>
 
 <h3 align="center">Payroll Lens</h3>
