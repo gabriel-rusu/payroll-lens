@@ -1,13 +1,13 @@
-FROM node:22
+FROM oven/bun
 
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml ./
+COPY package.json bun.lock ./
 
-RUN npm install -g pnpm@latest-10 && pnpm i
+RUN bun install
 
 COPY . .
 
 EXPOSE 4200
 
-CMD ["pnpm", "dev"]
+CMD ["bun", "dev"]
