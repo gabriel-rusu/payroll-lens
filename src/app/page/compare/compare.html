@@ -1,4 +1,4 @@
-<form class="flex items-center justify-center" #compareForm="ngForm">
+<form class="flex items-center justify-center" [formGroup]="offer">
   <div
     class="bg-white dark:bg-gray-800 rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5 col-span-2 min-w-2xl max-w-2xl">
     <div class="flex justify-center">
@@ -19,7 +19,7 @@
                name="salary" placeholder="Company B">
       </div>
     </div>
-    <app-collapsible-section title="Compenstion" [formGroup]="compensationForm">
+    <app-collapsible-section title="Compenstion" formGroupName="compensationForm">
 
       <div class="grid sm:grid-cols-4 lg:grid-cols-4">
         <app-dropdown label="Currency" [options]="currencyOptions" formControlName="currencyA"></app-dropdown>
@@ -55,7 +55,7 @@
         </div>
 
         <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">RSU(restricted stock units):</label>
+          <label for="salary" class="dark:text-green-500 block">RSU(stocks):</label>
           <input type="text" id="salary"
                  class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                  name="salary">
@@ -67,8 +67,9 @@
                  class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                  name="salary">
         </div>
+
         <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">RSU(restricted stock units):</label>
+          <label for="salary" class="dark:text-green-500 block">RSU(stocks):</label>
           <input type="text" id="salary"
                  class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                  name="salary">
@@ -79,14 +80,14 @@
                  class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                  name="salary">
         </div>
-
-
         <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Bonuses (per year):</label>
+          <label for="salary" class="dark:text-green-500 block">NASDAQ ticker:</label>
           <input type="text" id="salary"
                  class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                  name="salary">
         </div>
+
+
 
         <div class="m-2">
           <label for="salary" class="dark:text-green-500 block">Vesting period:</label>
@@ -94,71 +95,80 @@
                  class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                  name="salary">
         </div>
+        <div class="m-2">
+          <label for="salary" class="dark:text-green-500 block">NASDAQ ticker:</label>
+          <input type="text" id="salary"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                 name="salary">
+        </div>
 
         <div class="m-2">
           <label for="salary" class="dark:text-green-500 block">Bonuses (per year):</label>
+          <input type="text" id="salary"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                 name="salary">
+        </div>
+        <div class="m-2"></div>
+
+        <div class="m-2">
+          <label for="salary" class="dark:text-green-500 block">Bonuses (per year):</label>
+          <input type="text" id="salary"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                 name="salary">
+        </div>
+
+      </div>
+    </app-collapsible-section>
+    <app-collapsible-section title="Benefits" formGroupName="benefitsForm">
+      <div class="grid grid-cols-4">
+          <app-switch class="m-2" label="Health insurance:" formControlName="healthInsuranceA" (change)="print()"/>
+
+        <div class="m-2">
+          <label for="salary" class="dark:text-green-500 block">Paid time off(PTO):</label>
+          <input type="text" id="salary"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                 name="salary">
+        </div>
+
+        <app-switch class="m-2" label="Health insurance:" formControlName="healthInsuranceB" (change)="print()"/>
+
+        <div class="m-2">
+          <label for="salary" class="dark:text-green-500 block">Paid time off(PTO):</label>
+          <input type="text" id="salary"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                 name="salary">
+        </div>
+
+        <div class="m-2">
+          <label for="salary" class="dark:text-green-500 block">Floating days:</label>
+          <input type="checkbox" id="salary"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                 name="salary">
+        </div>
+
+        <div class="m-2">
+          <label for="salary" class="dark:text-green-500 block">Wellness benefit:</label>
+          <input type="text" id="salary"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                 name="salary">
+        </div>
+
+        <div class="m-2">
+          <label for="salary" class="dark:text-green-500 block">Floating days:</label>
+          <input type="checkbox" id="salary"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                 name="salary">
+        </div>
+
+        <div class="m-2">
+          <label for="salary" class="dark:text-green-500 block">Wellness benefit:</label>
           <input type="text" id="salary"
                  class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                  name="salary">
         </div>
       </div>
     </app-collapsible-section>
-    <app-collapsible-section title="Benefits" [formGroup]="benefitsForm">
-      <div class="grid grid-cols-4">
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 ">Health insurance:</label>
-          <app-switch/>
-        </div>
-
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Paid time off(PTO):</label>
-          <input type="text" id="salary"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
-        </div>
-
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Health insurance:</label>
-          <input type="checkbox" id="salary"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
-        </div>
-
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Paid time off(PTO):</label>
-          <input type="text" id="salary"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
-        </div>
-
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Floating days:</label>
-          <input type="checkbox" id="salary"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
-        </div>
-
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Wellness benefit:</label>
-          <input type="text" id="salary"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
-        </div>
-
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Floating days:</label>
-          <input type="checkbox" id="salary"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
-        </div>
-
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Wellness benefit:</label>
-          <input type="text" id="salary"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
-        </div>
-      </div>
+    <app-collapsible-section title="Work Arrangement" formGroupName="workArrangementForm">
     </app-collapsible-section>
 
   </div>

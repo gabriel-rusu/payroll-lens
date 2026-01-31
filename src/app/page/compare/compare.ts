@@ -24,24 +24,35 @@ export class Compare implements OnInit {
   protected salaryPeriodOptions: DictionaryValue[]=[];
   protected salaryTypeOptions: DictionaryValue[]=[];
 
-  protected compensationForm: FormGroup = new FormGroup({
-    salaryTypeCompanyA: new FormControl('', Validators.required),
-    salaryTypeCompanyB: new FormControl('', Validators.required),
-    currencyA: new FormControl('', Validators.required),
-    currencyB: new FormControl('', Validators.required),
-    salaryPeriodA: new FormControl('', Validators.required),
-    salaryPeriodB: new FormControl('', Validators.required),
+  protected offer: FormGroup = new FormGroup({
+    compensationForm: new FormGroup({
+      salaryTypeCompanyA: new FormControl('', Validators.required),
+      salaryTypeCompanyB: new FormControl('', Validators.required),
+      currencyA: new FormControl('', Validators.required),
+      currencyB: new FormControl('', Validators.required),
+      salaryPeriodA: new FormControl('', Validators.required),
+      salaryPeriodB: new FormControl('', Validators.required),
+    }),
+    benefitsForm: new FormGroup({
+      healthInsuranceA: new FormControl(false, Validators.required),
+      healthInsuranceB: new FormControl(false, Validators.required),
+    }),
+    workArrangementForm: new FormGroup({
+      locationA: new FormControl('', Validators.required),
+      locationB: new FormControl('', Validators.required),
+      commuteTimeA: new FormControl('', Validators.required),
+      commuteTimeB: new FormControl('', Validators.required),
+      workHoursA: new FormControl('', Validators.required),
+      workHoursB: new FormControl('', Validators.required),
+      overtimeExpectationsA: new FormControl(false, Validators.required),
+      overtimeExpectationsB: new FormControl(false, Validators.required),
+    }),
   });
-  protected benefitsForm: FormGroup = new FormGroup({});
 
 
   constructor(private httpClient: HttpClient) {
   }
 
-
-  protected eval($event: Event) {
-    console.log(this.compensationForm.getRawValue());
-  }
 
   ngOnInit() {
     this.httpClient.get<DictionaryValue[][]>('./dropdown.json').subscribe({
@@ -54,5 +65,9 @@ export class Compare implements OnInit {
       }
     })
 
+  }
+
+  protected print() {
+    console.log(this.offer.getRawValue());
   }
 }
