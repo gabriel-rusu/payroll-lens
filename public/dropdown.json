@@ -36,5 +36,19 @@
       "value": 2,
       "label": "Gross"
     }
+  ],
+  [
+    {
+      "value": 1,
+      "label": "OnSite"
+    },
+    {
+      "value": 2,
+      "label": "Hybrid"
+    },
+    {
+      "value": 3,
+      "label": "Remote"
+    }
   ]
 ]

@@ -1,6 +1,7 @@
-import {Component, effect, forwardRef, input, OnInit, signal} from '@angular/core';
+import {Component, effect, forwardRef, input, OnInit, output, signal} from '@angular/core';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {DictionaryValue} from '../../shared/model/dictionary.value';
+import {JsonPipe} from '@angular/common';
 
 @Component({
   standalone: true,
@@ -24,6 +25,7 @@ export class Dropdown implements ControlValueAccessor {
 
   protected value = signal<DictionaryValue | null>(null);
   protected isDisabled: boolean = false;
+  selected = output<DictionaryValue>();
 
   label = input.required<string>();
   options = input.required<DictionaryValue[]>();
@@ -45,8 +47,8 @@ export class Dropdown implements ControlValueAccessor {
   }
 
   protected handleChange(value: any) {
-    console.log('Value', value);
     this.value.set(value);
+    this.selected.emit(value);
     this.onChange(value);
     this.onTouched();
   }

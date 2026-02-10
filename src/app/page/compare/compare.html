@@ -88,7 +88,6 @@
         </div>
 
 
-
         <div class="m-2">
           <label for="salary" class="dark:text-green-500 block">Vesting period:</label>
           <input type="text" id="salary" formControlName="vestingPeriodB"
@@ -121,7 +120,7 @@
     </app-collapsible-section>
     <app-collapsible-section title="Benefits" formGroupName="benefitsForm">
       <div class="grid grid-cols-4">
-          <app-switch class="m-2" label="Health insurance:" formControlName="healthInsuranceA" (change)="print()"/>
+        <app-switch class="m-2" label="Health insurance:" formControlName="healthInsuranceA" (change)="print()"/>
 
         <div class="m-2">
           <label for="salary" class="dark:text-green-500 block">Paid time off(PTO):</label>
@@ -169,6 +168,34 @@
       </div>
     </app-collapsible-section>
     <app-collapsible-section title="Work Arrangement" formGroupName="workArrangementForm">
+      <div class="grid grid-cols-4">
+
+        <app-dropdown label="Mode" [options]="workLocations" formControlName="locationA" (selected)="workLocationChange($event, 'locationA')"></app-dropdown>
+
+        <div class="m-2">
+          <label for="commuteTimeA" class="dark:text-green-500 block">Commute (mins):</label>
+          <input type="text" id="salary" formControlName="commuteTimeA"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white" name="commuteTimeA">
+        </div>
+
+        <app-dropdown label="Mode" [options]="workLocations" formControlName="locationB"></app-dropdown>
+
+
+        <div class="m-2">
+          <label for="commuteTimeB" class="dark:text-green-500 block">Commute (mins):</label>
+          <input type="text" id="salary" formControlName="commuteTimeB"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white" name="commuteTimeA">
+        </div>
+
+        <app-switch label="Overtime Expectation" formControlName="overtimeExpectationsA"></app-switch>
+
+        <app-switch label="Work Hours Flexibility" formControlName="workHoursFlexibilityA"></app-switch>
+
+        <app-switch label="Overtime Expectation" formControlName="overtimeExpectationsB"></app-switch>
+
+        <app-switch label="Work Hours Flexibility" formControlName="workHoursFlexibilityB"></app-switch>
+
+      </div>
     </app-collapsible-section>
 
   </div>

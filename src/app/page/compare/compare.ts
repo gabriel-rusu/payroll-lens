@@ -23,6 +23,7 @@ export class Compare implements OnInit {
   protected currencyOptions:DictionaryValue[] = [];
   protected salaryPeriodOptions: DictionaryValue[]=[];
   protected salaryTypeOptions: DictionaryValue[]=[];
+  protected workLocations: DictionaryValue[] = [];
 
   protected offer: FormGroup = new FormGroup({
     compensationForm: new FormGroup({
@@ -54,12 +55,13 @@ export class Compare implements OnInit {
       locationB: new FormControl('', Validators.required),
       commuteTimeA: new FormControl('', Validators.required),
       commuteTimeB: new FormControl('', Validators.required),
-      workHoursA: new FormControl('', Validators.required),
-      workHoursB: new FormControl('', Validators.required),
+      workHoursFlexibilityA: new FormControl('', Validators.required),
+      workHoursFlexibilityB: new FormControl('', Validators.required),
       overtimeExpectationsA: new FormControl(false, Validators.required),
       overtimeExpectationsB: new FormControl(false, Validators.required),
     }),
   });
+
 
 
   constructor(private httpClient: HttpClient) {
@@ -72,7 +74,7 @@ export class Compare implements OnInit {
         this.currencyOptions = data[DictionaryTypeId.CURRENCY]
         this.salaryPeriodOptions = data[DictionaryTypeId.FREQUENCY]
         this.salaryTypeOptions = data[DictionaryTypeId.SALARY_TYPE]
-
+        this.workLocations = data[DictionaryTypeId.LOCATIONS]
         console.log(data);
       }
     })
@@ -81,5 +83,11 @@ export class Compare implements OnInit {
 
   protected print() {
     console.log(this.offer.getRawValue());
+  }
+
+  protected workLocationChange(event: any, field: string) {
+    console.log('Event!');
+    console.log(event);
+    console.log(field);
   }
 }
