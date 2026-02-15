@@ -7,7 +7,8 @@
     "start": "ng serve -o",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "bun run build && bun x wrangler pages deploy dist/payroll-lens/browser"
   },
   "prettier": {
     "printWidth": 100,
