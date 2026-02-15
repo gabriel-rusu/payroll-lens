@@ -20,7 +20,6 @@
       </div>
     </div>
     <app-collapsible-section title="Compenstion" formGroupName="compensationForm">
-
       <div class="grid sm:grid-cols-4 lg:grid-cols-4">
         <app-dropdown label="Currency" [options]="currencyOptions" formControlName="currencyA"></app-dropdown>
 
@@ -124,7 +123,7 @@
 
         <div class="m-2">
           <label for="salary" class="dark:text-green-500 block">Paid time off(PTO):</label>
-          <input type="text" id="salary"
+          <input type="text" id="salary" formControlName="ptoDaysA"
                  class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                  name="salary">
         </div>
@@ -133,68 +132,49 @@
 
         <div class="m-2">
           <label for="salary" class="dark:text-green-500 block">Paid time off(PTO):</label>
-          <input type="text" id="salary"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
+          <input type="number" id="salary" formControlName="ptoDaysB"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white">
         </div>
 
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Floating days:</label>
-          <input type="checkbox" id="salary"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
-        </div>
+        <app-switch class="m-2" label="Floating Days:" formControlName="floatingDaysA"></app-switch>
 
         <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Wellness benefit:</label>
-          <input type="text" id="salary"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
+          <label for="wellnessA" class="dark:text-green-500 block">Wellness benefit:</label>
+          <input type="number" id="wellnessA" formControlName="wellnessBenefitA"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white">
         </div>
 
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Floating days:</label>
-          <input type="checkbox" id="salary"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
-        </div>
+        <app-switch class="m-2" label="Floating days:" formControlName="floatingDaysB"></app-switch>
 
         <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Wellness benefit:</label>
-          <input type="text" id="salary"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
+          <label for="wellnessB" class="dark:text-green-500 block">Wellness benefit:</label>
+          <input type="text" id="wellnessB" formControlName="wellnessBenefitB"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white">
         </div>
       </div>
     </app-collapsible-section>
     <app-collapsible-section title="Work Arrangement" formGroupName="workArrangementForm">
       <div class="grid grid-cols-4">
-
-        <app-dropdown label="Mode" [options]="workLocations" formControlName="locationA" (selected)="workLocationChange($event, 'locationA')"></app-dropdown>
-
+        <app-dropdown label="Mode" [options]="workLocations" formControlName="locationA"
+                      (selected)="workLocationChange($event, 'locationA')"></app-dropdown>
         <div class="m-2">
           <label for="commuteTimeA" class="dark:text-green-500 block">Commute (mins):</label>
-          <input type="text" id="salary" formControlName="commuteTimeA"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white" name="commuteTimeA">
+          <input type="number" #commA id="commuteTimeA" formControlName="commuteTimeA"
+                 [ngClass]="{'disabled-input': commA.disabled}"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white">
         </div>
-
-        <app-dropdown label="Mode" [options]="workLocations" formControlName="locationB"></app-dropdown>
-
-
+        <app-dropdown label="Mode" [options]="workLocations" formControlName="locationB"
+                      (selected)="workLocationChange($event, 'locationB')"></app-dropdown>
         <div class="m-2">
           <label for="commuteTimeB" class="dark:text-green-500 block">Commute (mins):</label>
-          <input type="text" id="salary" formControlName="commuteTimeB"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white" name="commuteTimeA">
+          <input type="number" #commB id="commuteTimeB" formControlName="commuteTimeB"
+                 [ngClass]="{'disabled-input': commB.disabled}"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white">
         </div>
-
         <app-switch label="Overtime Expectation" formControlName="overtimeExpectationsA"></app-switch>
-
         <app-switch label="Work Hours Flexibility" formControlName="workHoursFlexibilityA"></app-switch>
-
         <app-switch label="Overtime Expectation" formControlName="overtimeExpectationsB"></app-switch>
-
         <app-switch label="Work Hours Flexibility" formControlName="workHoursFlexibilityB"></app-switch>
-
       </div>
     </app-collapsible-section>
 

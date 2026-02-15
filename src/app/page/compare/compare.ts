@@ -6,6 +6,7 @@ import {DictionaryValue} from '../../shared/model/dictionary.value';
 import {HttpClient} from '@angular/common/http';
 import {DictionaryTypeId} from '../../shared/model/constant';
 import {Switch} from '../../component/switch/switch';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-compare',
@@ -14,15 +15,16 @@ import {Switch} from '../../component/switch/switch';
     ReactiveFormsModule,
     CollapsibleSection,
     Dropdown,
-    Switch
+    Switch,
+    NgClass
   ],
   templateUrl: './compare.html',
   styleUrl: './compare.css'
 })
 export class Compare implements OnInit {
-  protected currencyOptions:DictionaryValue[] = [];
-  protected salaryPeriodOptions: DictionaryValue[]=[];
-  protected salaryTypeOptions: DictionaryValue[]=[];
+  protected currencyOptions: DictionaryValue[] = [];
+  protected salaryPeriodOptions: DictionaryValue[] = [];
+  protected salaryTypeOptions: DictionaryValue[] = [];
   protected workLocations: DictionaryValue[] = [];
 
   protected offer: FormGroup = new FormGroup({
@@ -49,6 +51,12 @@ export class Compare implements OnInit {
     benefitsForm: new FormGroup({
       healthInsuranceA: new FormControl(false, Validators.required),
       healthInsuranceB: new FormControl(false, Validators.required),
+      floatingDaysA: new FormControl(false, Validators.required),
+      floatingDaysB: new FormControl(false, Validators.required),
+      ptoDaysA: new FormControl(21, Validators.required),
+      ptoDaysB: new FormControl(21, Validators.required),
+      wellnessBenefitA: new FormControl(0, Validators.required),
+      wellnessBenefitB: new FormControl(0, Validators.required),
     }),
     workArrangementForm: new FormGroup({
       locationA: new FormControl('', Validators.required),
@@ -61,7 +69,6 @@ export class Compare implements OnInit {
       overtimeExpectationsB: new FormControl(false, Validators.required),
     }),
   });
-
 
 
   constructor(private httpClient: HttpClient) {
@@ -88,6 +95,16 @@ export class Compare implements OnInit {
   protected workLocationChange(event: any, field: string) {
     console.log('Event!');
     console.log(event);
-    console.log(field);
+    const companyLetter = field.charAt(field.length - 1);
+    if (event.value == 3) {
+      let workArrangementForm: FormGroup = this.offer.get('workArrangementForm') as FormGroup;
+      workArrangementForm?.get(`commuteTime${companyLetter}`)?.setValue(0);
+      workArrangementForm?.get(`commuteTime${companyLetter}`)?.disable();
+    } else {
+      let workArrangementForm: FormGroup = this.offer.get('workArrangementForm') as FormGroup;
+      workArrangementForm?.get(`commuteTime${companyLetter}`)?.setValue(0);
+      workArrangementForm?.get(`commuteTime${companyLetter}`)?.enable();
+    }
+
   }
 }
