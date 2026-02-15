@@ -68,6 +68,16 @@ export class Compare implements OnInit {
       overtimeExpectationsA: new FormControl(false, Validators.required),
       overtimeExpectationsB: new FormControl(false, Validators.required),
     }),
+    careerGrowth: new FormGroup({
+      promotionPathA: new FormControl(false, Validators.required),
+      promotionPathB: new FormControl(false, Validators.required),
+      trainingOpportunityA: new FormControl(false, Validators.required),
+      trainingOpportunityB: new FormControl(false, Validators.required),
+      mentorshipA: new FormControl(false, Validators.required),
+      mentorshipB: new FormControl(false, Validators.required),
+      companyStabilityA: new FormControl(false, Validators.required),
+      companyStabilityB: new FormControl(false, Validators.required),
+    })
   });
 
 
