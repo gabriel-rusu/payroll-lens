@@ -20,19 +20,48 @@ import {addDays, addYears, eachWeekOfInterval, format, isSameDay, isSunday, isWe
   styleUrl: './vacation.css'
 })
 export class Vacation implements OnInit {
+  private isMobile = window.innerWidth < 576;
   calendarOptions: CalendarOptions = {
+    customButtons: {
+      floatingDays: {
+        text: 'Floating Days',
+        click: (ev: MouseEvent, element: HTMLElement) => {
+          this.isActive = !this.isActive;
+          // Toggle active class
+          if (this.isActive) {
+            element.classList.add('fc-button-active');
+          } else {
+            element.classList.remove('fc-button-active');
+          }
+
+          console.log('Toggle state:', this.isActive);
+        }
+      }
+    },
     firstDay: 1,
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
     initialView: 'dayGridMonth',
-    headerToolbar: {
-      left: 'prev,today,next',
+    height: '65vh',
+    dayHeaderFormat: { weekday: 'narrow' }, // M T W T F S S
+    expandRows: true,
+    headerToolbar: this.isMobile ? {
+      left: '',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,listWeek',
+      right: ''
+    } : {
+      left: 'floatingDays',
+      center: 'title',
+      right: 'prev,today,next'
     },
-    fixedWeekCount: false
+    footerToolbar: this.isMobile ? {
+      left: 'floatingDays',
+      center: '',
+      right: 'prev,today,next'
+    } : false
   };
   protected legalHolidays: any[] = [];
   private holidayDates: Date[] = [];
+  private isActive: boolean = false;
 
   constructor(private workdayCounter: WorkdayCounterService, private localizationService: LocalizationService) {
   }

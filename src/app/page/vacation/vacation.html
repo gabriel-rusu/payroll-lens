@@ -1,8 +1,8 @@
 <form class="flex items-center justify-center" #salaryForm="ngForm">
-  <div class="bg-white dark:bg-gray-800 rounded-lg px-4 py-4 mt-24 ring shadow-xl m-auto ring-gray-900/5
-  min-w-2/5 min-h-2/5 xl:w-2/5 sm:w-3/4 @xs:w-5/6">
+  <div class="bg-white dark:bg-gray-800 rounded-lg sm:px-4 py-4 ring shadow-xl m-auto ring-gray-900/5
+       max-sm:w-full sm:w-[640px]">
     <div class="flex justify-center">
-      <img src="beach-chair.png" class="w-36 p-4 rounded-md border-white" alt="Payroll Lens logo"/>
+      <img src="beach-chair.png" class="not-sm:w-24 sm:w-36 p-4 rounded-md border-white" alt="An image with a beach chair and an umbrella"/>
     </div>
     <div class="grid sm:grid-cols lg:grid-cols text-white">
       <full-calendar [options]="calendarOptions" [events]="legalHolidays"></full-calendar>

@@ -1,2 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+
+
+.fc .fc-toolbar {
+  flex-wrap: wrap;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 24px;
+}
+
+.fc .fc-button {
+  padding: 4px 6px;
+}
+
+.fc-event {
+  font-size: 12px;
+  padding: 2px;
+}
