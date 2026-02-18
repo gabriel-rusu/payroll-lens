@@ -41,7 +41,7 @@ export class Vacation implements OnInit {
     firstDay: 1,
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
     initialView: 'dayGridMonth',
-    height: '65vh',
+    height: '60vh',
     dayHeaderFormat: { weekday: 'narrow' }, // M T W T F S S
     expandRows: true,
     headerToolbar: this.isMobile ? {

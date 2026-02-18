@@ -6,8 +6,26 @@
   flex-wrap: wrap;
 }
 
-.fc .fc-toolbar-title {
-  font-size: 24px;
+@media (max-width: 600px) {
+  .fc .fc-toolbar-title {
+    font-size: 16px;
+  }
+  .fc .fc-button {
+    padding: 2px 4px;
+  }
+
+  .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
+    margin-bottom: 10px;
+  }
+
+  .fc-footer-toolbar.fc-toolbar.fc-toolbar-ltr {
+    margin-top: 10px;
+  }
+}
+@media (min-width: 600px) {
+  .fc .fc-toolbar-title {
+    font-size: 24px;
+  }
 }
 
 .fc .fc-button {
