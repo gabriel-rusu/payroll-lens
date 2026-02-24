@@ -12,6 +12,7 @@
         "@angular/forms": "^20.3.0",
         "@angular/platform-browser": "^20.3.0",
         "@angular/router": "^20.3.0",
+        "@angular/service-worker": "^20.3.0",
         "@fullcalendar/angular": "^6.1.19",
         "@fullcalendar/core": "^6.1.19",
         "@fullcalendar/daygrid": "^6.1.19",
@@ -101,6 +102,8 @@
     "@angular/platform-browser-dynamic": ["@angular/platform-browser-dynamic@20.3.16", "", { "dependencies": { "tslib": "^2.3.0" }, "peerDependencies": { "@angular/common": "20.3.16", "@angular/compiler": "20.3.16", "@angular/core": "20.3.16", "@angular/platform-browser": "20.3.16" } }, "sha512-5mECCV9YeKH6ue239GXRTGeDSd/eTbM1j8dDejhm5cGnPBhTxRw4o+GgSrWTYtb6VmIYdwUGBTC+wCBphiaQ2A=="],
 
     "@angular/router": ["@angular/router@20.3.16", "", { "dependencies": { "tslib": "^2.3.0" }, "peerDependencies": { "@angular/common": "20.3.16", "@angular/core": "20.3.16", "@angular/platform-browser": "20.3.16", "rxjs": "^6.5.3 || ^7.4.0" } }, "sha512-e1LiQFZaajKqc00cY5FboIrWJZSMnZ64GDp5R0UejritYrqorQQQNOqP1W85BMuY2owibMmxVfX+dJg/Mc8PuQ=="],
+
+    "@angular/service-worker": ["@angular/service-worker@20.3.16", "", { "dependencies": { "tslib": "^2.3.0" }, "peerDependencies": { "@angular/core": "20.3.16", "rxjs": "^6.5.3 || ^7.4.0" }, "bin": { "ngsw-config": "ngsw-config.js" } }, "sha512-qme+jz3ySWas4JRif6NVaxWStas1XmOaws6EUfpei1AAlK0aBXmuTZtF3YAQDfP6RxLQP/axE0Vm1TpYhNYahA=="],
 
     "@babel/code-frame": ["@babel/code-frame@7.28.6", "", { "dependencies": { "@babel/helper-validator-identifier": "^7.28.5", "js-tokens": "^4.0.0", "picocolors": "^1.1.1" } }, "sha512-JYgintcMjRiCvS8mMECzaEn+m3PfoQiyqukOMCCVQtoJGYJw8j/8LBJEiqkHLkfwCcs74E3pbAUFNg7d9VNJ+Q=="],
 
