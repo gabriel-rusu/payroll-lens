@@ -1,14 +1,16 @@
-<label class="text-green-600 block">{{label()}}</label>
-<label class="relative inline-flex items-center cursor-pointer group">
-  <input type="checkbox" class="sr-only"
-         [ngModel]="value()"
-         [disabled]="isDisabled"
-         (ngModelChange)="handleChange($event)">
-  <div class="w-11 h-6 bg-gray-300 rounded-full transition-colors
+<div class="m-2">
+  <label class="text-green-500 block">{{label()}}</label>
+  <label class="relative inline-flex items-center cursor-pointer group">
+    <input type="checkbox" class="sr-only"
+           [ngModel]="value()"
+           [disabled]="isDisabled"
+           (ngModelChange)="handleChange($event)">
+    <div class="w-11 h-6 bg-gray-300 rounded-full transition-colors
               group-has-[input:checked]:bg-green-600" (click)="flipValue()">
-    <div class="absolute top-1 left-1 w-4 h-4 bg-white rounded-full
+      <div class="absolute top-1 left-1 w-4 h-4 bg-white rounded-full
                 transition-transform
                 group-has-[input:checked]:translate-x-5">
+      </div>
     </div>
-  </div>
-</label>
+  </label>
+</div>

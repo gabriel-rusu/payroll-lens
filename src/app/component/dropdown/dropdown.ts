@@ -1,7 +1,6 @@
-import {Component, effect, forwardRef, input, OnInit, output, signal} from '@angular/core';
+import {Component, forwardRef, input, output, signal} from '@angular/core';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {DictionaryValue} from '../../shared/model/dictionary.value';
-import {JsonPipe} from '@angular/common';
 
 @Component({
   standalone: true,

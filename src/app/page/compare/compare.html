@@ -1,11 +1,11 @@
 <form class="flex items-center justify-center" [formGroup]="offer">
   <div
-    class="bg-white dark:bg-gray-800 rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5 col-span-2 min-w-2xl max-w-2xl">
+    class="bg-white dark:bg-gray-800 rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5 col-span-2 max-md:min-w-full md:min-w-2xl md:max-w-2xl">
     <div class="flex justify-center">
       <img src="compare.png" class="w-36 p-4 rounded-md border-white" alt="Payroll Lens logo"/>
     </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-2">
+    <div class="grid grid-cols-2">
       <div class="m-2">
         <label for="salary" class="dark:text-green-500 block">Company name:</label>
         <input type="text" id="salary"
@@ -20,86 +20,90 @@
       </div>
     </div>
     <app-collapsible-section title="Compenstion" formGroupName="compensationForm">
-      <div class="grid max-sm:grid-cols-2 sm:grid-cols-4">
-        <app-dropdown label="Currency" [options]="currencyOptions" formControlName="currencyA"></app-dropdown>
+      <div class="grid grid-cols-2 ">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <app-dropdown label="Currency" [options]="currencyOptions" formControlName="currencyA"></app-dropdown>
 
-        <app-dropdown label="Salary type" [options]="salaryTypeOptions"
-                      formControlName="salaryTypeCompanyA"></app-dropdown>
-        <app-dropdown label="Currency" [options]="currencyOptions" formControlName="currencyB"></app-dropdown>
-        <app-dropdown label="Salary type" [options]="salaryTypeOptions"
-                      formControlName="salaryTypeCompanyB"></app-dropdown>
-        <app-dropdown label="Salary period" [options]="salaryPeriodOptions"
-                      formControlName="salaryPeriodA"></app-dropdown>
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Salary:</label>
-          <input type="text" id="salary" formControlName="salaryA"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white h-8"
-                 name="salary">
-        </div>
-        <app-dropdown label="Salary period" [options]="salaryPeriodOptions"
-                      formControlName="salaryPeriodB"></app-dropdown>
+          <app-dropdown label="Salary type" [options]="salaryTypeOptions"
+                        formControlName="salaryTypeCompanyA"></app-dropdown>
 
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Salary:</label>
-          <input type="text" id="salary" formControlName="salaryB"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white h-8"
-                 name="salary">
+          <app-dropdown label="Salary period" [options]="salaryPeriodOptions"
+                        formControlName="salaryPeriodA"></app-dropdown>
+          <div class="m-2">
+            <label for="salary" class="dark:text-green-500 block">Salary:</label>
+            <input type="text" id="salary" formControlName="salaryA"
+                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white h-8"
+                   name="salary">
+          </div>
         </div>
-
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Meal ticket value:</label>
-          <input type="text" id="salary" formControlName="mealTicketA"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
-        </div>
-
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">RSU(stocks):</label>
-          <input type="text" id="salary" formControlName="rsuA"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
-        </div>
-
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Meal ticket value:</label>
-          <input type="text" id="salary" formControlName="mealTicketB"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
-        </div>
-
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">RSU(stocks):</label>
-          <input type="text" id="salary" formControlName="rsuB"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
-        </div>
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Vesting period:</label>
-          <input type="text" id="salary" formControlName="vestingPeriodA"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
-        </div>
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">NASDAQ ticker:</label>
-          <input type="text" id="salary" formControlName="nasdaqTickerA"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <app-dropdown label="Currency" [options]="currencyOptions" formControlName="currencyB"></app-dropdown>
+          <app-dropdown label="Salary type" [options]="salaryTypeOptions"
+                        formControlName="salaryTypeCompanyB"></app-dropdown>
 
 
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Vesting period:</label>
-          <input type="text" id="salary" formControlName="vestingPeriodB"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
+          <app-dropdown label="Salary period" [options]="salaryPeriodOptions"
+                        formControlName="salaryPeriodB"></app-dropdown>
+          <div class="m-2">
+            <label for="salary" class="dark:text-green-500 block">Salary:</label>
+            <input type="text" id="salary" formControlName="salaryB"
+                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white h-8"
+                   name="salary">
+          </div>
         </div>
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">NASDAQ ticker:</label>
-          <input type="text" id="salary" formControlName="nasdaqTickerB"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <div class="m-2">
+            <label for="salary" class="dark:text-green-500 block">Meal ticket value:</label>
+            <input type="text" id="salary" formControlName="mealTicketA"
+                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                   name="salary">
+          </div>
+          <div class="m-2">
+            <label for="salary" class="dark:text-green-500 block">RSU(stocks):</label>
+            <input type="text" id="salary" formControlName="rsuA"
+                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                   name="salary">
+          </div>
+          <div class="m-2">
+            <label for="salary" class="dark:text-green-500 block">Vesting period:</label>
+            <input type="text" id="salary" formControlName="vestingPeriodA"
+                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                   name="salary">
+          </div>
+          <div class="m-2">
+            <label for="salary" class="dark:text-green-500 block">NASDAQ ticker:</label>
+            <input type="text" id="salary" formControlName="nasdaqTickerA"
+                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                   name="salary">
+          </div>
         </div>
-
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <div class="m-2">
+            <label for="salary" class="dark:text-green-500 block">Meal ticket value:</label>
+            <input type="text" id="salary" formControlName="mealTicketB"
+                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                   name="salary">
+          </div>
+          <div class="m-2">
+            <label for="salary" class="dark:text-green-500 block">RSU(stocks):</label>
+            <input type="text" id="salary" formControlName="rsuB"
+                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                   name="salary">
+          </div>
+          <div class="m-2">
+            <label for="salary" class="dark:text-green-500 block">Vesting period:</label>
+            <input type="text" id="salary" formControlName="vestingPeriodB"
+                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                   name="salary">
+          </div>
+          <div class="m-2">
+            <label for="salary" class="dark:text-green-500 block">NASDAQ ticker:</label>
+            <input type="text" id="salary" formControlName="nasdaqTickerB"
+                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                   name="salary">
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2">
         <div class="m-2">
           <label for="salary" class="dark:text-green-500 block">Bonuses (per year):</label>
           <input type="text" id="salary" formControlName="bonusesA"
@@ -107,102 +111,97 @@
                  name="salary">
         </div>
         <div class="m-2"></div>
-
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2">
         <div class="m-2">
           <label for="salary" class="dark:text-green-500 block">Bonuses (per year):</label>
           <input type="text" id="salary" formControlName="bonusesB"
                  class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                  name="salary">
         </div>
+        </div>
 
       </div>
     </app-collapsible-section>
     <app-collapsible-section title="Benefits" formGroupName="benefitsForm">
-      <div class="grid grid-cols-4">
-        <app-switch class="m-2" label="Health insurance:" formControlName="healthInsuranceA" (change)="print()"/>
+      <div class="grid grid-cols-2">
+        <div class="grid grid-cols-1 md:grid-cols-2">
 
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Paid time off(PTO):</label>
-          <input type="text" id="salary" formControlName="ptoDaysA"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
+          <div class="m-2">
+            <label for="wellnessA" class="dark:text-green-500 block">Wellness benefit:</label>
+            <input type="number" id="wellnessA" formControlName="wellnessBenefitA"
+                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white">
+          </div>
+          <div class="m-2">
+            <label for="salary" class="dark:text-green-500 block">Paid time off(PTO):</label>
+            <input type="text" id="salary" formControlName="ptoDaysA"
+                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                   name="salary">
+          </div>
+          <app-switch label="Floating Days:" formControlName="floatingDaysA"></app-switch>
+          <app-switch label="Health insurance:" formControlName="healthInsuranceA" (change)="print()"/>
         </div>
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <div class="m-2">
+            <label for="wellnessB" class="dark:text-green-500 block">Wellness benefit:</label>
+            <input type="text" id="wellnessB" formControlName="wellnessBenefitB"
+                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white">
+          </div>
+          <div class="m-2">
+            <label for="salary" class="dark:text-green-500 block">Paid time off(PTO):</label>
+            <input type="number" id="salary" formControlName="ptoDaysB"
+                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white">
+          </div>
+          <app-switch label="Floating days:" formControlName="floatingDaysB"></app-switch>
+          <app-switch label="Health insurance:" formControlName="healthInsuranceB" (change)="print()"/>
 
-        <app-switch class="m-2" label="Health insurance:" formControlName="healthInsuranceB" (change)="print()"/>
-
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Paid time off(PTO):</label>
-          <input type="number" id="salary" formControlName="ptoDaysB"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white">
-        </div>
-
-        <app-switch class="m-2" label="Floating Days:" formControlName="floatingDaysA"></app-switch>
-
-        <div class="m-2">
-          <label for="wellnessA" class="dark:text-green-500 block">Wellness benefit:</label>
-          <input type="number" id="wellnessA" formControlName="wellnessBenefitA"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white">
-        </div>
-
-        <app-switch class="m-2" label="Floating days:" formControlName="floatingDaysB"></app-switch>
-
-        <div class="m-2">
-          <label for="wellnessB" class="dark:text-green-500 block">Wellness benefit:</label>
-          <input type="text" id="wellnessB" formControlName="wellnessBenefitB"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white">
         </div>
       </div>
     </app-collapsible-section>
     <app-collapsible-section title="Work Arrangement" formGroupName="workArrangementForm">
-      <div class="grid grid-cols-4">
-        <app-dropdown label="Mode" [options]="workLocations" formControlName="locationA"
-                      (selected)="workLocationChange($event, 'locationA')"></app-dropdown>
-        <div class="m-2">
-          <label for="commuteTimeA" class="dark:text-green-500 block">Commute (mins):</label>
-          <input type="number" #commA id="commuteTimeA" formControlName="commuteTimeA"
-                 [ngClass]="{'disabled-input': commA.disabled}"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white">
+      <div class="grid grid-cols-2">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <app-dropdown label="Mode" [options]="workLocations" formControlName="locationA"
+                        (selected)="workLocationChange($event, 'locationA')"></app-dropdown>
+          <div class="m-2">
+            <label for="commuteTimeA" class="dark:text-green-500 block">Commute (mins):</label>
+            <input type="number" #commA id="commuteTimeA" formControlName="commuteTimeA"
+                   [ngClass]="{'disabled-input': commA.disabled}"
+                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white">
+          </div>
+          <app-switch label="Overtime Expectation" formControlName="overtimeExpectationsA"></app-switch>
+          <app-switch label="Work Hours Flexibility" formControlName="workHoursFlexibilityA"></app-switch>
         </div>
-        <app-dropdown label="Mode" [options]="workLocations" formControlName="locationB"
-                      (selected)="workLocationChange($event, 'locationB')"></app-dropdown>
-        <div class="m-2">
-          <label for="commuteTimeB" class="dark:text-green-500 block">Commute (mins):</label>
-          <input type="number" #commB id="commuteTimeB" formControlName="commuteTimeB"
-                 [ngClass]="{'disabled-input': commB.disabled}"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <app-dropdown label="Mode" [options]="workLocations" formControlName="locationB"
+                        (selected)="workLocationChange($event, 'locationB')"></app-dropdown>
+          <div class="m-2">
+            <label for="commuteTimeB" class="dark:text-green-500 block">Commute (mins):</label>
+            <input type="number" #commB id="commuteTimeB" formControlName="commuteTimeB"
+                   [ngClass]="{'disabled-input': commB.disabled}"
+                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white">
+          </div>
+
+          <app-switch label="Overtime Expectation" formControlName="overtimeExpectationsB"></app-switch>
+          <app-switch label="Work Hours Flexibility" formControlName="workHoursFlexibilityB"></app-switch>
         </div>
-        <app-switch label="Overtime Expectation" formControlName="overtimeExpectationsA"></app-switch>
-        <app-switch label="Work Hours Flexibility" formControlName="workHoursFlexibilityA"></app-switch>
-        <app-switch label="Overtime Expectation" formControlName="overtimeExpectationsB"></app-switch>
-        <app-switch label="Work Hours Flexibility" formControlName="workHoursFlexibilityB"></app-switch>
       </div>
     </app-collapsible-section>
     <app-collapsible-section title="Career Growth" formGroupName="careerGrowth">
-      <div class="grid max-sm:grid-cols-2 sm:grid-cols-4">
-        <div class="sm:grid-cols-4 max-sm:grid-cols-1">
-          <app-switch label="Promotion path?" formControlName="promotionPathA">
-          </app-switch>
-          <app-switch label="Training & Development" formControlName="trainingOpportunityA">
-          </app-switch>
-        </div>
-
-        <div class="sm:grid-cols-4 max-sm:grid-cols-1">
-          <app-switch label="Promotion path?" formControlName="promotionPathB">
-          </app-switch>
-          <app-switch label="Training & Development" formControlName="trainingOpportunityB">
-          </app-switch>
-        </div>
-
-        <div class="sm:grid-cols-2 max-sm:grid-cols-1">
+      <div class="grid grid-cols-2">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <app-switch label="Promotion path" formControlName="promotionPathA"/>
+          <app-switch label="Training" formControlName="trainingOpportunityA"/>
           <app-switch label="Mentorship" formControlName="mentorshipA"></app-switch>
-          <app-switch label="Company stability?" formControlName="companyStabilityA"></app-switch>
-        </div>
+          <app-switch label="Stability" formControlName="companyStabilityA"></app-switch>
 
-        <div class="sm:grid-cols-2 max-sm:grid-cols-1">
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <app-switch label="Promotion path" formControlName="promotionPathB"/>
+          <app-switch label="Training" formControlName="trainingOpportunityB"/>
           <app-switch label="Mentorship" formControlName="mentorshipB"></app-switch>
-          <app-switch label="Company stability?" formControlName="companyStabilityB"></app-switch>
+          <app-switch label="Stability" formControlName="companyStabilityB"></app-switch>
         </div>
-
       </div>
     </app-collapsible-section>
   </div>
