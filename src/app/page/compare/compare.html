@@ -20,7 +20,7 @@
       </div>
     </div>
     <app-collapsible-section title="Compenstion" formGroupName="compensationForm">
-      <div class="grid sm:grid-cols-4 lg:grid-cols-4">
+      <div class="grid max-sm:grid-cols-2 sm:grid-cols-4">
         <app-dropdown label="Currency" [options]="currencyOptions" formControlName="currencyA"></app-dropdown>
 
         <app-dropdown label="Salary type" [options]="salaryTypeOptions"
@@ -178,7 +178,32 @@
       </div>
     </app-collapsible-section>
     <app-collapsible-section title="Career Growth" formGroupName="careerGrowth">
+      <div class="grid max-sm:grid-cols-2 sm:grid-cols-4">
+        <div class="sm:grid-cols-4 max-sm:grid-cols-1">
+          <app-switch label="Promotion path?" formControlName="promotionPathA">
+          </app-switch>
+          <app-switch label="Training & Development" formControlName="trainingOpportunityA">
+          </app-switch>
+        </div>
 
+        <div class="sm:grid-cols-4 max-sm:grid-cols-1">
+          <app-switch label="Promotion path?" formControlName="promotionPathB">
+          </app-switch>
+          <app-switch label="Training & Development" formControlName="trainingOpportunityB">
+          </app-switch>
+        </div>
+
+        <div class="sm:grid-cols-2 max-sm:grid-cols-1">
+          <app-switch label="Mentorship" formControlName="mentorshipA"></app-switch>
+          <app-switch label="Company stability?" formControlName="companyStabilityA"></app-switch>
+        </div>
+
+        <div class="sm:grid-cols-2 max-sm:grid-cols-1">
+          <app-switch label="Mentorship" formControlName="mentorshipB"></app-switch>
+          <app-switch label="Company stability?" formControlName="companyStabilityB"></app-switch>
+        </div>
+
+      </div>
     </app-collapsible-section>
   </div>
 
