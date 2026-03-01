@@ -7,6 +7,7 @@ import {HttpClient} from '@angular/common/http';
 import {DictionaryTypeId} from '../../shared/model/constant';
 import {Switch} from '../../component/switch/switch';
 import {NgClass} from '@angular/common';
+import {ToastService} from '../../shared/service/toast.service';
 
 @Component({
   selector: 'app-compare',
@@ -81,7 +82,7 @@ export class Compare implements OnInit {
   });
 
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private toastService: ToastService) {
   }
 
 
@@ -116,5 +117,14 @@ export class Compare implements OnInit {
       workArrangementForm?.get(`commuteTime${companyLetter}`)?.enable();
     }
 
+  }
+
+  protected compareOffers() {
+    if (!this.offer.valid) {
+      console.log('invalid offer!');
+      this.toastService.add('appMessages', 'Invalid offer!');
+      return;
+    }
+    console.log('valid offer!');
   }
 }
