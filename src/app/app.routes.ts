@@ -7,7 +7,7 @@ import {Compare} from './page/compare/compare';
 
 export const routes: Routes = [
   {path: 'salary', component: Salary},
-  {path: 'vacation', component: Vacation},
+  {path: 'holidays', component: Vacation},
   {path: 'compare', component: Compare},
   {path: '', component: Dashboard}
 ];

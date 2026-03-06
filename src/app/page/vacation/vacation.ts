@@ -9,12 +9,15 @@ import {LocalizationService} from '../../shared/service/localization.service';
 import {FormsModule} from '@angular/forms';
 import {zipWith} from 'rxjs';
 import {addDays, addYears, eachWeekOfInterval, format, isSameDay, isSunday, isWeekend, parse} from 'date-fns';
+import {Dropdown} from '../../component/dropdown/dropdown';
+import {DictionaryValue} from '../../shared/model/dictionary.value';
 
 @Component({
   selector: 'app-vacation',
   imports: [
     FullCalendarModule,
-    FormsModule
+    FormsModule,
+    Dropdown
   ],
   templateUrl: './vacation.html',
   styleUrl: './vacation.css'
@@ -61,7 +64,14 @@ export class Vacation implements OnInit {
   };
   protected legalHolidays: any[] = [];
   private holidayDates: Date[] = [];
-  private isActive: boolean = false;
+  protected isActive: boolean = false;
+  protected workWeekDays: DictionaryValue[] = [
+    new DictionaryValue(1, 'Monday'),
+    new DictionaryValue(2, 'Tuesday'),
+    new DictionaryValue(3, 'Wednesday'),
+    new DictionaryValue(4, 'Thursday'),
+    new DictionaryValue(5, 'Friday'),
+  ];
 
   constructor(private workdayCounter: WorkdayCounterService, private localizationService: LocalizationService) {
   }

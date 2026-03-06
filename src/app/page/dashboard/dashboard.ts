@@ -14,7 +14,7 @@ import {TileImage} from '../../shared/model/tile.image.model';
 export class Dashboard {
   dashboardTiles: Tile[] = [
     new Tile('Salary Calculator', new TileImage('purse.png', 144, 144), 'salary'),
-    new Tile('Vacation Tracker', new TileImage('beach-chair.png', 144, 144), 'vacation'),
+    new Tile('Holiday Calendar', new TileImage('beach-chair.png', 144, 144), 'holidays'),
     new Tile('Offer Comparison', new TileImage('compare.png', 144, 144), 'compare'),
   ]
 }
