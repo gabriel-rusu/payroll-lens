@@ -29,15 +29,17 @@ export class Vacation implements OnInit {
       floatingDays: {
         text: 'Floating Days',
         click: (ev: MouseEvent, element: HTMLElement) => {
-          this.isActive = !this.isActive;
+          this.floatingDays = !this.floatingDays;
           // Toggle active class
-          if (this.isActive) {
+          if (this.floatingDays) {
             element.classList.add('fc-button-active');
+            this.resetVacationSuggestions();
+            this.suggestVacations();
           } else {
             element.classList.remove('fc-button-active');
           }
 
-          console.log('Toggle state:', this.isActive);
+          console.log('Toggle state:', this.floatingDays);
         }
       }
     },
@@ -64,7 +66,7 @@ export class Vacation implements OnInit {
   };
   protected legalHolidays: any[] = [];
   private holidayDates: Date[] = [];
-  protected isActive: boolean = false;
+  protected floatingDays: boolean = false;
   protected workWeekDays: DictionaryValue[] = [
     new DictionaryValue(1, 'Monday'),
     new DictionaryValue(2, 'Tuesday'),
@@ -81,14 +83,15 @@ export class Vacation implements OnInit {
       zipWith(this.workdayCounter.legalDaysOff(new Date().getFullYear() + 1, this.localizationService.getCountryCode()))
     ).subscribe(
       data => {
+        console.log(data);
         let [currentYearHolidays, nextYearHolidays] = data;
         this.legalHolidays.push(...currentYearHolidays.map(entry => {
-          entry.title = entry.name;
+          entry.title = entry.localName;
           entry.color = 'green';
           return entry;
         }));
         this.legalHolidays.push(...nextYearHolidays.map(entry => {
-          entry.title = entry.name;
+          entry.title = entry.localName;
           entry.color = 'green';
           return entry;
         }));
@@ -111,7 +114,11 @@ export class Vacation implements OnInit {
       let holidayCount = 0;
       let currentDay = addDays(startingDay, 1);
       while (!isSunday(currentDay)) {
-        if (!isWeekend(currentDay) && this.holidayDates.some(date => isSameDay(date, currentDay))) {
+        if (!isWeekend(currentDay) && !this.floatingDays &&
+          this.holidayDates.some(date => isSameDay(date, currentDay))) {
+          holidayCount++;
+        } else if(this.floatingDays && this.holidayDates.some(date => isSameDay(date, currentDay))) {
+          console.log('Holiday date is: ', currentDay);
           holidayCount++;
         }
         holidaysInWeek.set(startingDay, holidayCount);
@@ -135,5 +142,13 @@ export class Vacation implements OnInit {
     this.legalHolidays = [...this.legalHolidays];
     console.log(holidaysInWeek);
     console.log(this.legalHolidays);
+  }
+
+  private resetVacationSuggestions() {
+    this.legalHolidays = this.legalHolidays.filter(entry => entry.title != 'Suggestion');
+  }
+
+  protected compensationDay(event: Event) {
+    console.log(event);
   }
 }

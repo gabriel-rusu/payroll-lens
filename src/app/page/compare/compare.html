@@ -5,18 +5,18 @@
       <img src="compare.png" class="w-36 p-4 rounded-md border-white" alt="Payroll Lens logo"/>
     </div>
 
-    <div class="grid grid-cols-2">
+    <div class="grid grid-cols-2" formGroupName="companyNames">
       <div class="m-2">
         <label for="salary" class="dark:text-green-500 block">Company name:</label>
         <input type="text" id="salary"
                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               name="salary" placeholder="Company A">
+               formControlName="companyNameA" placeholder="Company A">
       </div>
       <div class="m-2">
         <label for="salary" class="dark:text-green-500 block">Company name:</label>
         <input type="text" id="salary"
                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-               name="salary" placeholder="Company B">
+               formControlName="companyNameB" placeholder="Company B">
       </div>
     </div>
     <app-collapsible-section title="Compenstion" formGroupName="compensationForm">

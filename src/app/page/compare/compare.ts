@@ -8,6 +8,8 @@ import {DictionaryTypeId} from '../../shared/model/constant';
 import {Switch} from '../../component/switch/switch';
 import {NgClass} from '@angular/common';
 import {ToastService} from '../../shared/service/toast.service';
+import {YahooFinanceService} from '../../shared/service/yahoo.finance.service';
+import {debounceTime, map, pipe, switchMap} from 'rxjs';
 
 @Component({
   selector: 'app-compare',
@@ -78,15 +80,19 @@ export class Compare implements OnInit {
       mentorshipB: new FormControl(false, Validators.required),
       companyStabilityA: new FormControl(false, Validators.required),
       companyStabilityB: new FormControl(false, Validators.required),
+    }),
+    companyNames: new FormGroup({
+      companyNameA: new FormControl('', Validators.required),
+      companyNameB: new FormControl('', Validators.required),
     })
   });
 
 
-  constructor(private httpClient: HttpClient, private toastService: ToastService) {
+  constructor(private httpClient: HttpClient, private toastService: ToastService, private financeService: YahooFinanceService) {
   }
 
 
-  ngOnInit() {
+  async ngOnInit() {
     this.httpClient.get<DictionaryValue[][]>('./dropdown.json').subscribe({
       next: data => {
         this.currencyOptions = data[DictionaryTypeId.CURRENCY]
@@ -95,7 +101,28 @@ export class Compare implements OnInit {
         this.workLocations = data[DictionaryTypeId.LOCATIONS]
         console.log(data);
       }
-    })
+    });
+
+
+    this.financeService.findTicker('Adobe').subscribe(data => {
+      console.log('ticker: ', data);
+    });
+
+// Single ticker
+    this.financeService.getStockPrice('AAPL').subscribe(price => {
+      console.log("AAPL:", price);
+    });
+
+    // @ts-ignore
+    this.offer.get('companyNames').get('companyNameA').valueChanges.pipe(debounceTime(750),
+      switchMap(companyName => this.financeService.findTicker(companyName).pipe(
+        switchMap(ticker => this.financeService.getStockPrice(ticker).pipe(map(price => ({ticker, price}))))
+      ))).subscribe((price: any) => {
+        console.log(price);
+    });
+    // .get('companyNameA').valueChanges.pipe().subscribe(companyName => {
+
+    // })
 
   }
 
