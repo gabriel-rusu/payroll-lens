@@ -9,7 +9,7 @@ import {Switch} from '../../component/switch/switch';
 import {NgClass} from '@angular/common';
 import {ToastService} from '../../shared/service/toast.service';
 import {YahooFinanceService} from '../../shared/service/yahoo.finance.service';
-import {debounceTime, map, pipe, switchMap} from 'rxjs';
+import {debounceTime, filter, map, pipe, switchMap} from 'rxjs';
 
 @Component({
   selector: 'app-compare',
@@ -50,6 +50,8 @@ export class Compare implements OnInit {
       vestingPeriodB: new FormControl('', Validators.required),
       nasdaqTickerA: new FormControl('', Validators.required),
       nasdaqTickerB: new FormControl('', Validators.required),
+      pricePerShareCompanyA: new FormControl('', Validators.required),
+      pricePerShareCompanyB: new FormControl('', Validators.required),
     }),
     benefitsForm: new FormGroup({
       healthInsuranceA: new FormControl(false, Validators.required),
@@ -113,17 +115,22 @@ export class Compare implements OnInit {
       console.log("AAPL:", price);
     });
 
-    // @ts-ignore
-    this.offer.get('companyNames').get('companyNameA').valueChanges.pipe(debounceTime(750),
+    this.loadTickerAndPrice('A');
+    this.loadTickerAndPrice('B');
+
+  }
+
+  private loadTickerAndPrice(companyFormLetter: string) {
+    this.offer?.get('companyNames')?.get(`companyName${companyFormLetter}`)?.valueChanges.pipe(debounceTime(200),
+      filter(companyName => companyName?.length > 0),
       switchMap(companyName => this.financeService.findTicker(companyName).pipe(
         switchMap(ticker => this.financeService.getStockPrice(ticker).pipe(map(price => ({ticker, price}))))
-      ))).subscribe((price: any) => {
-        console.log(price);
+      ))).subscribe((priceAndTicker: any) => {
+      this.offer?.get('compensationForm')?.get(`nasdaqTicker${companyFormLetter}`)?.setValue(priceAndTicker.ticker);
+      this.offer?.get('compensationForm')?.get(`nasdaqTicker${companyFormLetter}`)?.disable();
+      this.offer?.get('compensationForm')?.get(`pricePerShareCompany${companyFormLetter}`)?.setValue(priceAndTicker.price);
+      this.offer?.get('compensationForm')?.get(`pricePerShareCompany${companyFormLetter}`)?.disable();
     });
-    // .get('companyNameA').valueChanges.pipe().subscribe(companyName => {
-
-    // })
-
   }
 
   protected print() {

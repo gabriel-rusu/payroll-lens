@@ -27,6 +27,6 @@ export class YahooFinanceService {
       name: q.longname || q.shortname,
       exchange: q.exchange,
       type: q.quoteType,
-    }))[0].ticker));
+    }))[0]?.ticker));
   }
 }

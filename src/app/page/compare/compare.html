@@ -72,7 +72,7 @@
           </div>
           <div class="m-2">
             <label for="salary" class="dark:text-green-500 block">NASDAQ ticker:</label>
-            <input type="text" id="salary" formControlName="nasdaqTickerA"
+            <input type="text" id="tickerA" #tickerA formControlName="nasdaqTickerA" [ngClass]="{'disabled-input': tickerA.disabled}"
                    class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                    name="salary">
           </div>
@@ -98,7 +98,7 @@
           </div>
           <div class="m-2">
             <label for="salary" class="dark:text-green-500 block">NASDAQ ticker:</label>
-            <input type="text" id="salary" formControlName="nasdaqTickerB"
+            <input type="text" id="salary" #tickerB formControlName="nasdaqTickerB" [ngClass]="{'disabled-input': tickerB.disabled}"
                    class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                    name="salary">
           </div>
@@ -110,7 +110,12 @@
                  class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                  name="salary">
         </div>
-        <div class="m-2"></div>
+          <div class="m-2">
+            <label for="salary" class="dark:text-green-500 block">Price per share:</label>
+            <input type="text" id="salary" #sharePriceA formControlName="pricePerShareCompanyA" [ngClass]="{'disabled-input' : sharePriceA.disabled}"
+                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                   name="salary">
+          </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2">
         <div class="m-2">
@@ -119,6 +124,12 @@
                  class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                  name="salary">
         </div>
+          <div class="m-2">
+            <label for="salary" class="dark:text-green-500 block">Price per share:</label>
+            <input type="text" id="salary" #sharePriceB formControlName="pricePerShareCompanyB" [ngClass]="{'disabled-input' : sharePriceB.disabled}"
+                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                   name="salary">
+          </div>
         </div>
 
       </div>

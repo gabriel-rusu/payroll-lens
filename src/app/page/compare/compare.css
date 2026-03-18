@@ -1,3 +1,9 @@
 input.disabled-input {
   background-color: #ada7a7;
 }
+
+
+input.disabled {
+  background-color: #a7a7a7;
+  color: #ada7a7;
+}
