@@ -101,18 +101,7 @@ export class Compare implements OnInit {
         this.salaryPeriodOptions = data[DictionaryTypeId.FREQUENCY]
         this.salaryTypeOptions = data[DictionaryTypeId.SALARY_TYPE]
         this.workLocations = data[DictionaryTypeId.LOCATIONS]
-        console.log(data);
       }
-    });
-
-
-    this.financeService.findTicker('Adobe').subscribe(data => {
-      console.log('ticker: ', data);
-    });
-
-// Single ticker
-    this.financeService.getStockPrice('AAPL').subscribe(price => {
-      console.log("AAPL:", price);
     });
 
     this.loadTickerAndPrice('A');

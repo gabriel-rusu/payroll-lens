@@ -7,14 +7,14 @@
 
     <div class="grid grid-cols-2" formGroupName="companyNames">
       <div class="m-2">
-        <label for="salary" class="dark:text-green-500 block">Company name:</label>
-        <input type="text" id="salary"
+        <label for="companyNameA" class="dark:text-green-500 block">Company name:</label>
+        <input type="text" id="companyNameA"
                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                formControlName="companyNameA" placeholder="Company A">
       </div>
       <div class="m-2">
-        <label for="salary" class="dark:text-green-500 block">Company name:</label>
-        <input type="text" id="salary"
+        <label for="companyNameB" class="dark:text-green-500 block">Company name:</label>
+        <input type="text" id="companyNameB"
                class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                formControlName="companyNameB" placeholder="Company B">
       </div>
@@ -30,8 +30,8 @@
           <app-dropdown label="Salary period" [options]="salaryPeriodOptions"
                         formControlName="salaryPeriodA"></app-dropdown>
           <div class="m-2">
-            <label for="salary" class="dark:text-green-500 block">Salary:</label>
-            <input type="text" id="salary" formControlName="salaryA"
+            <label for="salaryA" class="dark:text-green-500 block">Salary:</label>
+            <input type="text" id="salaryA" formControlName="salaryA"
                    class="p-1 rounded-lg text-center w-full text-green-800 bg-white h-8"
                    name="salary">
           </div>
@@ -45,7 +45,7 @@
           <app-dropdown label="Salary period" [options]="salaryPeriodOptions"
                         formControlName="salaryPeriodB"></app-dropdown>
           <div class="m-2">
-            <label for="salary" class="dark:text-green-500 block">Salary:</label>
+            <label for="salaryB" class="dark:text-green-500 block">Salary:</label>
             <input type="text" id="salary" formControlName="salaryB"
                    class="p-1 rounded-lg text-center w-full text-green-800 bg-white h-8"
                    name="salary">
@@ -53,20 +53,20 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2">
           <div class="m-2">
-            <label for="salary" class="dark:text-green-500 block">Meal ticket value:</label>
-            <input type="text" id="salary" formControlName="mealTicketA"
+            <label for="mealTicketA" class="dark:text-green-500 block">Meal ticket value:</label>
+            <input type="text" id="mealTicketA" formControlName="mealTicketA"
                    class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                    name="salary">
           </div>
           <div class="m-2">
-            <label for="salary" class="dark:text-green-500 block">RSU(stocks):</label>
-            <input type="text" id="salary" formControlName="rsuA"
+            <label for="rsuA" class="dark:text-green-500 block">RSU(stocks):</label>
+            <input type="text" id="rsuA" formControlName="rsuA"
                    class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                    name="salary">
           </div>
           <div class="m-2">
-            <label for="salary" class="dark:text-green-500 block">Vesting period:</label>
-            <input type="text" id="salary" formControlName="vestingPeriodA"
+            <label for="vestingPeriodA" class="dark:text-green-500 block">Vesting period:</label>
+            <input type="text" id="vestingPeriodA" formControlName="vestingPeriodA"
                    class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                    name="salary">
           </div>
@@ -79,53 +79,53 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2">
           <div class="m-2">
-            <label for="salary" class="dark:text-green-500 block">Meal ticket value:</label>
-            <input type="text" id="salary" formControlName="mealTicketB"
+            <label for="mealTicketB" class="dark:text-green-500 block">Meal ticket value:</label>
+            <input type="text" id="mealTicketB" formControlName="mealTicketB"
                    class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                    name="salary">
           </div>
           <div class="m-2">
-            <label for="salary" class="dark:text-green-500 block">RSU(stocks):</label>
-            <input type="text" id="salary" formControlName="rsuB"
+            <label for="rsuB" class="dark:text-green-500 block">RSU(stocks):</label>
+            <input type="text" id="rsuB" formControlName="rsuB"
                    class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                    name="salary">
           </div>
           <div class="m-2">
-            <label for="salary" class="dark:text-green-500 block">Vesting period:</label>
-            <input type="text" id="salary" formControlName="vestingPeriodB"
+            <label for="vestingPeriodB" class="dark:text-green-500 block">Vesting period:</label>
+            <input type="text" id="vestingPeriodB" formControlName="vestingPeriodB"
                    class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                    name="salary">
           </div>
           <div class="m-2">
-            <label for="salary" class="dark:text-green-500 block">NASDAQ ticker:</label>
-            <input type="text" id="salary" #tickerB formControlName="nasdaqTickerB" [ngClass]="{'disabled-input': tickerB.disabled}"
-                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                   name="salary">
-          </div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2">
-        <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Bonuses (per year):</label>
-          <input type="text" id="salary" formControlName="bonusesA"
-                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
-                 name="salary">
-        </div>
-          <div class="m-2">
-            <label for="salary" class="dark:text-green-500 block">Price per share:</label>
-            <input type="text" id="salary" #sharePriceA formControlName="pricePerShareCompanyA" [ngClass]="{'disabled-input' : sharePriceA.disabled}"
+            <label for="tickerB" class="dark:text-green-500 block">NASDAQ ticker:</label>
+            <input type="text" id="tickerB" #tickerB formControlName="nasdaqTickerB" [ngClass]="{'disabled-input': tickerB.disabled}"
                    class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                    name="salary">
           </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2">
         <div class="m-2">
-          <label for="salary" class="dark:text-green-500 block">Bonuses (per year):</label>
-          <input type="text" id="salary" formControlName="bonusesB"
+          <label for="bonusesA" class="dark:text-green-500 block">Bonuses (per year):</label>
+          <input type="text" id="bonusesA" formControlName="bonusesA"
                  class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                  name="salary">
         </div>
           <div class="m-2">
-            <label for="salary" class="dark:text-green-500 block">Price per share:</label>
+            <label for="sharePriceA" class="dark:text-green-500 block">Price per share:</label>
+            <input type="text" id="sharePriceA" #sharePriceA formControlName="pricePerShareCompanyA" [ngClass]="{'disabled-input' : sharePriceA.disabled}"
+                   class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                   name="salary">
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2">
+        <div class="m-2">
+          <label for="bonusesB" class="dark:text-green-500 block">Bonuses (per year):</label>
+          <input type="text" id="bonusesB" formControlName="bonusesB"
+                 class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
+                 name="salary">
+        </div>
+          <div class="m-2">
+            <label for="sharePriceB" class="dark:text-green-500 block">Price per share:</label>
             <input type="text" id="salary" #sharePriceB formControlName="pricePerShareCompanyB" [ngClass]="{'disabled-input' : sharePriceB.disabled}"
                    class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                    name="salary">
@@ -144,13 +144,13 @@
                    class="p-1 rounded-lg text-center w-full text-green-800 bg-white">
           </div>
           <div class="m-2">
-            <label for="salary" class="dark:text-green-500 block">Paid time off(PTO):</label>
-            <input type="text" id="salary" formControlName="ptoDaysA"
+            <label for="ptoA" class="dark:text-green-500 block">Paid time off(PTO):</label>
+            <input type="text" id="ptoA" formControlName="ptoDaysA"
                    class="p-1 rounded-lg text-center w-full text-green-800 bg-white"
                    name="salary">
           </div>
           <app-switch label="Floating Days:" formControlName="floatingDaysA"></app-switch>
-          <app-switch label="Health insurance:" formControlName="healthInsuranceA" (change)="print()"/>
+          <app-switch label="Health insurance:" formControlName="healthInsuranceA" />
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2">
           <div class="m-2">
@@ -159,12 +159,12 @@
                    class="p-1 rounded-lg text-center w-full text-green-800 bg-white">
           </div>
           <div class="m-2">
-            <label for="salary" class="dark:text-green-500 block">Paid time off(PTO):</label>
-            <input type="number" id="salary" formControlName="ptoDaysB"
+            <label for="ptoB" class="dark:text-green-500 block">Paid time off(PTO):</label>
+            <input type="number" id="ptoB" formControlName="ptoDaysB"
                    class="p-1 rounded-lg text-center w-full text-green-800 bg-white">
           </div>
           <app-switch label="Floating days:" formControlName="floatingDaysB"></app-switch>
-          <app-switch label="Health insurance:" formControlName="healthInsuranceB" (change)="print()"/>
+          <app-switch label="Health insurance:" formControlName="healthInsuranceB"/>
 
         </div>
       </div>
