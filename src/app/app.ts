@@ -1,18 +1,12 @@
-import {Component} from '@angular/core';
-import {RouterLink, RouterOutlet} from '@angular/router';
-import {NgOptimizedImage} from '@angular/common';
-import {ToastMessage} from './component/toast-message/toast-message';
+import { Component, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterOutlet,
-    NgOptimizedImage,
-    RouterLink,
-    ToastMessage
-  ],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
+  protected readonly title = signal('payroll-lens');
 }
