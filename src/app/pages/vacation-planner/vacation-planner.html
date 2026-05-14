@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 
-<app-side-nav-bar></app-side-nav-bar>
 <!-- Main Content Canvas -->
-<main class="ml-64 min-h-screen">
+<main class="md:ml-64 min-h-screen">
   <div class="p-10 max-w-7xl mx-auto space-y-10">
     <!-- Header Section with Stats (Asymmetric Layout) -->
     <section class="grid grid-cols-12 gap-8 items-end">
@@ -32,12 +31,13 @@
         <div class="bg-surface-container-lowest rounded-xl custom-shadow overflow-hidden">
           <div class="bg-surface-container-low px-8 py-6 flex justify-between items-center">
             <div class="flex items-center gap-4">
-              <h3 class="text-xl font-bold font-headline">October 2024</h3>
+              <h3 class="text-xl font-bold font-headline">{{ currentMonthName() + ' ' + currentYear() }}</h3>
               <div class="flex gap-1">
-                <button class="p-1 hover:bg-surface-container-highest rounded transition-colors"><span
-                  class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span></button>
-                <button class="p-1 hover:bg-surface-container-highest rounded transition-colors"><span
-                  class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span></button>
+                <button class="p-1 hover:bg-surface-container-highest rounded transition-colors" (click)="prevMonth()">
+                  <span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span></button>
+                <button class="p-1 hover:bg-surface-container-highest rounded transition-colors" (click)="nextMonth()">
+                  <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+                </button>
               </div>
             </div>
             <div class="flex gap-2">
@@ -53,132 +53,35 @@
           </div>
           <div class="p-8">
             <div class="grid grid-cols-7 mb-4 text-center">
-              <div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Mon</div>
-              <div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Tue</div>
-              <div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Wed</div>
-              <div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Thu</div>
-              <div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Fri</div>
-              <div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Sat</div>
-              <div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Sun</div>
+              @for (day of dayHeaders; track day) {
+                <div class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">{{ day }}</div>
+              }
             </div>
             <div class="grid grid-cols-7 gap-px bg-slate-100 rounded-lg overflow-hidden border border-slate-100">
-              <!-- Day cells -->
-              <!-- Prev month days -->
-              <div class="aspect-square bg-slate-50 p-3 text-slate-300 text-sm font-medium">30</div>
-              <!-- Current month -->
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                1
-              </div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                2
-              </div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                3
-              </div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                4
-              </div>
-              <div class="aspect-square bg-slate-50 p-3 text-on-surface-variant text-sm font-medium">5</div>
-              <div class="aspect-square bg-slate-50 p-3 text-on-surface-variant text-sm font-medium">6</div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                7
-              </div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                8
-              </div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                9
-              </div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                10
-              </div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                11
-              </div>
-              <!-- Holiday Highlight -->
-              <div
-                class="aspect-square bg-secondary-container/30 p-3 text-on-secondary-container text-sm font-bold relative group">
-                12
-                <span
-                  class="absolute bottom-2 left-2 text-[8px] font-bold uppercase leading-none opacity-0 group-hover:opacity-100 transition-opacity">Columbus Day</span>
-                <div class="absolute top-1 right-1 w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-              </div>
-              <div class="aspect-square bg-slate-50 p-3 text-on-surface-variant text-sm font-medium">13</div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                14
-              </div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                15
-              </div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                16
-              </div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                17
-              </div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                18
-              </div>
-              <div class="aspect-square bg-slate-50 p-3 text-on-surface-variant text-sm font-medium">19</div>
-              <div class="aspect-square bg-slate-50 p-3 text-on-surface-variant text-sm font-medium">20</div>
-              <!-- Floating Compensation day -->
-              <div
-                class="aspect-square bg-tertiary-fixed/20 p-3 text-on-tertiary-fixed text-sm font-bold relative border-2 border-tertiary-fixed">
-                21
-                <span class="absolute top-1 right-1 w-1.5 h-1.5 bg-green-600 rounded-full"></span>
-                <div class="mt-2 text-[8px] uppercase tracking-tighter">Float Comp</div>
-              </div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                22
-              </div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                23
-              </div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                24
-              </div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                25
-              </div>
-              <div class="aspect-square bg-slate-50 p-3 text-on-surface-variant text-sm font-medium">26</div>
-              <div class="aspect-square bg-slate-50 p-3 text-on-surface-variant text-sm font-medium">27</div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                28
-              </div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                29
-              </div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                30
-              </div>
-              <div
-                class="aspect-square bg-white p-3 text-on-surface text-sm font-medium relative hover:bg-slate-50 transition-colors">
-                31
-              </div>
-              <div class="aspect-square bg-slate-50 p-3 text-slate-300 text-sm font-medium">1</div>
-              <div class="aspect-square bg-slate-50 p-3 text-slate-300 text-sm font-medium">2</div>
-              <div class="aspect-square bg-slate-50 p-3 text-slate-300 text-sm font-medium">3</div>
+              @for (day of calendarDays(); track day) {
+                @if (!day.holiday) {
+                  <div [class]="getCellClasses(day)">
+                    {{ day.date }}
+                  </div>
+                } @else if(day.holiday.type == 'regional') {
+                  <!-- Holiday Highlight -->
+                  <div
+                    class="aspect-square bg-secondary-container/30 p-3 text-on-secondary-container text-sm font-bold relative group">
+                    {{day.date}}
+                    <span
+                      class="absolute bottom-2 left-2 text-[8px] font-bold uppercase leading-none opacity-0 group-hover:opacity-100 transition-opacity">{{day.holiday.name}}</span>
+                    <div class="absolute top-1 right-1 w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
+                  </div>
+                } @else {
+                  <!-- Floating Compensation day -->
+                  <div
+                    class="aspect-square bg-tertiary-fixed/20 p-3 text-on-tertiary-fixed text-sm font-bold relative border-2 border-tertiary-fixed">
+                    {{day.date}}
+                    <span class="absolute top-1 right-1 w-1.5 h-1.5 bg-green-600 rounded-full"></span>
+                    <div class="mt-2 text-[8px] uppercase tracking-tighter">{{day.holiday.name}}</div>
+                  </div>
+                }
+              }
             </div>
           </div>
         </div>
@@ -248,6 +151,8 @@
         </div>
       </div>
     </div>
+
+
     <!-- Bento-style Footer Info -->
     <section class="grid grid-cols-1 md:grid-cols-4 gap-6">
       <div
@@ -274,19 +179,3 @@
     </section>
   </div>
 </main>
-<!-- Mobile Bottom Navigation (Hidden on desktop as per rules) -->
-<nav
-  class="md:hidden fixed bottom-0 left-0 right-0 bg-surface-container-lowest h-16 flex justify-around items-center px-6 z-50 border-t border-slate-100">
-  <button class="text-slate-400">
-    <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-  </button>
-  <button class="text-slate-400">
-    <span class="material-symbols-outlined" data-icon="calculate">calculate</span>
-  </button>
-  <button class="text-slate-900 border-t-2 border-slate-900 pt-1">
-    <span class="material-symbols-outlined" data-icon="event_available" style="font-variation-settings: 'FILL' 1;">event_available</span>
-  </button>
-  <button class="text-slate-400">
-    <span class="material-symbols-outlined" data-icon="compare_arrows">compare_arrows</span>
-  </button>
-</nav>

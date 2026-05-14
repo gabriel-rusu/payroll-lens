@@ -3,9 +3,7 @@ import {SideNavBar} from '../../component/side-nav-bar/side-nav-bar';
 
 @Component({
   selector: 'app-offer-comparison',
-  imports: [
-    SideNavBar
-  ],
+  imports: [],
   templateUrl: './offer-comparison.html',
   styleUrl: './offer-comparison.css',
 })

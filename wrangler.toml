@@ -1,0 +1,8 @@
+name = "payroll-lens"
+compatibility_date = "2026-05-14"
+
+[build]
+command = "bun run build"
+
+[assets]
+directory = "./dist/payroll-lens/browser"
