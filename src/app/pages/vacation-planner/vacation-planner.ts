@@ -1,13 +1,18 @@
-import { Component, computed, inject, OnInit, Signal, signal, WritableSignal } from '@angular/core';
-import { SideNavBar } from '../../component/side-nav-bar/side-nav-bar';
+import { Component, computed, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { CalendarDay } from './model/calendar.day';
 import { FloatingRule } from './model/floating.rule';
 import { WorkdayCounterService } from '../../service/workday.service';
-import { Countries } from '../../util/constants';
+import { differenceInCalendarDays, format, isAfter, isWeekend, nextMonday, parse, subDays } from 'date-fns';
+import { DatePipe } from '@angular/common';
+
+interface Compensation {
+  holidayDate: Date;
+  compensatoryDate: Date;
+}
 
 @Component({
   selector: 'app-vacation-planner',
-  imports: [],
+  imports: [DatePipe],
   templateUrl: './vacation-planner.html',
   styleUrl: './vacation-planner.css',
   standalone: true,
@@ -18,10 +23,57 @@ export class VacationPlanner implements OnInit {
   private _showAllRules = signal(false);
   private workdayService = inject(WorkdayCounterService);
 
+  protected selectedRegion = signal('RO');
+  protected compensatedHolidays = signal(Array<Compensation>());
+
+  protected holidays = computed(() => {
+    let daysOff = this.holidayMap();
+    let numberOfDays = 0;
+    Object.keys(daysOff).forEach((key) => {
+      if (daysOff[key].type === 'regional') {
+        numberOfDays += 1;
+      }
+    });
+    return numberOfDays;
+  });
+  protected floatingDays = computed(() => {
+    let daysOff = this.holidayMap();
+    let numberOfDays = 0;
+    Object.keys(daysOff).forEach((day) => {
+      const dateObj = parse(day, 'yyyy-MM-dd', new Date());
+      const dow = dateObj.getDay();
+      const isWeekend = dow === 0 || dow === 6;
+      if (daysOff[day].type === 'regional' && isWeekend) {
+        numberOfDays += 1;
+      }
+    });
+    return numberOfDays - 2; // subtract the Easter and the other holiday that always will be in a weekend
+  });
+
   currentMonthIndex = computed(() => this._month());
   currentMonthName = computed(() => this.months[this._month()]);
   currentYear = computed(() => this._year());
   showAllRules = computed(() => this._showAllRules());
+
+  nextLeave = computed(() => {
+    const holidays: { date: Date; name: string; type: 'regional' | 'float' }[] = [];
+    Object.keys(this.holidayMap()).forEach((date) => {
+      holidays.push({
+        date: parse(date, 'yyyy-MM-dd', new Date()),
+        name: this.holidayMap()[date].name,
+        type: this.holidayMap()[date].type,
+      });
+    });
+    holidays.sort((a, b) => a.date.getTime() - b.date.getTime());
+    let nextHolidays = holidays.filter(
+      (holiday) =>
+        holiday.date.getTime() > new Date().getTime() &&
+        holiday.date.getDay() != 0 &&
+        holiday.date.getDay() != 6,
+    );
+    return nextHolidays[0];
+  });
+  deltaTillNextLeave = computed(() => differenceInCalendarDays(this.nextLeave().date, new Date()));
 
   private holidayMap: WritableSignal<Record<string, { name: string; type: 'regional' | 'float' }>> =
     signal({
@@ -31,7 +83,7 @@ export class VacationPlanner implements OnInit {
       '2024-11-11': { name: 'Veterans Day', type: 'regional' },
       '2024-12-25': { name: 'Christmas Day', type: 'regional' },
       '2024-12-26': { name: 'Boxing Day', type: 'regional' },
-      '2024-12-30': { name: 'Float Comp', type: 'float' },
+      '2026-05-20': { name: 'Float Comp', type: 'float' },
       '2026-04-12': { name: 'Orthodox Easter', type: 'regional' },
       '2026-05-13': { name: 'Birthday', type: 'float' },
     });
@@ -85,7 +137,6 @@ export class VacationPlanner implements OnInit {
       const fullDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
       days.push({ date: d, month: 'next', isWeekend: false, fullDate });
     }
-    console.log('Calendar days: ', days);
     return days;
   });
 
@@ -117,17 +168,6 @@ export class VacationPlanner implements OnInit {
   });
 
   ngOnInit() {
-    // holidayMap: Record<string, { name: string; type: 'regional' | 'float' }> = {
-    //   '2024-10-12': { name: 'Columbus Day', type: 'regional' },
-    //   '2024-10-21': { name: 'Float Comp', type: 'float' },
-    //   '2024-11-01': { name: "All Saints' Day", type: 'regional' },
-    //   '2024-11-11': { name: 'Veterans Day', type: 'regional' },
-    //   '2024-12-25': { name: 'Christmas Day', type: 'regional' },
-    //   '2024-12-26': { name: 'Boxing Day', type: 'regional' },
-    //   '2024-12-30': { name: 'Float Comp', type: 'float' },
-    //   '2026-04-12': { name: 'Orthodox Easter', type: 'regional' },
-    //   '2026-05-13': { name: 'Birthday', type: 'float' },
-    // };
     this.loadDaysOff(this._year());
   }
 
@@ -148,13 +188,30 @@ export class VacationPlanner implements OnInit {
   }
 
   private loadDaysOff(year: number) {
-    this.workdayService.legalDaysOff(year, 'RO').subscribe((legalDaysOff) => {
-      console.log('legalDaysOff');
-      console.log(legalDaysOff);
+    this.workdayService.legalDaysOff(year, this.selectedRegion()).subscribe((legalDaysOff) => {
       let currentHolidays: Record<string, { name: string; type: 'regional' | 'float' }> = {};
       legalDaysOff.forEach((dayOff) => {
         currentHolidays[dayOff.date] = { name: dayOff.name, type: 'regional' };
       });
+      // currentHolidays['2026-05-13'] = { name: 'Birthday', type: 'float' };
+      let compensatoryDates :Compensation[] = [];
+      for(let holiday of Object.keys(currentHolidays)) {
+        let date = parse(holiday, 'yyyy-MM-dd', new Date());
+        let monday = nextMonday(date);
+        if (isWeekend(date) && !currentHolidays[holiday]?.name?.includes('Easter') && !currentHolidays[format(monday, 'yyyy-MM-dd')]) {
+          compensatoryDates.push({ holidayDate: date, compensatoryDate: nextMonday(date) });
+        }
+      }
+      this.holidayMap.set(currentHolidays);
+      for(let compensatory of compensatoryDates) {
+        let dateString = format(compensatory.compensatoryDate, 'yyyy-MM-dd');
+        let holidayDateString = format(compensatory.holidayDate, 'yyyy-MM-dd');
+        currentHolidays[dateString] = {
+          name: 'Comp: ' + this.holidayMap()[holidayDateString]?.name,
+          type: 'float',
+        };
+      }
+      this.compensatedHolidays.set(compensatoryDates);
       this.holidayMap.set(currentHolidays);
     });
   }
@@ -189,4 +246,11 @@ export class VacationPlanner implements OnInit {
     }
     return `${base} bg-white text-on-surface hover:bg-slate-50`;
   }
+
+  remainingDays = computed(() => {
+    return Object.keys(this.holidayMap()).filter((date) =>
+      isAfter(parse(date, 'yyyy-MM-dd', new Date()), new Date()),
+    ).length;
+  });
+  protected floatingDaysRulesVisible = signal(false);
 }

@@ -2,7 +2,7 @@
 
 <!-- Main Content Canvas -->
 <main class="md:ml-64 min-h-screen">
-  <div class="p-10 max-w-7xl mx-auto space-y-10">
+  <div class="sm:p-12 p-4 pt-20 max-w-7xl mx-auto space-y-10">
     <!-- Header Section with Stats (Asymmetric Layout) -->
     <section class="grid grid-cols-12 gap-8 items-end">
       <div class="col-span-12 lg:col-span-7">
@@ -13,13 +13,13 @@
       </div>
       <div class="col-span-12 lg:col-span-5 grid grid-cols-2 gap-4">
         <div class="bg-surface-container-lowest p-6 rounded-xl custom-shadow">
-          <p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">Vacation Balance</p>
-          <p class="text-4xl font-extrabold text-primary font-headline">18<span
+          <p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">Regional Holidays</p>
+          <p class="text-4xl font-extrabold text-primary font-headline">{{ holidays() }}<span
             class="text-lg font-medium text-on-surface-variant ml-1">days</span></p>
         </div>
         <div class="bg-surface-container-lowest p-6 rounded-xl custom-shadow border-t-4 border-tertiary-fixed">
-          <p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">Planned Days</p>
-          <p class="text-4xl font-extrabold text-primary font-headline">04<span
+          <p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">Floating Days</p>
+          <p class="text-4xl font-extrabold text-primary font-headline">{{ floatingDays() }}<span
             class="text-lg font-medium text-on-surface-variant ml-1">days</span></p>
         </div>
       </div>
@@ -63,22 +63,24 @@
                   <div [class]="getCellClasses(day)">
                     {{ day.date }}
                   </div>
-                } @else if(day.holiday.type == 'regional') {
+                } @else if (day.holiday.type == 'regional') {
                   <!-- Holiday Highlight -->
                   <div
                     class="aspect-square bg-secondary-container/30 p-3 text-on-secondary-container text-sm font-bold relative group">
-                    {{day.date}}
+                    {{ day.date }}
                     <span
-                      class="absolute bottom-2 left-2 text-[8px] font-bold uppercase leading-none opacity-0 group-hover:opacity-100 transition-opacity">{{day.holiday.name}}</span>
+                      class="absolute bottom-2 left-2 text-[8px] font-bold uppercase leading-none opacity-0 group-hover:opacity-100 transition-opacity">{{ day.holiday.name }}</span>
                     <div class="absolute top-1 right-1 w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
                   </div>
                 } @else {
                   <!-- Floating Compensation day -->
                   <div
-                    class="aspect-square bg-tertiary-fixed/20 p-3 text-on-tertiary-fixed text-sm font-bold relative border-2 border-tertiary-fixed">
-                    {{day.date}}
+                    class="aspect-square bg-tertiary-fixed/20 p-3 text-on-tertiary-fixed text-sm font-bold relative border-tertiary-fixed group">
+                    {{ day.date }}
                     <span class="absolute top-1 right-1 w-1.5 h-1.5 bg-green-600 rounded-full"></span>
-                    <div class="mt-2 text-[8px] uppercase tracking-tighter">{{day.holiday.name}}</div>
+                    <div
+                      class="absolute bottom-2 left-2 text-[8px] font-bold uppercase leading-none opacity-0 group-hover:opacity-100 transition-opacity">{{ day.holiday.name }}
+                    </div>
                   </div>
                 }
               }
@@ -88,6 +90,26 @@
       </div>
       <!-- Right Side: Details & Employer Floating Days -->
       <div class="space-y-8">
+        <!-- Regional Settings -->
+        <div class="bg-surface-container-lowest p-8 rounded-xl custom-shadow space-y-4">
+          <h4 class="text-sm font-bold uppercase tracking-widest text-on-surface-variant">Regional Context</h4>
+          <div class="flex items-center gap-4 p-4 bg-surface-container-low rounded-lg">
+            <span class="material-symbols-outlined text-2xl text-primary" data-icon="location_on">location_on</span>
+            <div>
+              <p class="text-xs font-bold text-on-surface-variant">Selected Region</p>
+              <p class="text-sm font-bold text-on-surface">European Union (Romania)</p>
+            </div>
+          </div>
+          <div class="pt-4 border-t border-slate-100">
+            <div class="flex justify-between text-xs font-bold mb-2">
+              <span class="text-on-surface-variant">Public Holidays ({{ currentYear() }})</span>
+              <span class="text-primary">{{ remainingDays() }} Days Remaining</span>
+            </div>
+            <div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+              <div class="bg-primary h-full" [style]="{width: `${(remainingDays()/holidays()) * 100}%`}"></div>
+            </div>
+          </div>
+        </div>
         <!-- Floating Days Insight Card -->
         <div class="bg-surface-container-low p-8 rounded-xl space-y-6 relative overflow-hidden group">
           <div
@@ -97,57 +119,42 @@
             <p class="text-on-surface font-medium text-sm leading-relaxed">Holidays falling on weekends are
               automatically compensated to the nearest Monday or Friday.</p>
           </div>
-          <div class="space-y-4">
-            <div class="bg-surface-container-lowest p-4 rounded-lg flex items-center justify-between">
-              <div>
-                <p class="text-xs font-bold text-on-surface-variant">Original Holiday</p>
-                <p class="text-sm font-bold text-on-surface">Oct 12 (Sat)</p>
-              </div>
-              <span class="material-symbols-outlined text-on-surface-variant"
-                    data-icon="trending_flat">trending_flat</span>
-              <div class="text-right">
-                <p class="text-xs font-bold text-on-tertiary-container">Compensated</p>
-                <p class="text-sm font-bold text-tertiary-container">Oct 14 (Mon)</p>
-              </div>
-            </div>
-            <div
-              class="bg-surface-container-lowest p-4 rounded-lg flex items-center justify-between opacity-50 grayscale">
-              <div>
-                <p class="text-xs font-bold text-on-surface-variant">Original Holiday</p>
-                <p class="text-sm font-bold text-on-surface">Dec 28 (Sat)</p>
-              </div>
-              <span class="material-symbols-outlined text-on-surface-variant"
-                    data-icon="trending_flat">trending_flat</span>
-              <div class="text-right">
-                <p class="text-xs font-bold text-on-tertiary-container">Compensated</p>
-                <p class="text-sm font-bold text-tertiary-container">Dec 30 (Mon)</p>
-              </div>
-            </div>
+          <div class="space-y-4 max-h-64 overflow-auto">
+            @for (compensatedHoliday of compensatedHolidays(); track compensatedHoliday) {
+              @if($first) {
+                <div class="bg-surface-container-lowest p-4 rounded-lg flex items-center justify-between">
+                  <div>
+                    <p class="text-xs font-bold text-on-surface-variant">Original Holiday</p>
+                    <p class="text-sm font-bold text-on-surface">{{compensatedHoliday.holidayDate | date:'fullDate'}}</p>
+                  </div>
+                  <span class="material-symbols-outlined text-on-surface-variant"
+                        data-icon="trending_flat">trending_flat</span>
+                  <div class="text-right">
+                    <p class="text-xs font-bold text-on-tertiary-container">Compensated</p>
+                    <p class="text-sm font-bold text-tertiary-container">{{compensatedHoliday.compensatoryDate | date:'fullDate'}}</p>
+                  </div>
+                </div>
+              } @else {
+                <div class="bg-surface-container-lowest p-4 rounded-lg flex items-center justify-between opacity-50 grayscale">
+                  <div>
+                    <p class="text-xs font-bold text-on-surface-variant">Original Holiday</p>
+                    <p class="text-sm font-bold text-on-surface">{{compensatedHoliday.holidayDate | date:'fullDate'}}</p>
+                  </div>
+                  <span class="material-symbols-outlined text-on-surface-variant"
+                        data-icon="trending_flat">trending_flat</span>
+                  <div class="text-right">
+                    <p class="text-xs font-bold text-on-tertiary-container">Compensated</p>
+                    <p class="text-sm font-bold text-tertiary-container">{{compensatedHoliday.compensatoryDate | date:'fullDate'}}</p>
+                  </div>
+                </div>
+              }
+            }
+
           </div>
-          <button
+          <button (click)="floatingDaysRulesVisible.set(true)"
             class="w-full py-3 bg-primary text-on-primary rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-slate-800 transition-colors">
             Manage Rules
           </button>
-        </div>
-        <!-- Regional Settings -->
-        <div class="bg-surface-container-lowest p-8 rounded-xl custom-shadow space-y-4">
-          <h4 class="text-sm font-bold uppercase tracking-widest text-on-surface-variant">Regional Context</h4>
-          <div class="flex items-center gap-4 p-4 bg-surface-container-low rounded-lg">
-            <span class="material-symbols-outlined text-2xl text-primary" data-icon="location_on">location_on</span>
-            <div>
-              <p class="text-xs font-bold text-on-surface-variant">Selected Region</p>
-              <p class="text-sm font-bold text-on-surface">European Union (Germany)</p>
-            </div>
-          </div>
-          <div class="pt-4 border-t border-slate-100">
-            <div class="flex justify-between text-xs font-bold mb-2">
-              <span class="text-on-surface-variant">Public Holidays (2024)</span>
-              <span class="text-primary">12 Days Total</span>
-            </div>
-            <div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
-              <div class="bg-primary h-full" style="width: 75%"></div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -158,9 +165,10 @@
       <div
         class="md:col-span-2 bg-surface-container-lowest p-8 rounded-xl custom-shadow flex items-center justify-between">
         <div class="space-y-1">
-          <h5 class="text-sm font-bold text-on-surface-variant uppercase tracking-widest">Next Leave</h5>
-          <p class="text-2xl font-extrabold font-headline">Winter Solstice Break</p>
-          <p class="text-sm text-on-secondary-container font-medium">Starting in 42 days • Dec 20, 2024</p>
+          <h5 class="text-sm font-bold text-on-surface-variant uppercase tracking-widest">Next Regional Leave</h5>
+          <p class="text-2xl font-extrabold font-headline">{{ nextLeave().name }}</p>
+          <p class="text-sm text-on-secondary-container font-medium">Starting in {{ deltaTillNextLeave() }} days
+            • {{ nextLeave().date | date:'fullDate' }}</p>
         </div>
         <div class="h-16 w-16 rounded-full bg-secondary-container flex items-center justify-center">
           <span class="material-symbols-outlined text-3xl text-on-secondary-container" data-icon="beach_access">beach_access</span>
@@ -177,5 +185,73 @@
         <p class="text-xs mt-2 text-on-surface-variant italic">vs. Industry Average</p>
       </div>
     </section>
+  </div>
+  <div class="fixed inset-0 z-[60] flex items-center justify-center" [class.hidden]="!floatingDaysRulesVisible()" id="manage-rules-modal">
+    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+    <div
+      class="relative bg-white w-full max-w-md mx-4 rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300 font-headline">
+      <div class="p-6 border-b border-slate-100 flex justify-between items-center">
+        <h2 class="text-xl font-bold text-slate-900">Floating Day Compensation Rules</h2>
+        <button class="text-slate-400 hover:text-slate-600"
+                (click)="floatingDaysRulesVisible.set(false)">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="p-6 space-y-6">
+        <p class="text-sm text-slate-600 font-body">Configure how public holidays falling on weekends are automatically
+          compensated.</p>
+        <div class="space-y-3">
+          <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400">Current Active Rules</h3>
+          <div class="space-y-2">
+            <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+              <span class="text-sm font-medium">Saturday Holiday → Monday</span>
+              <button class="text-error hover:bg-error-container p-1 rounded transition-colors"><span
+                class="material-symbols-outlined text-sm">delete</span></button>
+            </div>
+            <div class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+              <span class="text-sm font-medium">Sunday Holiday → Monday</span>
+              <button class="text-error hover:bg-error-container p-1 rounded transition-colors"><span
+                class="material-symbols-outlined text-sm">delete</span></button>
+            </div>
+          </div>
+        </div>
+        <div class="pt-4 border-t border-slate-100 space-y-4">
+          <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400">Add New Rule</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="space-y-1">
+              <label class="text-[10px] font-bold text-slate-500 uppercase">Holiday Day</label>
+              <select
+                class="w-full text-sm border-slate-200 rounded-lg focus:ring-tertiary-fixed focus:border-tertiary-fixed">
+                <option>Saturday</option>
+                <option>Sunday</option>
+              </select>
+            </div>
+            <div class="space-y-1">
+              <label class="text-[10px] font-bold text-slate-500 uppercase">Compensate On</label>
+              <select
+                class="w-full text-sm border-slate-200 rounded-lg focus:ring-tertiary-fixed focus:border-tertiary-fixed">
+                <option>Monday</option>
+                <option>Friday</option>
+              </select>
+            </div>
+          </div>
+          <button
+            class="w-full py-2 bg-slate-100 text-slate-900 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-slate-200 transition-colors flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-sm">add</span> Add Rule
+          </button>
+        </div>
+      </div>
+      <div class="p-6 bg-slate-50 flex gap-3">
+        <button
+          class="flex-1 py-3 text-slate-600 font-bold text-xs uppercase tracking-widest hover:text-slate-900 transition-colors"
+          (click)="floatingDaysRulesVisible.set(false)">Cancel
+        </button>
+        <button
+          class="flex-[2] py-3 bg-tertiary-fixed text-on-tertiary-fixed rounded-lg font-bold text-xs uppercase tracking-widest hover:shadow-lg hover:shadow-tertiary-fixed/20 transition-all">
+          Save
+          Rules
+        </button>
+      </div>
+    </div>
   </div>
 </main>
