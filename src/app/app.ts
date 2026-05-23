@@ -1,18 +1,14 @@
-import {Component} from '@angular/core';
-import {RouterLink, RouterOutlet} from '@angular/router';
-import {NgOptimizedImage} from '@angular/common';
-import {ToastMessage} from './component/toast-message/toast-message';
+import { Component, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { SideNavBar } from './component/side-nav-bar/side-nav-bar';
+import { MobileNavBar } from './component/mobile-nav-bar/mobile-nav-bar';
 
 @Component({
   selector: 'app-root',
-  imports: [
-    RouterOutlet,
-    NgOptimizedImage,
-    RouterLink,
-    ToastMessage
-  ],
+  imports: [RouterOutlet, SideNavBar, MobileNavBar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
+  protected readonly title = signal('payroll-lens');
 }

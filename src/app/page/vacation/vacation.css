@@ -1,5 +1,0 @@
-@reference "tailwindcss";
-
-.btn-primary {
-  @apply bg-green-800 p-1 h-8 rounded-lg dark:text-gray-200 max-sm:mx-2
-}

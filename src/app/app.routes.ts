@@ -1,13 +1,13 @@
-import {Routes} from '@angular/router';
-import {Vacation} from './page/vacation/vacation';
-import {Dashboard} from './page/dashboard/dashboard';
-import {Salary} from './page/salary/salary.component';
-import {Compare} from './page/compare/compare';
-
+import { Routes } from '@angular/router';
+import {Dashboard} from './pages/dashboard/dashboard';
+import {OfferComparison} from './pages/offer-comparison/offer-comparison';
+import {SalaryCalculator} from './pages/salary-calculator/salary-calculator';
+import {VacationPlanner} from './pages/vacation-planner/vacation-planner';
 
 export const routes: Routes = [
-  {path: 'salary', component: Salary},
-  {path: 'holidays', component: Vacation},
-  {path: 'compare', component: Compare},
-  {path: '', component: Dashboard}
+  {path: 'dashboard', title: 'Payroll Lens | Dashboard', component: Dashboard},
+  {path: 'offer-comparison', title: 'Payroll Lens | Offer Comparison', component: OfferComparison},
+  {path: 'salary-calculator', title: 'Payroll Lens | Salary Calculator', component: SalaryCalculator},
+  {path: 'vacation-planner', title: 'Payroll Lens | Vacation Planner', component: VacationPlanner},
+  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
 ];

@@ -1,249 +1,59 @@
-<p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="public/pay-day.png" alt="Salary Calculator Logo"></a>
-</p>
+# PayrollLens
 
-<h3 align="center">Payroll Lens</h3>
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
 
-<p align="center"> A salary calculator tool intended to help employees and 
-employers in seeking information or clarification on how to calculate from gross to net salary.
-It also help employees to determine how RSU (Restricted Stock Units) modify the monthly take home or annual earnings.
-    <br> 
-</p>
+## Development server
 
-## 📝 Table of Contents
-
-- [About](#about)
-- [Getting Started](#getting_started)
-- [Deployment](#deployment)
-- [Usage](#usage)
-- [Built Using](#built_using)
-- [TODO](./TODO.md)
-- [Authors](#authors)
-- [Acknowledgments](#acknowledgement)
-
-## 🧐 About <a name = "about"></a>
-
-Write about 1-2 paragraphs describing the purpose of your project.
-
-## 🏁 Getting Started <a name = "getting_started"></a>
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
-
-### Prerequisites
-
-What things you need to install the software and how to install them.
-
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
-
-## 🔧 Running the tests <a name = "tests"></a>
-
-Explain how to run the automated tests for this system.
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## 🎈 Usage <a name="usage"></a>
-
-Add notes about how to use the system.
-
-## 🚀 Deployment <a name = "deployment"></a>
-
-### ✅ Prerequisites
-
-Make sure you have the following installed:
-
-| Tool             | Version Command      |
-| ---------------- | -------------------- |
-| **Node.js**      | `node -v`            |
-| **npm**          | `npm -v`             |
-| **Angular CLI**  | `ng version`         |
-| **Firebase CLI** | `firebase --version` |
-
-If not installed:
+To start a local development server, run:
 
 ```bash
-npm install -g @angular/cli
-npm install -g firebase-tools
+ng serve
 ```
 
----
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-### 🔧 Step 1: Create Angular App (skip if you already have one)
+## Code scaffolding
+
+Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
 ```bash
-ng new my-angular-app
-cd my-angular-app
+ng generate component component-name
 ```
 
-✅ Choose `Yes` for Angular routing and your preferred stylesheet format (CSS, SCSS, etc.)
+For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
----
+```bash
+ng generate --help
+```
 
-## 🛠 Step 2: Build Angular App
+## Building
 
-Angular 20 uses **standalone configuration**, so the build command is:
+To build the project run:
 
 ```bash
 ng build
 ```
 
-> This will output your build into `dist/my-angular-app/`
+This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
----
+## Running unit tests
 
-### 🔥 Step 3: Initialize Firebase in Your Project
-
-```bash
-firebase login
-firebase init
-```
-
-You’ll see a menu of options. Use spacebar to select:
-
-✅ **Hosting: Configure files for Firebase Hosting**
-
-Then press **Enter**.
-
-### 📋 Firebase CLI Prompts:
-
-| Prompt                        | What to Answer                    |
-| ----------------------------- | --------------------------------- |
-| **Select a Firebase project** | Choose your project or create one |
-| **Public directory**          | `dist/my-angular-app/browser`     |
-| **Single-page app rewrite?**  | `Yes`                             |
-| **Overwrite index.html?**     | `No`                              |
-
-> 🟡 Replace `my-angular-app` with your real project name if it's different.
-
----
-
-### 🚀 Step 4: Deploy to Firebase Hosting
+To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
 
 ```bash
-firebase deploy
+ng test
 ```
 
-You'll see output like:
+## Running end-to-end tests
 
-```
-✔ Deploy complete!
-Hosting URL: https://your-project-name.web.app
-```
+For end-to-end (e2e) testing, run:
 
-🎉 Your Angular 20 app is live on Firebase Hosting!
-
----
-
-### 📂 Example Project Folder Structure After Build
-
-```
-my-angular-app/
-├── dist/
-│   └── my-angular-app/
-│       └── browser/
-├── firebase.json
-├── angular.json
-├── ...
+```bash
+ng e2e
 ```
 
----
+Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
-### 📄 Example `firebase.json`
+## Additional Resources
 
-Firebase automatically generates this, but it should look like:
-
-```json
-{
-  "hosting": {
-    "public": "dist/my-angular-app/browser",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
-}
-```
-
----
-
-### 🌐 Step 5 (Optional): Add a Custom Domain
-
-1. Go to [Firebase Console](https://console.firebase.google.com)
-2. Select your project → Hosting → "Add custom domain"
-3. Enter your domain (e.g., `www.example.com`)
-4. Follow instructions to add **A** and **TXT** records to your DNS provider
-
-Firebase will manage SSL automatically.
-
----
-
-### ✅ Recap
-
-| Step               | Command           |
-| ------------------ | ----------------- |
-| Build Angular      | `ng build`        |
-| Init Firebase      | `firebase init`   |
-| Deploy to Firebase | `firebase deploy` |
-
-
-## ⛏️ Built Using <a name = "built_using"></a>
-
-- [MongoDB](https://www.mongodb.com/) - Database
-
-## ✍️ Authors <a name = "authors"></a>
-
-- [@gabriel-rusu](https://github.com/gabriel-rusu) - Idea & Initial work
-
-## 🎉 Acknowledgements <a name = "acknowledgement"></a>
-
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
-
-
-### Features
-
-- vacation suggestions (based on the number of holidays in a week) + floating days option
-- salary comparisons
-- bonus feature: micro-frontends split, the toolbar component should be a micro-frontend
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

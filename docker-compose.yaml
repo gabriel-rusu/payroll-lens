@@ -1,8 +1,0 @@
-services:
-  payroll-lens:
-    container_name: payroll-lens-ui
-    image: payroll-lens
-    build:
-      context: .
-    ports:
-      - '4200:4200'
