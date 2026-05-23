@@ -1,6 +1,6 @@
 {
-  "name": "payroll-lens",
-  "short_name": "payroll-lens",
+  "name": "Payroll-Lens",
+  "short_name": "Payroll-Lens",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
