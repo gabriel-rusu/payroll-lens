@@ -4,7 +4,6 @@ import { map } from 'rxjs';
 import { eachDayOfInterval, endOfMonth, format, getDay, parse, startOfMonth } from 'date-fns';
 import { LocalizationService } from './localization.service';
 import { LegalDayOff } from '../model/legal-day-off';
-import { Countries } from '../util/constants';
 
 @Injectable({
   providedIn: 'root',

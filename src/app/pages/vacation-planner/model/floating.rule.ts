@@ -1,7 +1,6 @@
+import { Day, format } from 'date-fns';
+
 export interface FloatingRule {
-  originalDate: string;
-  originalDay: string;
-  compensatedDate: string;
-  compensatedDay: string;
-  active: boolean;
+  weekendDay: Day
+  workWeekDay: Day
 }
