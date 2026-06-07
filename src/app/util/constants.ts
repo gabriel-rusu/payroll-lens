@@ -13,9 +13,25 @@ export enum TaxOrder {
   REMAINING = 2,
 }
 
+export enum Frequency {
+  Annually = 'Annually',
+  Monthly = 'Monthly',
+}
+
+export enum HealthBenefits {
+  PrivateInsurance = 'Private Insurance',
+  PremiumCoverage = 'Premium Coverage',
+  BasicCoverage = 'Basic Coverage',
+}
 
 export enum Currency {
   USD = 'USD',
   EURO = 'EURO',
   RON = 'RON',
+}
+
+export enum WorkPolicy {
+  Hybrid = 'Hybrid',
+  Remote = 'Remote',
+  OnSite = 'On-Site',
 }

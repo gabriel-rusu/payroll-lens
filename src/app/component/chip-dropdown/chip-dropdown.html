@@ -1,0 +1,29 @@
+<div class="pt-6">
+  <label class="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-2 ml-1">{{label()}}</label>
+  <div class="relative">
+    <div
+      class="w-full bg-surface-container-highest border-none rounded-lg p-3 min-h-[56px] focus-within:ring-2 focus-within:ring-primary focus-within:bg-surface-container-lowest transition-all flex flex-wrap gap-2 items-center cursor-pointer group"
+      (click)="expandDd = !expandDd">
+      @for (perk of selectedPerks; track perk) {
+        <div class="bg-tertiary-fixed text-on-tertiary-fixed px-2 py-1 rounded text-xs font-bold flex items-center gap-1">
+          {{ perk.name }}
+          <span class="material-symbols-outlined text-[14px]" (click)="$event.stopPropagation(); removePerk(perk)">close</span>
+        </div>
+      }
+      <span class="text-outline/50 text-sm font-medium ml-1">Select more...</span>
+      <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/4 text-on-surface-variant group-hover:text-primary transition-colors">expand_more</span>
+    </div>
+
+    @if (expandDd) {
+      <div class="absolute z-100 left-0 w-full mt-1 bg-surface-container rounded-lg overflow-hidden ring-1 ring-inset ring-outline/20">
+        @for (perk of options(); track perk) {
+          <div
+            class="w-full px-3 py-2 text-sm text-on-surface hover:bg-surface-container-highest cursor-pointer"
+            (click)="selectPerk(perk)">
+            {{ perk.name }}
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

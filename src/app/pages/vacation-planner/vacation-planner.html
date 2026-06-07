@@ -28,6 +28,23 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <!-- Left: Calendar View -->
       <div class="lg:col-span-2 space-y-6">
+        <!-- Bento-style Footer Info -->
+        @if (nextLeave()) {
+          <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div
+              class="md:col-span-2 bg-surface-container-lowest p-8 rounded-xl custom-shadow flex items-center justify-between">
+              <div class="space-y-1">
+                <h5 class="text-sm font-bold text-on-surface-variant uppercase tracking-widest">Next Regional Leave</h5>
+                <p class="text-2xl font-extrabold font-headline">{{ nextLeave().name }}</p>
+                <p class="text-sm text-on-secondary-container font-medium">Starting in {{ deltaTillNextLeave() }} days
+                  • {{ nextLeave().date | date:'fullDate' }}</p>
+              </div>
+              <div class="h-16 w-16 rounded-full bg-secondary-container flex items-center justify-center">
+                <span class="material-symbols-outlined text-3xl text-on-secondary-container" data-icon="beach_access">beach_access</span>
+              </div>
+            </div>
+          </section>
+        }
         <app-calendar [daysOff]="daysOff()" (yearChange)="loadDaysOff($event)"></app-calendar>
       </div>
       <!-- Right Side: Details & Employer Floating Days -->
@@ -48,7 +65,7 @@
               <span class="text-primary">{{ remainingDays() }} Days Remaining</span>
             </div>
             <div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
-              <div class="bg-primary h-full" [style]="{width: `${(remainingDays()/holidays()) * 100}%`}"></div>
+              <div class="bg-primary h-full" [style]="{width: `${(holidays() - remainingDays())/holidays() * 100}%`}"></div>
             </div>
           </div>
         </div>
@@ -58,22 +75,5 @@
     </div>
 
 
-    <!-- Bento-style Footer Info -->
-    @if (nextLeave()) {
-      <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div
-          class="md:col-span-2 bg-surface-container-lowest p-8 rounded-xl custom-shadow flex items-center justify-between">
-          <div class="space-y-1">
-            <h5 class="text-sm font-bold text-on-surface-variant uppercase tracking-widest">Next Regional Leave</h5>
-            <p class="text-2xl font-extrabold font-headline">{{ nextLeave().name }}</p>
-            <p class="text-sm text-on-secondary-container font-medium">Starting in {{ deltaTillNextLeave() }} days
-              • {{ nextLeave().date | date:'fullDate' }}</p>
-          </div>
-          <div class="h-16 w-16 rounded-full bg-secondary-container flex items-center justify-center">
-            <span class="material-symbols-outlined text-3xl text-on-secondary-container" data-icon="beach_access">beach_access</span>
-          </div>
-        </div>
-      </section>
-    }
   </div>
 </main>
