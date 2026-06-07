@@ -1,16 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { OfferProfile } from '../../component/offer-profile/offer-profile';
 import { Offer } from '../../model/offer';
-import { FormBuilder, FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { OfferForm } from '../../component/offer-profile/offer.form';
-import { Currency, Frequency, HealthBenefits, WorkPolicy } from '../../util/constants';
-import { Perk } from '../../model/perk';
-
-
+import { FormControl, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Currency, Frequency, HealthBenefits, IncomeType, WorkPolicy } from '../../util/constants';
+import { StorageService } from '../../service/storage.service';
+import { ComparissonOverview } from '../../component/comparisson-overview/comparisson-overview';
 
 @Component({
   selector: 'app-offer-comparison',
-  imports: [OfferProfile, ReactiveFormsModule],
+  imports: [OfferProfile, ReactiveFormsModule, ComparissonOverview],
   templateUrl: './offer-comparison.html',
   styleUrl: './offer-comparison.css',
 })
@@ -20,6 +18,7 @@ export class OfferComparison {
     positionAOffer: new FormControl<Offer>({
       jobTitle: '',
       companyName: '',
+      salaryType: IncomeType.NET,
       baseSalary: 0,
       frequency: Frequency.Monthly,
       salaryCurrency: Currency.RON,
@@ -35,6 +34,7 @@ export class OfferComparison {
     positionBOffer: new FormControl<Offer>({
       jobTitle: '',
       companyName: '',
+      salaryType: IncomeType.NET,
       baseSalary: 0,
       frequency: Frequency.Monthly,
       salaryCurrency: Currency.RON,
@@ -48,9 +48,14 @@ export class OfferComparison {
       perks: [{ name: 'Gym membership' }],
     }),
   });
+  protected offersAreEditable: boolean = true;
+
+  constructor(private storageService: StorageService) {}
 
   submit() {
-    const offer: Offer|null = this.offers.getRawValue().positionAOffer;
-    console.log(offer);
+    const offers: any = this.offers.getRawValue();
+    this.storageService.append('offer-comparison', offers);
+    console.log(offers);
+    this.offersAreEditable = false;
   }
 }

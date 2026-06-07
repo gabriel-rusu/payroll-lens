@@ -20,6 +20,15 @@
                class="w-full bg-surface-container-highest border-none rounded-lg p-4 focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all placeholder:text-outline/50 text-on-surface font-semibold"
                placeholder="e.g. Goldman Sachs" type="text" />
       </div>
+      <div>
+        <label class="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-2 ml-1">Salary Type</label>
+        <select formControlName="salaryType"
+                class="w-full bg-surface-container-highest border-none rounded-lg p-4 focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all text-on-surface font-semibold appearance-none">
+          @for (salaryType of supportedCSalaryType(); track salaryType) {
+            <option>{{ salaryType }}</option>
+          }
+        </select>
+      </div>
       <div class="grid grid-cols-2 gap-4">
         <div>
           <label class="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-2 ml-1">Salary

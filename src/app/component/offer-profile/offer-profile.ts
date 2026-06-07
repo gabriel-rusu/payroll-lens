@@ -1,14 +1,24 @@
-import { Component, forwardRef, inject, input, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
+import {
+  Component,
+  forwardRef,
+  inject,
+  input,
+  OnDestroy,
+  OnInit,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { ChipDropdown } from '../chip-dropdown/chip-dropdown';
 import { Perk } from '../../model/perk';
 import {
-  ControlValueAccessor, NG_VALUE_ACCESSOR,
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
   NonNullableFormBuilder,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { OfferForm } from './offer.form';
-import { Currency, Frequency, HealthBenefits, WorkPolicy } from '../../util/constants';
+import { Currency, Frequency, HealthBenefits, IncomeType, WorkPolicy } from '../../util/constants';
 import { FormattedNumberDirective } from '../../directive/formatted.number';
 import { Subscription } from 'rxjs';
 import { Offer } from '../../model/offer';
@@ -24,21 +34,22 @@ import { Offer } from '../../model/offer';
       useExisting: forwardRef(() => OfferProfile),
       multi: true,
     },
-  ]
+  ],
 })
 export class OfferProfile implements ControlValueAccessor, OnInit, OnDestroy {
   //TODO: put this into a json
   protected allPerks: Perk[] = [
     { name: 'Gym Membership' },
-    { name: 'Remote Stipend' },
     { name: 'Health Insurance' },
-    { name: '401k Match' },
     { name: 'Unlimited PTO' },
     { name: 'Stock Options' },
     { name: 'Learning Budget' },
     { name: 'Meal Allowance' },
     { name: 'Childcare' },
     { name: 'Commuter Benefits' },
+    { name: 'Wellness Budget' },
+    { name: 'Floating Days' },
+    { name: 'Birthday Paid Leave' },
   ];
   offerLabel = input.required<string>();
   private formBuilder = inject(NonNullableFormBuilder);
@@ -46,6 +57,7 @@ export class OfferProfile implements ControlValueAccessor, OnInit, OnDestroy {
   form: OfferForm = this.formBuilder.group({
     jobTitle: ['', Validators.required],
     companyName: ['', Validators.required],
+    salaryType: [IncomeType.NET, Validators.required],
     baseSalary: [0, [Validators.required, Validators.min(0)]],
     frequency: [Frequency.Monthly, Validators.required],
     salaryCurrency: [Currency.USD, Validators.required],
@@ -104,5 +116,9 @@ export class OfferProfile implements ControlValueAccessor, OnInit, OnDestroy {
 
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
+  }
+
+  protected supportedCSalaryType() {
+    return Object.values(IncomeType);
   }
 }

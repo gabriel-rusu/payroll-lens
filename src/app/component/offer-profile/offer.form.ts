@@ -1,10 +1,11 @@
 import { FormControl, FormGroup } from '@angular/forms';
-import { Currency, Frequency, HealthBenefits, WorkPolicy } from '../../util/constants';
+import { Currency, Frequency, HealthBenefits, IncomeType, WorkPolicy } from '../../util/constants';
 import { Perk } from '../../model/perk';
 
 export type OfferForm = FormGroup<{
   jobTitle: FormControl<string>;
   companyName: FormControl<string>;
+  salaryType: FormControl<IncomeType>;
   baseSalary: FormControl<number>;
   frequency: FormControl<Frequency>;
   salaryCurrency: FormControl<Currency>;

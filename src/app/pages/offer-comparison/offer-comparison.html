@@ -10,55 +10,59 @@
         rewards, long-term equity projections, and lifestyle impacts.
       </p>
     </div>
-    <form class="space-y-12" [formGroup]="offers">
-      <!-- Side-by-Side Comparison Grid -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12" >
-        <!-- Position A -->
-        <app-offer-profile formControlName="positionAOffer" offerLabel="POSITION A"/>
-        <!-- Position B -->
-        <app-offer-profile formControlName="positionBOffer" offerLabel="POSITION B"/>
-      </div>
-      <!-- Footer Actions -->
-      <div class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-outline-variant/10">
-        <div class="mb-6 md:mb-0">
-          <p class="text-on-surface-variant text-sm font-medium italic opacity-75">
-            * Data is encrypted and stored in your private vault for future reference.
-          </p>
+    @if (offersAreEditable) {
+      <form class="space-y-12" [formGroup]="offers">
+        <!-- Side-by-Side Comparison Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          <!-- Position A -->
+          <app-offer-profile formControlName="positionAOffer" offerLabel="POSITION A" />
+          <!-- Position B -->
+          <app-offer-profile formControlName="positionBOffer" offerLabel="POSITION B" />
         </div>
-        <div class="flex items-center space-x-4 w-full md:w-auto">
-          <button
-            class="flex-1 md:flex-none px-8 py-4 text-on-surface-variant font-bold border border-outline-variant/20 rounded-lg hover:bg-surface-container-low transition-all active:scale-95"
-            type="button">
-            Save Draft
-          </button>
-          <button
-            class="flex-1 md:flex-none px-12 py-4 bg-gradient-to-br from-primary bg-black to-primary-container text-on-primary font-bold rounded-lg shadow-xl hover:shadow-2xl hover:translate-y-[-2px] transition-all active:scale-95"
-            type="submit" (click)="submit()">
-            Compare Now
-          </button>
+        <!-- Footer Actions -->
+        <div class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-outline-variant/10">
+          <div class="mb-6 md:mb-0">
+            <p class="text-on-surface-variant text-sm font-medium italic opacity-75">
+              * Data is encrypted and stored in your private vault for future reference.
+            </p>
+          </div>
+          <div class="flex items-center space-x-4 w-full md:w-auto">
+            <button
+              class="flex-1 md:flex-none px-8 py-4 text-on-surface-variant font-bold border border-outline-variant/20 rounded-lg hover:bg-surface-container-low transition-all active:scale-95"
+              type="button">
+              Save Draft
+            </button>
+            <button
+              class="flex-1 md:flex-none px-12 py-4 bg-gradient-to-br from-primary bg-black to-primary-container text-on-primary font-bold rounded-lg shadow-xl hover:shadow-2xl hover:translate-y-[-2px] transition-all active:scale-95"
+              type="submit" (click)="submit()">
+              Compare Now
+            </button>
+          </div>
         </div>
-      </div>
-    </form>
-    <!-- Secondary Insight Bento Section -->
-    <section class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="md:col-span-2 bg-surface-container-high p-8 rounded-xl relative overflow-hidden group">
-        <div class="relative z-10">
-          <h3 class="text-2xl font-bold mb-2">Market Volatility Guard</h3>
-          <p class="text-on-surface-variant text-sm leading-relaxed max-w-md">Our algorithm analyzes the cash-to-equity
-            ratio against current market trends to determine which offer provides the best recession protection.</p>
-        </div>
-        <div class="absolute right-0 bottom-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-          <span class="material-symbols-outlined text-[120px]">shield_with_heart</span>
-        </div>
-      </div>
-      <div class="bg-tertiary-fixed p-8 rounded-xl flex flex-col justify-between">
-        <div>
-          <span class="material-symbols-outlined text-on-tertiary-fixed mb-4">trending_up</span>
-          <h3 class="text-xl font-black text-on-tertiary-fixed">Growth Multiplier</h3>
-        </div>
-        <p class="text-on-tertiary-fixed/70 text-xs font-bold uppercase tracking-widest">Available with Premium
-          Analysis</p>
-      </div>
-    </section>
+      </form>
+    } @else {
+      <app-comparisson-overview></app-comparisson-overview>
+    }
+    <!--    &lt;!&ndash; Secondary Insight Bento Section &ndash;&gt;-->
+    <!--    <section class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-6">-->
+    <!--      <div class="md:col-span-2 bg-surface-container-high p-8 rounded-xl relative overflow-hidden group">-->
+    <!--        <div class="relative z-10">-->
+    <!--          <h3 class="text-2xl font-bold mb-2">Market Volatility Guard</h3>-->
+    <!--          <p class="text-on-surface-variant text-sm leading-relaxed max-w-md">Our algorithm analyzes the cash-to-equity-->
+    <!--            ratio against current market trends to determine which offer provides the best recession protection.</p>-->
+    <!--        </div>-->
+    <!--        <div class="absolute right-0 bottom-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">-->
+    <!--          <span class="material-symbols-outlined text-[120px]">shield_with_heart</span>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div class="bg-tertiary-fixed p-8 rounded-xl flex flex-col justify-between">-->
+    <!--        <div>-->
+    <!--          <span class="material-symbols-outlined text-on-tertiary-fixed mb-4">trending_up</span>-->
+    <!--          <h3 class="text-xl font-black text-on-tertiary-fixed">Growth Multiplier</h3>-->
+    <!--        </div>-->
+    <!--        <p class="text-on-tertiary-fixed/70 text-xs font-bold uppercase tracking-widest">Available with Premium-->
+    <!--          Analysis</p>-->
+    <!--      </div>-->
+    <!--    </section>-->
   </div>
 </main>
