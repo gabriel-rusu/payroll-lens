@@ -4,16 +4,19 @@ import { Offer } from '../../model/offer';
 import { FormControl, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Currency, Frequency, HealthBenefits, IncomeType, WorkPolicy } from '../../util/constants';
 import { StorageService } from '../../service/storage.service';
-import { ComparissonOverview } from '../../component/comparisson-overview/comparisson-overview';
+import { ComparisonOverview } from '../../component/comparisson-overview/comparison-overview.component';
+import { FinalOffer } from '../../model/offer-comparison';
+
 
 @Component({
   selector: 'app-offer-comparison',
-  imports: [OfferProfile, ReactiveFormsModule, ComparissonOverview],
+  imports: [OfferProfile, ReactiveFormsModule, ComparisonOverview],
   templateUrl: './offer-comparison.html',
   styleUrl: './offer-comparison.css',
 })
 export class OfferComparison {
   private formBuilder = inject(NonNullableFormBuilder);
+  protected finalOffers!: FinalOffer;
   protected offers = this.formBuilder.group({
     positionAOffer: new FormControl<Offer>({
       jobTitle: '',
@@ -29,7 +32,14 @@ export class OfferComparison {
       vacationDays: 25,
       workPolicy: WorkPolicy.Hybrid,
       healthBenefits: HealthBenefits.BasicCoverage,
-      perks: [{ name: 'Gym membership' }],
+      perks: [
+        {
+          name: 'Gym membership',
+          iconCss: 'material-symbols-outlined text-base',
+          iconName: 'fitness_center',
+          iconSymbol: 'fitness_center',
+        },
+      ],
     }),
     positionBOffer: new FormControl<Offer>({
       jobTitle: '',
@@ -45,7 +55,14 @@ export class OfferComparison {
       vacationDays: 25,
       workPolicy: WorkPolicy.Hybrid,
       healthBenefits: HealthBenefits.BasicCoverage,
-      perks: [{ name: 'Gym membership' }],
+      perks: [
+        {
+          name: 'Gym membership',
+          iconCss: 'material-symbols-outlined text-base',
+          iconName: 'fitness_center',
+          iconSymbol: 'fitness_center',
+        },
+      ],
     }),
   });
   protected offersAreEditable: boolean = true;
@@ -53,9 +70,9 @@ export class OfferComparison {
   constructor(private storageService: StorageService) {}
 
   submit() {
-    const offers: any = this.offers.getRawValue();
-    this.storageService.append('offer-comparison', offers);
-    console.log(offers);
+    this.finalOffers = <FinalOffer>this.offers.getRawValue();
+    this.storageService.append('offer-comparison', this.finalOffers);
+    console.log(this.finalOffers);
     this.offersAreEditable = false;
   }
 }

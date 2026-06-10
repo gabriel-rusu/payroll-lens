@@ -1,3 +1,4 @@
+<script src="../../model/perk.ts"></script>
 <div class="pt-6">
   <label class="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-2 ml-1">{{label()}}</label>
   <div class="relative">
@@ -6,6 +7,9 @@
       (click)="expandDd = !expandDd">
       @for (perk of selectedPerks; track perk) {
         <div class="bg-tertiary-fixed text-on-tertiary-fixed px-2 py-1 rounded text-xs font-bold flex items-center gap-1">
+          @if (hasProperty(perk, 'iconCss')) {
+            <span class="{{ prop(perk, 'iconCss') }}" [attr.data-icon]="prop(perk, 'iconSymbol')">{{prop(perk, 'iconName')}}</span>
+          }
           {{ perk.name }}
           <span class="material-symbols-outlined text-[14px]" (click)="$event.stopPropagation(); removePerk(perk)">close</span>
         </div>

@@ -39,18 +39,74 @@ import { Offer } from '../../model/offer';
 export class OfferProfile implements ControlValueAccessor, OnInit, OnDestroy {
   //TODO: put this into a json
   protected allPerks: Perk[] = [
-    { name: 'Gym Membership' },
-    { name: 'Health Insurance' },
-    { name: 'Unlimited PTO' },
-    { name: 'Stock Options' },
-    { name: 'Learning Budget' },
-    { name: 'Meal Allowance' },
-    { name: 'Childcare' },
-    { name: 'Commuter Benefits' },
-    { name: 'Wellness Budget' },
-    { name: 'Floating Days' },
-    { name: 'Birthday Paid Leave' },
+    {
+      name: 'Gym Membership',
+      iconCss: 'material-symbols-outlined text-base',
+      iconSymbol: 'fitness_center',
+      iconName: 'fitness_center',
+    },
+    {
+      name: 'Health Insurance',
+      iconCss: 'material-symbols-outlined text-base',
+      iconSymbol: 'health_and_safety',
+      iconName: 'health_and_safety',
+    },
+    {
+      name: 'Unlimited PTO',
+      iconCss: 'material-symbols-outlined text-base',
+      iconSymbol: 'beach_access',
+      iconName: 'beach_access',
+    },
+    {
+      name: 'Stock Options',
+      iconCss: 'material-symbols-outlined text-base',
+      iconSymbol: 'trending_up',
+      iconName: 'trending_up',
+    },
+    {
+      name: 'Learning Budget',
+      iconCss: 'material-symbols-outlined text-base',
+      iconSymbol: 'school',
+      iconName: 'school',
+    },
+    {
+      name: 'Meal Allowance',
+      iconCss: 'material-symbols-outlined text-base',
+      iconSymbol: 'restaurant',
+      iconName: 'restaurant',
+    },
+    {
+      name: 'Childcare',
+      iconCss: 'material-symbols-outlined text-base',
+      iconSymbol: 'child_care',
+      iconName: 'child_care',
+    },
+    {
+      name: 'Commuter Benefits',
+      iconCss: 'material-symbols-outlined text-base',
+      iconSymbol: 'directions_transit',
+      iconName: 'directions_transit',
+    },
+    {
+      name: 'Wellness Budget',
+      iconCss: 'material-symbols-outlined text-base',
+      iconSymbol: 'self_improvement',
+      iconName: 'self_improvement',
+    },
+    {
+      name: 'Floating Days',
+      iconCss: 'material-symbols-outlined text-base',
+      iconSymbol: 'calendar_month',
+      iconName: 'calendar_month',
+    },
+    {
+      name: 'Birthday Paid Leave',
+      iconCss: 'material-symbols-outlined text-base',
+      iconSymbol: 'cake',
+      iconName: 'cake',
+    },
   ];
+
   offerLabel = input.required<string>();
   private formBuilder = inject(NonNullableFormBuilder);
 

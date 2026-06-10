@@ -123,6 +123,4 @@ export class SalaryCalculator implements OnInit {
   private decode(s: string) {
     return s == '€' ? 'EUR' : s == '$' ? 'USD' : 'RON';
   }
-
-
 }

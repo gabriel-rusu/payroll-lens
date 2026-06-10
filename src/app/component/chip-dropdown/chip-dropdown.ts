@@ -61,4 +61,12 @@ export class ChipDropdown implements ControlValueAccessor {
   setDisabledState(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
   }
+
+  protected hasProperty(obj: any, property: string) {
+    return Object.hasOwn(obj, property);
+  }
+
+  protected prop(perk: DropdownValue, property: string) {
+    return (perk as any)[property];
+  }
 }
