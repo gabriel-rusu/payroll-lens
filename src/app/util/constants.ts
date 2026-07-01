@@ -30,6 +30,12 @@ export enum Currency {
   RON = 'RON',
 }
 
+export const CurrencySymbol = {
+  USD: '$',
+  EURO: '€',
+  RON: 'RON',
+};
+
 export enum WorkPolicy {
   Hybrid = 'Hybrid',
   Remote = 'Remote',

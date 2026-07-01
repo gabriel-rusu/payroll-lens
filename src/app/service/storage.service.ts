@@ -19,4 +19,13 @@ export class StorageService {
       localStorage.setItem(key, JSON.stringify(previousItems));
     }
   }
+
+  get(key: string) {
+    if (localStorage.getItem(key) !== null) {
+      // @ts-ignore
+      return JSON.parse(localStorage.getItem(key));
+    } else {
+      return null;
+    }
+  }
 }

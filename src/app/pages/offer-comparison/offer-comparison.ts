@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { OfferProfile } from '../../component/offer-profile/offer-profile';
 import { Offer } from '../../model/offer';
 import { FormControl, NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -14,7 +14,7 @@ import { FinalOffer } from '../../model/offer-comparison';
   templateUrl: './offer-comparison.html',
   styleUrl: './offer-comparison.css',
 })
-export class OfferComparison {
+export class OfferComparison implements AfterViewInit {
   private formBuilder = inject(NonNullableFormBuilder);
   protected finalOffers!: FinalOffer;
   protected offers = this.formBuilder.group({
@@ -74,5 +74,15 @@ export class OfferComparison {
     this.storageService.append('offer-comparison', this.finalOffers);
     console.log(this.finalOffers);
     this.offersAreEditable = false;
+  }
+
+  ngAfterViewInit(): void {
+    console.log('Here?');
+    console.log(this.storageService.get('offer-comparison'));
+    this.offers.patchValue(
+      this.storageService.get('offer-comparison')[
+        this.storageService.get('offer-comparison').length-1
+      ],
+    );
   }
 }

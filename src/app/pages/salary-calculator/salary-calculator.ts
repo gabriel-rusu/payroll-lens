@@ -95,12 +95,8 @@ export class SalaryCalculator implements OnInit {
   protected readonly IncomeType = IncomeType;
 
   protected changeFreq() {
-    console.log(this.frequency());
     if (this.frequency() == 'Annually') {
-      console.log('annually');
       this.income.update((currentIncome) => {
-        console.log('currentIncome', currentIncome);
-        console.log('finalIncome', currentIncome * 12);
         return currentIncome * 12;
       });
     } else {

@@ -1,4 +1,4 @@
-<!-- Main Content Canvas -->
+Main Content Canvas
 <main class="md:ml-64 min-h-screen">
   <!-- Page Content -->
   <div class="sm:p-12 p-4 pt-20 max-w-7xl mx-auto">
@@ -7,46 +7,70 @@
       <h2 class="text-4xl font-extrabold font-headline tracking-tight text-on-surface mb-2">Executive Summary</h2>
       <p class="text-on-surface-variant text-lg font-medium">Welcome back. Your financial health is trending upward.</p>
     </div>
-    <!-- Bento Grid Dashboard -->
-    <div class="grid grid-cols-12 gap-8">
-      <!-- Primary Metric Card: Current Net Salary -->
-      <div
-        class="col-span-12 lg:col-span-7 bg-surface-container-lowest p-8 rounded-xl relative overflow-hidden flex flex-col justify-between group">
-        <div class="absolute top-0 right-0 p-8">
-          <span
-            class="material-symbols-outlined text-tertiary-fixed-dim text-4xl opacity-20 group-hover:opacity-100 transition-opacity duration-500">payments</span>
-        </div>
-        <div>
-          <span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2 block">Current Net Salary</span>
-          <div class="flex items-baseline gap-3">
-            <h3 class="text-6xl font-headline font-extrabold text-on-surface tabular-nums">$8,450</h3>
-            <span class="text-tertiary-fixed-dim font-bold flex items-center text-sm">
-<span class="material-symbols-outlined text-sm">trending_up</span>
-                                4.2%
-                            </span>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 ">
+      @if(!position || editable) {
+      <app-offer-profile offerLabel="CURRENT POSITION" [(ngModel)]="position">
+        <div class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-outline-variant/10">
+          <div class="flex items-center space-x-4 w-full md:w-auto">
+            <button
+              class="flex-1 md:flex-none px-12 py-4 bg-gradient-to-br from-primary bg-black to-primary-container text-on-primary font-bold rounded-lg shadow-xl hover:shadow-2xl hover:translate-y-[-2px] transition-all active:scale-95"
+              type="submit" (click)="saveDetails()">
+              Save Offer
+            </button>
           </div>
         </div>
-        <div class="mt-8">
-          <div class="flex justify-between items-end mb-4">
-            <div class="flex gap-1 items-end h-24">
-              <div class="w-8 bg-surface-container-high h-[40%] rounded-t-sm transition-all hover:bg-primary"></div>
-              <div class="w-8 bg-surface-container-high h-[55%] rounded-t-sm transition-all hover:bg-primary"></div>
-              <div class="w-8 bg-surface-container-high h-[48%] rounded-t-sm transition-all hover:bg-primary"></div>
-              <div class="w-8 bg-surface-container-high h-[70%] rounded-t-sm transition-all hover:bg-primary"></div>
-              <div class="w-8 bg-surface-container-high h-[65%] rounded-t-sm transition-all hover:bg-primary"></div>
-              <div class="w-8 bg-primary h-[90%] rounded-t-sm"></div>
-            </div>
-            <div class="text-right">
-              <p class="text-xs text-on-surface-variant font-medium">Projected Next Month</p>
-              <p class="text-xl font-bold">$8,820</p>
+      </app-offer-profile>
+      } @else {
+        <app-overview [offer]="position">
+          <div class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-outline-variant/10 mr-0">
+            <div class="flex items-center space-x-4 w-full md:w-auto">
+              <button
+                class="flex-1 md:flex-none px-8 py-4 text-on-surface-variant font-bold border border-outline-variant/20 rounded-lg hover:bg-surface-container-low transition-all active:scale-95"
+                type="button" (click)="editable = true">
+                Edit
+              </button>
             </div>
           </div>
-        </div>
-      </div>
+        </app-overview>
+      }
+
+
       <!-- Secondary Stats Pillar -->
-      <div class="col-span-12 lg:col-span-5 grid grid-rows-2 gap-8">
+      <div >
+        <div class="col-span-12 lg:col-span-4 bg-primary text-white p-8 rounded-xl flex flex-col justify-between ">
+          <div>
+            <div class="flex justify-between items-start mb-6">
+              <h3 class="font-headline font-bold text-xl leading-tight">Upcoming<br />Out of Office</h3>
+              <button class="bg-white/10 p-2 rounded-full hover:bg-white/20 transition-colors">
+                <span class="material-symbols-outlined text-sm">add</span>
+              </button>
+            </div>
+            <div class="space-y-6">
+              <div class="flex gap-4">
+                <div class="flex flex-col items-center justify-center w-12 h-14 bg-white/10 rounded-lg text-white">
+                  <span class="text-[10px] font-bold uppercase">Oct</span>
+                  <span class="text-xl font-bold">12</span>
+                </div>
+                <div>
+                  <p class="text-sm font-bold text-white">Autumn Break</p>
+                  <p class="text-xs text-white/60">4 Days • Pending Approval</p>
+                </div>
+              </div>
+              <div class="flex gap-4 opacity-60">
+                <div class="flex flex-col items-center justify-center w-12 h-14 bg-white/10 rounded-lg text-white">
+                  <span class="text-[10px] font-bold uppercase">Dec</span>
+                  <span class="text-xl font-bold">24</span>
+                </div>
+                <div>
+                  <p class="text-sm font-bold text-white">Winter Holiday</p>
+                  <p class="text-xs text-white/60">10 Days • Not Started</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- Vacation Card -->
-        <div class="bg-surface-container-low p-6 rounded-xl flex flex-col justify-between">
+        <div class="bg-surface-container-low p-6 rounded-xl flex flex-col justify-between h-fit mt-4">
           <div class="flex justify-between items-start">
             <div>
               <span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1 block">Vacation Allocation</span>
@@ -67,7 +91,7 @@
           </div>
         </div>
         <!-- Pending Comparisons -->
-        <div class="bg-surface-container-lowest p-6 rounded-xl flex items-center justify-between shadow-sm">
+        <div class="bg-surface-container-lowest p-6 rounded-xl flex items-center justify-between shadow-sm h-fit mt-4">
           <div class="flex items-center gap-4">
             <div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center">
               <span class="material-symbols-outlined text-on-tertiary-fixed">compare_arrows</span>
@@ -82,130 +106,8 @@
             Review
           </button>
         </div>
-      </div>
-      <!-- Detailed Tables / Lists -->
-      <div class="col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-xl overflow-hidden">
-        <div class="px-8 py-6 border-b border-surface-container-low flex justify-between items-center">
-          <h3 class="font-headline font-bold text-xl">Recent Calculations</h3>
-          <button class="text-xs text-primary font-bold hover:underline">View All Records</button>
-        </div>
-        <div class="p-4">
-          <table class="w-full text-left border-collapse">
-            <thead>
-            <tr class="text-[10px] uppercase tracking-widest text-on-surface-variant/70">
-              <th class="px-4 py-4 font-bold">Entity / Position</th>
-              <th class="px-4 py-4 font-bold">Base Gross</th>
-              <th class="px-4 py-4 font-bold">Est. Net</th>
-              <th class="px-4 py-4 font-bold text-right">Status</th>
-            </tr>
-            </thead>
-            <tbody class="text-sm">
-            <tr class="group hover:bg-surface-container-low transition-colors rounded-lg">
-              <td class="px-4 py-5">
-                <div class="flex items-center gap-3">
-                  <div
-                    class="w-8 h-8 rounded bg-slate-900 flex items-center justify-center text-[10px] font-bold text-white">
-                    NV
-                  </div>
-                  <div>
-                    <p class="font-bold">NovaTech Solutions</p>
-                    <p class="text-xs text-on-surface-variant">Product Lead</p>
-                  </div>
-                </div>
-              </td>
-              <td class="px-4 py-5 font-medium">$145,000</td>
-              <td class="px-4 py-5 font-bold">$9,120/mo</td>
-              <td class="px-4 py-5 text-right">
-                <span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed rounded-full text-[10px] font-bold">Finalized</span>
-              </td>
-            </tr>
-            <tr class="bg-surface-container-low/50 group hover:bg-surface-container-low transition-colors rounded-lg">
-              <td class="px-4 py-5">
-                <div class="flex items-center gap-3">
-                  <div
-                    class="w-8 h-8 rounded bg-blue-600 flex items-center justify-center text-[10px] font-bold text-white">
-                    SK
-                  </div>
-                  <div>
-                    <p class="font-bold">Skyline Architects</p>
-                    <p class="text-xs text-on-surface-variant">Design Director</p>
-                  </div>
-                </div>
-              </td>
-              <td class="px-4 py-5 font-medium">$132,000</td>
-              <td class="px-4 py-5 font-bold">$8,450/mo</td>
-              <td class="px-4 py-5 text-right">
-                <span
-                  class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-[10px] font-bold">Active</span>
-              </td>
-            </tr>
-            <tr class="group hover:bg-surface-container-low transition-colors rounded-lg">
-              <td class="px-4 py-5">
-                <div class="flex items-center gap-3">
-                  <div
-                    class="w-8 h-8 rounded bg-emerald-700 flex items-center justify-center text-[10px] font-bold text-white">
-                    LD
-                  </div>
-                  <div>
-                    <p class="font-bold">Lucid Dynamics</p>
-                    <p class="text-xs text-on-surface-variant">Fintech Lead</p>
-                  </div>
-                </div>
-              </td>
-              <td class="px-4 py-5 font-medium">$158,000</td>
-              <td class="px-4 py-5 font-bold">$10,050/mo</td>
-              <td class="px-4 py-5 text-right">
-                <span
-                  class="px-3 py-1 bg-surface-container-highest text-on-surface-variant rounded-full text-[10px] font-bold">Draft</span>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <!-- Upcoming Vacations Card -->
-      <div class="col-span-12 lg:col-span-4 bg-primary text-white p-8 rounded-xl flex flex-col justify-between">
-        <div>
-          <div class="flex justify-between items-start mb-6">
-            <h3 class="font-headline font-bold text-xl leading-tight">Upcoming<br />Out of Office</h3>
-            <button class="bg-white/10 p-2 rounded-full hover:bg-white/20 transition-colors">
-              <span class="material-symbols-outlined text-sm">add</span>
-            </button>
-          </div>
-          <div class="space-y-6">
-            <div class="flex gap-4">
-              <div class="flex flex-col items-center justify-center w-12 h-14 bg-white/10 rounded-lg text-white">
-                <span class="text-[10px] font-bold uppercase">Oct</span>
-                <span class="text-xl font-bold">12</span>
-              </div>
-              <div>
-                <p class="text-sm font-bold text-white">Autumn Break</p>
-                <p class="text-xs text-white/60">4 Days • Pending Approval</p>
-              </div>
-            </div>
-            <div class="flex gap-4 opacity-60">
-              <div class="flex flex-col items-center justify-center w-12 h-14 bg-white/10 rounded-lg text-white">
-                <span class="text-[10px] font-bold uppercase">Dec</span>
-                <span class="text-xl font-bold">24</span>
-              </div>
-              <div>
-                <p class="text-sm font-bold text-white">Winter Holiday</p>
-                <p class="text-xs text-white/60">10 Days • Not Started</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="mt-8 pt-8 border-t border-white/10">
-          <button class="w-full text-center text-xs font-bold py-2 hover:text-tertiary-fixed transition-colors">Manage
-            All Requests
-          </button>
-        </div>
+
       </div>
     </div>
   </div>
 </main>
-<!-- Contextual FAB (Only for Dashboard/Home as per mandate) -->
-<button
-  class="fixed bottom-8 right-8 w-14 h-14 rounded-full bg-primary-gradient text-white shadow-xl flex items-center justify-center hover:scale-110 active:scale-90 transition-all z-50 group">
-  <span class="material-symbols-outlined group-hover:rotate-90 transition-transform duration-300">add</span>
-</button>

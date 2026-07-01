@@ -45,8 +45,8 @@
         </div>
         <!-- Net Salary -->
         <div class="h-20 flex flex-col justify-center">
-          <div class="font-headline text-4xl font-extrabold tracking-tight text-on-surface">$112,400</div>
-          <div class="text-xs text-on-surface-variant mt-1">Est. Net After Tax</div>
+          <div class="font-headline text-4xl font-extrabold tracking-tight text-on-surface">{{ overview().offerA.takeHomePay | number:'1.0-2' }}</div>
+          <div class="text-xs text-on-surface-variant mt-1">{{ overview().offerA.takeHomePayNote }}</div>
         </div>
         <!-- Benefits -->
         <div class="h-20 flex items-center border-t border-outline-variant/20">
