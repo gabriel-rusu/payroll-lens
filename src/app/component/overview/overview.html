@@ -1,79 +1,85 @@
 <div class="grid grid-cols-12 relative">
-<div class="col-span-3 md:col-span-3 pt-52 flex flex-col gap-y-16">
-  <div class="h-20 flex items-center">
+  <div class="col-span-3 md:col-span-3 flex flex-col gap-y-16" [class]="withoutOption() ? 'pt-40' : 'pt-52'">
+    <div class="h-20 flex items-center">
       <span
         class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Base Compensation</span>
-  </div>
-  <div class="h-20 flex items-center">
+    </div>
+    <div class="h-20 flex items-center">
       <span
         class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Take Home Pay</span>
-  </div>
-  <div class="h-20 flex items-center border-t border-outline-variant/20">
-    <span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Perks &amp; Benefits</span>
-  </div>
-  <div class="h-20 flex items-center">
+    </div>
+    <div class="h-20 flex items-center border-t border-outline-variant/20">
+      <span class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Perks &amp; Benefits</span>
+    </div>
+    <div class="h-20 flex items-center">
       <span
         class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Work Policy</span>
-  </div>
-  <div class="h-20 flex items-center">
+    </div>
+    <div class="h-20 flex items-center">
       <span
         class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">PTO / Vacation</span>
-  </div>
-</div>
-<div class="md:col-span-9 col-span-9 pb-10 md:pb-0">
-  <div class="bg-surface-container-low rounded-xl p-8 h-full transition-all duration-300">
-    <div class="mb-10">
-      <div class="flex justify-between items-start mb-4">
-        <!--          <div class="bg-white p-4 rounded-lg shadow-sm border border-outline-variant/10">-->
-        <!--            <img alt="Tech Corp Logo" class="h-10 w-10 object-contain" data-alt="Abstract modern technology company logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1C_f11QgKA1f2jYPpDs3-nbkN3w0jU_fbSCPDjrh3vFeCrvO0o7BX0Y&#45;&#45;wpNDHENXd6ovT477BJ_vCRtH0W0q3DRfY4M7eWyGf3oDlVB-ud68kNb01P8WmIC2aYy9klFLZDgfQmiHjeIFwZ8hOwI12Dt7sw2q57xZrat79WxhjG6t2UkiexyIgu9-5MlMEKDxlPi0kh1L2RjGMinoLW5ozW0o6XXDSki6DjCprEitpU_DvBeQzcN0JY7IKLYcgRgn2FjkyAk8Qhg"/>-->
-        <!--          </div>-->
-        <span
-          class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase">Option A</span>
-      </div>
-      <h3 class="font-headline text-3xl font-bold text-on-surface"> {{ overview().jobTitle }}</h3>
-      <p class="font-body text-on-surface-variant text-sm">{{ overview().companyName }}</p>
     </div>
-    <!-- Data Points -->
-    <div class="flex flex-col gap-y-16">
-      <!-- Gross Salary -->
-      <div class="h-20 flex flex-col justify-center">
-        <div class="font-headline text-4xl font-extrabold tracking-tight text-on-surface">$165,000</div>
-        <div class="text-xs text-on-surface-variant mt-1">Annual Gross (USD)</div>
-      </div>
-      <!-- Net Salary -->
-      <div class="h-20 flex flex-col justify-center">
-        <div class="font-headline text-4xl font-extrabold tracking-tight text-on-surface">{{ overview().takeHomePay | number:'1.0-2' }}</div>
-        <div class="text-xs text-on-surface-variant mt-1">{{ overview().takeHomePayNote }}</div>
-      </div>
-      <!-- Benefits -->
-      <div class="h-20 flex items-center border-t border-outline-variant/20">
-        <div class="flex flex-wrap gap-2">
-          @for (perk of overview().perks; track perk.name) {
+  </div>
+  <div class="md:col-span-9 col-span-9 pb-10 md:pb-0">
+    <div class="bg-surface-container-low rounded-xl p-8 h-full transition-all duration-300">
+      <div class="mb-10">
+        <div class="flex justify-between items-start mb-4">
+          <!--          <div class="bg-white p-4 rounded-lg shadow-sm border border-outline-variant/10">-->
+          <!--            <img alt="Tech Corp Logo" class="h-10 w-10 object-contain" data-alt="Abstract modern technology company logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1C_f11QgKA1f2jYPpDs3-nbkN3w0jU_fbSCPDjrh3vFeCrvO0o7BX0Y&#45;&#45;wpNDHENXd6ovT477BJ_vCRtH0W0q3DRfY4M7eWyGf3oDlVB-ud68kNb01P8WmIC2aYy9klFLZDgfQmiHjeIFwZ8hOwI12Dt7sw2q57xZrat79WxhjG6t2UkiexyIgu9-5MlMEKDxlPi0kh1L2RjGMinoLW5ozW0o6XXDSki6DjCprEitpU_DvBeQzcN0JY7IKLYcgRgn2FjkyAk8Qhg"/>-->
+          <!--          </div>-->
+          @if (!withoutOption()) {
             <span
-              class="bg-surface-container-highest px-3 py-1.5 rounded-sm text-xs font-medium flex items-center gap-1.5">
+              class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase">Option A</span>
+          }
+        </div>
+        <h3 class="font-headline text-3xl font-bold text-on-surface"> {{ overview().jobTitle }}</h3>
+        <p class="font-body text-on-surface-variant text-sm">{{ overview().companyName }}</p>
+      </div>
+      <!-- Data Points -->
+      <div class="flex flex-col gap-y-16">
+        <!-- Gross Salary -->
+        <div class="h-20 flex flex-col justify-center">
+          <div
+            class="font-headline text-4xl font-extrabold tracking-tight text-on-surface">{{ currency(overview().baseCompensation | number:'1.0-2') }}
+          </div>
+          <div class="text-xs text-on-surface-variant mt-1"> {{ overview().baseCompensationNote }}</div>
+        </div>
+        <!-- Net Salary -->
+        <div class="h-20 flex flex-col justify-center">
+          <div
+            class="font-headline text-4xl font-extrabold tracking-tight text-on-surface">{{ currency(overview().takeHomePay | number:'1.0-2') }}
+          </div>
+          <div class="text-xs text-on-surface-variant mt-1">{{ overview().takeHomePayNote }}</div>
+        </div>
+        <!-- Benefits -->
+        <div class="h-20 flex items-center border-t border-outline-variant/20">
+          <div class="flex flex-wrap gap-2">
+            @for (perk of overview().perks; track perk.name) {
+              <span
+                class="bg-surface-container-highest px-3 py-1.5 rounded-sm text-xs font-medium flex items-center gap-1.5">
              <span class="material-symbols-outlined text-base"
                    [attr.data-icon]="perk.iconName">{{ perk.iconSymbol }}</span> {{ perk.name }}
              </span>
-          }
-        </div>
-      </div>
-      <!-- Remote -->
-      <div class="h-20 flex items-center">
-        <div class="flex items-center gap-3">
-          <span class="material-symbols-outlined text-primary text-2xl" data-icon="home_work">home_work</span>
-          <div>
-            <div class="font-bold text-on-surface">Hybrid</div>
+            }
           </div>
         </div>
-      </div>
-      <!-- Vacation -->
-      <div class="h-20 flex items-center">
-        <div class="font-headline text-3xl font-bold text-on-surface">{{overview().pto}} <span
-          class="text-sm font-body font-normal text-on-surface-variant">Days</span></div>
+        <!-- Remote -->
+        <div class="h-20 flex items-center">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary text-2xl" data-icon="home_work">home_work</span>
+            <div>
+              <div class="font-bold text-on-surface">Hybrid</div>
+            </div>
+          </div>
+        </div>
+        <!-- Vacation -->
+        <div class="h-20 flex items-center">
+          <div class="font-headline text-3xl font-bold text-on-surface">{{ overview().pto }} <span
+            class="text-sm font-body font-normal text-on-surface-variant">Days</span></div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 <ng-content>
 

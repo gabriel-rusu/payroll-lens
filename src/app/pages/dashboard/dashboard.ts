@@ -20,6 +20,8 @@ export class Dashboard implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem('currentPosition')) {
       this.position = JSON.parse(<string>localStorage.getItem('currentPosition'));
+    } else {
+      this.editable = true;
     }
   }
 
