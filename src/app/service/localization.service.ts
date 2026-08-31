@@ -11,14 +11,14 @@ export class LocalizationService {
   }
 
   getCountryCode() {
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const timezone = Intl?.DateTimeFormat()?.resolvedOptions()?.timeZone;
 
     if (timezone === '' || !timezone) {
       return null;
     }
 
     // @ts-ignore
-    return TimeZones[timezone].c[0];
+    return TimeZones[timezone]?.c[0];
   }
 
   getState() {

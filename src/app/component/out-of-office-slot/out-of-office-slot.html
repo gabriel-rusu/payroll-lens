@@ -1,0 +1,10 @@
+<div class="flex gap-4">
+  <div class="flex flex-col items-center justify-center w-12 h-14 bg-white/10 rounded-lg text-white">
+    <span class="text-[10px] font-bold uppercase">{{date().getMonth()}}</span>
+    <span class="text-xl font-bold">{{date().getDay()}}</span>
+  </div>
+  <div>
+    <p class="text-sm font-bold text-white">{{ date().name }}</p>
+    <p class="text-xs text-white/60">{{ format(date().date, 'EEEE')}} • {{ date().numberOfDays }} Day(s)</p>
+  </div>
+</div>
