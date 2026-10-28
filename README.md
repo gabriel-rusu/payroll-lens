@@ -1,59 +1,158 @@
-# PayrollLens
+<p align="center">
+  <img width=200px height=200px src="assets/logo.png" alt="Payroll Lens logo">
+</p>
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+<h3 align="center">Payroll Lens</h3>
 
-## Development server
+<div align="center">
 
-To start a local development server, run:
+[![Status](https://img.shields.io/badge/status-active-success.svg)]()
+[![GitHub Issues](https://img.shields.io/github/issues/gabriel-rusu/payroll-lens.svg)](https://github.com/gabriel-rusu/payroll-lens/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/gabriel-rusu/payroll-lens.svg)](https://github.com/gabriel-rusu/payroll-lens/pulls)
+
+</div>
+
+---
+
+<p align="center">
+  Understand your pay: convert gross to net under Romanian tax rules, compare job offers side by side,
+  and plan your time off around public holidays.
+  <br>
+</p>
+
+## 📝 Table of Contents
+
+- [About](#about)
+- [Features](#features)
+- [Getting Started](#getting_started)
+- [Running the Tests](#tests)
+- [Deployment](#deployment)
+- [Project Structure](#structure)
+- [Built Using](#built_using)
+- [Authors](#authors)
+
+## 🧐 About <a name = "about"></a>
+
+Payroll Lens is an installable web app (PWA) for employees in Romania who want to know what a salary is really
+worth. It turns a gross salary into take-home pay (and back), shows every deduction, compares two job offers even
+when they are in different currencies, and helps you plan vacations around the year's public holidays.
+
+Everything runs in the browser: there is no backend and no account, and saved comparisons stay in your browser's
+local storage.
+
+## ✨ Features <a name = "features"></a>
+
+### Salary Calculator
+
+- Convert **gross → net** or **net → gross**, monthly or annual.
+- Line-by-line breakdown of employee deductions (social insurance CAS, health insurance CASS, income tax) and
+  the employer's total cost (including CAM).
+- Switch between RON, EUR and USD using live exchange rates.
+
+### Offer Comparison
+
+- Enter two offers: salary (gross or net, monthly or annual, any currency), bonus, equity and vesting period,
+  vacation days, work policy (remote, hybrid with on-site days, or on-site), health benefits and perks.
+- Both offers are converted to one currency and compared per month:
+  - **Base compensation**: monthly gross.
+  - **Take home pay**: monthly net.
+  - Both include the bonus. A bonus of X% is X% of one monthly salary paid once a year, so 100% adds
+    salary / 12 to each month.
+- The better offer is marked per category and overall. The overall winner takes the most categories; a tie
+  goes to the higher take home pay.
+- **Saved comparisons**: save, reopen, update and delete comparisons from a table on the page.
+
+### Vacation Planner
+
+- This year's public holidays for Romania.
+- Floating days: the days off you get back for holidays that fall on a weekend.
+- A countdown to your next day off, and out-of-office slots to plan leave.
+
+## 🏁 Getting Started <a name = "getting_started"></a>
+
+### Prerequisites
+
+- [Bun](https://bun.sh/) 1.3 or newer (the project's package manager)
+- or [Docker](https://www.docker.com/) with Compose, if you'd rather not install anything else
+
+### Run locally
 
 ```bash
-ng serve
+bun install
+bun run start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Open http://localhost:4200. The app reloads when you change a source file.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Run with Docker
 
 ```bash
-ng generate component component-name
+docker compose up --watch
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Open http://localhost:4200. Changes in `src/` and `public/` are synced into the container and reload the app;
+changing `package.json` rebuilds the image. The Dockerfile lives in `assets/docker/Dockerfile`.
+
+### Build
 
 ```bash
-ng generate --help
+bun run build
 ```
 
-## Building
+The production build, including the service worker, is written to `dist/payroll-lens/browser/`.
 
-To build the project run:
+## 🔧 Running the Tests <a name = "tests"></a>
 
 ```bash
-ng build
+bun run test
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Unit tests run with [Vitest](https://vitest.dev/) through the Angular CLI. The offer calculations and comparison
+rules (`src/app/util/offer.comparison.spec.ts`) and the saved-comparisons store
+(`src/app/service/comparison-history.service.spec.ts`) are covered.
 
-## Running unit tests
+## 🚀 Deployment <a name = "deployment"></a>
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+The app is deployed to **Cloudflare Pages**. Every push to `main` runs the GitHub Actions workflow in
+`.github/workflows/deploy-cloudflare.yml`, which builds the app with Bun and publishes it.
+
+To deploy by hand:
 
 ```bash
-ng test
+bun run deploy
 ```
 
-## Running end-to-end tests
+The `_redirects` file copied into the build sends every route to `index.html`, so refreshing a page like `/offer-comparison` works.
+See [DEPLOYMENT.md](DEPLOYMENT.md) for the full guide: API token setup, manual uploads and custom domains.
 
-For end-to-end (e2e) testing, run:
+## 🗂️ Project Structure <a name = "structure"></a>
 
-```bash
-ng e2e
+```
+src/app/
+├── pages/        one folder per feature: salary-calculator, offer-comparison, vacation-planner
+├── component/    reusable UI: offer form, offer card, comparison table, navigation, calendar
+├── service/      taxes, exchange rates, public holidays, local storage, saved comparisons
+├── strategy/     gross → net and net → gross tax calculators
+├── util/         pure, framework-free logic: offer calculations and comparison rules
+├── pipe/         money formatting
+└── model/        TypeScript interfaces
+public/taxes.json Romanian tax rates used by the calculators
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+The visual language is described in [DESIGN.md](DESIGN.md).
 
-## Additional Resources
+## ⛏️ Built Using <a name = "built_using"></a>
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [Angular 21](https://angular.dev/): signals, standalone components, reactive forms, service worker
+- [TypeScript](https://www.typescriptlang.org/) and [RxJS](https://rxjs.dev/)
+- [Tailwind CSS 4](https://tailwindcss.com/): styling
+- [date-fns](https://date-fns.org/): date handling
+- [Vitest](https://vitest.dev/): unit tests
+- [Bun](https://bun.sh/): package manager and scripts
+- [Frankfurter API](https://frankfurter.dev/): currency exchange rates
+- [Nager.Date API](https://date.nager.at/): public holidays
+- [Cloudflare Pages](https://pages.cloudflare.com/): hosting
+
+## ✍️ Authors <a name = "authors"></a>
+
+- [@gabriel-rusu](https://github.com/gabriel-rusu): idea and development

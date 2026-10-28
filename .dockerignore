@@ -1,0 +1,11 @@
+node_modules
+dist
+.git
+.angular
+.wrangler
+.claude
+.github
+.idea
+.vscode
+.DS_Store
+assets

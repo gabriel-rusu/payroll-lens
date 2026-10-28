@@ -1,0 +1,17 @@
+services:
+  payroll-lens:
+    build:
+      context: .
+      dockerfile: assets/docker/Dockerfile
+    ports:
+      - "4200:4200"
+    develop:
+      watch:
+        - action: sync            # edits appear instantly, ng serve reloads
+          path: ./src
+          target: /app/src
+        - action: sync
+          path: ./public
+          target: /app/public
+        - action: rebuild         # new dependencies need a fresh install
+          path: package.json

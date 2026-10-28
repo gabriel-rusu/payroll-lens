@@ -1,5 +1,6 @@
 name: Deploy to Cloudflare Pages
 
+# main -> production; pull requests -> a preview URL for their branch
 on:
   push:
     branches:
@@ -7,6 +8,12 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
+
+# A newer push to the same branch replaces a deploy still in progress
+concurrency:
+  group: deploy-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -19,25 +26,32 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Angular 21 needs Node ^20.19, ^22.12 or >=24
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
 
+      # Same Bun version as assets/docker/Dockerfile
       - name: Install Bun
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version: "1.3.7"
 
       - name: Install dependencies
-        run: bun install
+        run: bun install --frozen-lockfile
 
       - name: Build application
         run: bun run build
 
+      # Pull requests from forks don't get the secrets, so they only build
       - name: Deploy to Cloudflare Pages
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist/payroll-lens/browser --project-name=payroll-lens
+          # Account ID is an identifier, not a credential, so it doesn't need to be a secret
+          accountId: 709faaa0fa75e69154579fef936c7a74
+          packageManager: bun
+          wranglerVersion: "4"
+          command: pages deploy dist/payroll-lens/browser --project-name=payroll-lens --branch=${{ github.head_ref || github.ref_name }}
