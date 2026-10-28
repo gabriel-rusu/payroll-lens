@@ -36,8 +36,20 @@ export const CurrencySymbol = {
   RON: 'RON',
 };
 
+export const CurrencyIsoCode = {
+  USD: 'USD',
+  EURO: 'EUR',
+  RON: 'RON',
+};
+
 export enum WorkPolicy {
   Hybrid = 'Hybrid',
   Remote = 'Remote',
   OnSite = 'On-Site',
 }
+
+export const WorkPolicySymbol = {
+  Hybrid: 'home_work',
+  Remote: 'language',
+  'On-Site': 'apartment',
+};

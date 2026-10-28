@@ -14,6 +14,7 @@ export interface Offer {
   vestingPeriod: number;
   vacationDays: number;
   workPolicy: WorkPolicy;
+  onSiteWorkDays: number;
   healthBenefits: HealthBenefits;
   perks: Perk[];
 }

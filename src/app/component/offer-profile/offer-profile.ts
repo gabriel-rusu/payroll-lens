@@ -123,6 +123,7 @@ export class OfferProfile implements ControlValueAccessor, OnInit, OnDestroy {
     vestingPeriod: [0, [Validators.min(0), Validators.max(100)]],
     vacationDays: [0, Validators.min(0)],
     workPolicy: [WorkPolicy.Hybrid, Validators.required],
+    onSiteWorkDays: [0, Validators.required],
     healthBenefits: [HealthBenefits.PrivateInsurance],
     perks: [[] as Perk[]],
   });
@@ -153,6 +154,22 @@ export class OfferProfile implements ControlValueAccessor, OnInit, OnDestroy {
       this.onChange(this.form.getRawValue());
       this.onTouched();
     });
+
+    this.form?.get('workPolicy')?.valueChanges.subscribe((policy: WorkPolicy) => {
+      const defaultDays = { [WorkPolicy.OnSite]: 5, [WorkPolicy.Remote]: 0, [WorkPolicy.Hybrid]: 1 };
+      this.form?.get('onSiteWorkDays')?.setValue(defaultDays[policy]);
+      this.syncOnSiteWorkDays(policy);
+    });
+  }
+
+  // On-site days are only editable for hybrid offers
+  private syncOnSiteWorkDays(policy: WorkPolicy) {
+    const onSiteWorkDays = this.form?.get('onSiteWorkDays');
+    if (policy == WorkPolicy.Hybrid) {
+      onSiteWorkDays?.enable({ emitEvent: false });
+    } else {
+      onSiteWorkDays?.disable({ emitEvent: false });
+    }
   }
 
   ngOnDestroy() {
@@ -163,6 +180,7 @@ export class OfferProfile implements ControlValueAccessor, OnInit, OnDestroy {
   writeValue(value: Offer): void {
     if (value) {
       this.form.setValue(value, { emitEvent: false }); // emitEvent:false avoids a loop
+      this.syncOnSiteWorkDays(value.workPolicy);
     }
   }
 

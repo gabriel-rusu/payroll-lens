@@ -25,7 +25,7 @@
         <select formControlName="salaryType"
                 class="w-full bg-surface-container-highest border-none rounded-lg p-4 focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all text-on-surface font-semibold appearance-none">
           @for (salaryType of supportedCSalaryType(); track salaryType) {
-            <option>{{ salaryType }}</option>
+            <option [value]="salaryType">{{ salaryType }}</option>
           }
         </select>
       </div>
@@ -36,7 +36,7 @@
           <select formControlName="salaryCurrency" #sCurrency
                   class="w-full bg-surface-container-highest border-none rounded-lg p-4 focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all text-on-surface font-semibold appearance-none">
             @for (currency of supportedCurrencies(); track currency) {
-              <option>{{ currency }}</option>
+              <option [value]="currency">{{ currency }}</option>
             }
           </select>
         </div>
@@ -46,7 +46,7 @@
           <select formControlName="frequency"
                   class="w-full bg-surface-container-highest border-none rounded-lg p-4 focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all text-on-surface font-semibold appearance-none">
             @for (frequency of supportedFrequencies(); track frequency) {
-              <option>{{ frequency }}</option>
+              <option [value]="frequency">{{ frequency }}</option>
             }
           </select>
         </div>
@@ -82,7 +82,7 @@
           <select formControlName="equityCurrency" #eCurrency
                   class="w-full bg-surface-container-highest border-none rounded-lg p-4 focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all text-on-surface font-semibold appearance-none">
             @for (currency of supportedCurrencies(); track currency) {
-              <option>{{ currency }}</option>
+              <option [value]="currency">{{ currency }}</option>
             }
           </select>
         </div>
@@ -107,7 +107,7 @@
                  placeholder="50,000" type="text" />
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-4">
+      <div class="grid grid-cols-3 gap-4">
         <div>
           <label class="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-2 ml-1">Vacation
             Days</label>
@@ -121,9 +121,15 @@
           <select formControlName="workPolicy"
                   class="w-full bg-surface-container-highest border-none rounded-lg p-4 focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all text-on-surface font-semibold appearance-none">
             @for (policy of supportedWorkPolicy(); track policy) {
-              <option>{{ policy }}</option>
+              <option [value]="policy">{{ policy }}</option>
             }
           </select>
+        </div>
+        <div>
+          <label class="block text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-2 ml-1">On-site work days</label>
+          <input formControlName="onSiteWorkDays"
+                 class="w-full bg-surface-container-highest border-none rounded-lg p-4 focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all placeholder:text-outline/50 text-on-surface font-semibold"
+                 placeholder="1" type="number" />
         </div>
       </div>
       <div>
@@ -132,7 +138,7 @@
         <select formControlName="healthBenefits"
                 class="w-full bg-surface-container-highest border-none rounded-lg p-4 focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all text-on-surface font-semibold appearance-none">
           @for (benefit of supportedHealthBenefits(); track benefit) {
-            <option>{{ benefit }}</option>
+            <option [value]="benefit">{{ benefit }}</option>
           }
         </select>
       </div>

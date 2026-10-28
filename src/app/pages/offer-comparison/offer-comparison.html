@@ -4,10 +4,13 @@
   <div class="max-w-5xl mx-auto">
     <!-- Header Section -->
     <div class="mb-12">
-      <h1 class="text-5xl font-extrabold text-on-surface tracking-tight mb-4">Add Comparison Details</h1>
+      <h1 class="page-title mb-4">
+        {{ offersAreEditable ? 'Add Comparison Details' : 'Offer Comparison' }}
+      </h1>
       <p class="text-on-surface-variant text-lg max-w-2xl leading-relaxed">
-        Compare two employment opportunities with architectural precision. Enter your offer specifics to visualize total
-        rewards, long-term equity projections, and lifestyle impacts.
+        Compare two job offers side by side: gross and take-home pay after tax in one currency, bonus and equity,
+        perks, work policy and vacation days. The better offer is highlighted per category and overall, and comparisons
+        are saved so you can reopen them later.
       </p>
     </div>
     @if (offersAreEditable) {
@@ -21,16 +24,16 @@
         </div>
         <!-- Footer Actions -->
         <div class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-outline-variant/10">
-          <div class="mb-6 md:mb-0">
-            <p class="text-on-surface-variant text-sm font-medium italic opacity-75">
-              * Data is encrypted and stored in your private vault for future reference.
-            </p>
-          </div>
-          <div class="flex items-center space-x-4 w-full md:w-auto">
+          <div class="flex flex-wrap items-center gap-4 w-full md:w-auto">
             <button
               class="flex-1 md:flex-none px-8 py-4 text-on-surface-variant font-bold border border-outline-variant/20 rounded-lg hover:bg-surface-container-low transition-all active:scale-95"
-              type="button">
-              Save Draft
+              type="button" (click)="newComparison()">
+              New
+            </button>
+            <button
+              class="flex-1 md:flex-none px-8 py-4 text-on-surface-variant font-bold border border-outline-variant/20 rounded-lg hover:bg-surface-container-low transition-all active:scale-95"
+              type="button" (click)="save()">
+              {{ activeId() ? 'Save Changes' : 'Save' }}
             </button>
             <button
               class="flex-1 md:flex-none px-12 py-4 bg-gradient-to-br from-primary bg-black to-primary-container text-on-primary font-bold rounded-lg shadow-xl hover:shadow-2xl hover:translate-y-[-2px] transition-all active:scale-95"
@@ -42,7 +45,27 @@
       </form>
     } @else {
       <app-comparisson-overview [offers]="finalOffers"></app-comparisson-overview>
+      <div class="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-outline-variant/10">
+        <div class="flex flex-wrap items-center gap-4 w-full md:w-auto">
+          <button
+            class="flex-1 md:flex-none px-8 py-4 text-on-surface-variant font-bold border border-outline-variant/20 rounded-lg hover:bg-surface-container-low transition-all active:scale-95"
+            type="button" (click)="newComparison()">
+            New
+          </button>
+          <button
+            class="flex-1 md:flex-none px-12 py-4 bg-gradient-to-br from-primary bg-black to-primary-container text-on-primary font-bold rounded-lg shadow-xl hover:shadow-2xl hover:translate-y-[-2px] transition-all active:scale-95"
+            type="button" (click)="offersAreEditable = true">
+            Edit
+          </button>
+        </div>
+      </div>
     }
+    <!-- Saved Comparisons -->
+    <section class="mt-16">
+      <h2 class="font-headline text-2xl font-bold text-on-surface mb-6">Saved Comparisons</h2>
+      <app-comparison-history [comparisons]="savedComparisons()" [activeId]="activeId()"
+                              (opened)="open($event)" (removed)="remove($event)" />
+    </section>
     <!--    &lt;!&ndash; Secondary Insight Bento Section &ndash;&gt;-->
     <!--    <section class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-6">-->
     <!--      <div class="md:col-span-2 bg-surface-container-high p-8 rounded-xl relative overflow-hidden group">-->

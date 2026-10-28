@@ -1,96 +1,43 @@
-import { Component, computed, input, Input, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { FinalOffer } from '../../model/offer-comparison';
-import { SalaryCalculator } from '../../pages/salary-calculator/salary-calculator';
-import { OfferOverview } from '../../model/offer.overview';
 import { FinalOfferOverview } from '../../model/final.offer.overview';
 import { Offer } from '../../model/offer';
-import { Currency, CurrencySymbol, Frequency, IncomeType } from '../../util/constants';
-import { Tax } from '../../model/tax';
-import { map } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { BaseCalculatorStrategy } from '../../strategy/base-calculator.strategy';
-import { CalculatorFactory } from '../../strategy/calculator.factory';
-import { Income } from '../../model/income';
-import { DecimalPipe, formatCurrency } from '@angular/common';
+import { ConversionRates } from '../../model/exchange.rate';
+import { TaxService } from '../../service/tax.service';
+import { ExchangeService } from '../../service/exchange.service';
+import { buildOfferOverview } from '../../util/offer.calculations';
+import { compareOffers } from '../../util/offer.comparison';
+import { OfferCard } from '../offer-card/offer-card';
+import { ComparisonLabels } from '../comparison-labels/comparison-labels';
 
 @Component({
   selector: 'app-comparisson-overview',
-  imports: [DecimalPipe],
+  imports: [OfferCard, ComparisonLabels],
   templateUrl: './comparison-overview.component.html',
   styleUrl: './comparison-overview.component.css',
 })
-export class ComparisonOverview implements OnInit {
+export class ComparisonOverview {
   offers = input.required<FinalOffer>();
-  overview = computed<FinalOfferOverview>(() => {
-    let overviewA: OfferOverview = this.getOverview(this.offers().positionAOffer);
-    let overviewB: OfferOverview = this.getOverview(this.offers().positionBOffer);
-    return { offerA: overviewA, offerB: overviewB };
+
+  private taxes = inject(TaxService).taxes;
+  private exchangeService = inject(ExchangeService);
+  // Both offers are expressed in Offer A's salary currency so they can be compared
+  private comparisonCurrency = computed(() => this.offers().positionAOffer.salaryCurrency);
+  private conversionRates = rxResource({
+    params: () => ({
+      target: this.comparisonCurrency(),
+      sources: [this.offers().positionAOffer.salaryCurrency, this.offers().positionBOffer.salaryCurrency],
+    }),
+    stream: ({ params }) => this.exchangeService.conversionRates(params.target, params.sources),
+    defaultValue: {},
   });
 
-  private taxes: WritableSignal<Tax[]> = signal([]);
-
-  constructor(private httpClient: HttpClient) {}
-
-  ngOnInit() {
-    this.httpClient
-      .get<Tax[]>('./taxes.json')
-      .pipe(map((res) => res.map((tax) => Tax.from(tax))))
-      .subscribe({
-        next: (taxes: Tax[]) => {
-          this.taxes.set(taxes);
-        },
-      });
-  }
-
-  private getOverview(positionOffer: Offer): OfferOverview {
-    return {
-      jobTitle: positionOffer.jobTitle,
-      companyName: positionOffer.companyName,
-      baseCompensation: 1000,
-      baseCompensationNote: 'TODO',
-      takeHomePay: this.computeTakeHomePay(positionOffer),
-      takeHomePayNote: this.composeNoteAboutEquity(positionOffer),
-      workPolicy: positionOffer.workPolicy,
-      perks: positionOffer.perks,
-      pto: positionOffer.vacationDays,
-      isWinner: true,
-    };
-  }
-
-  private computeTakeHomePay(positionOffer: Offer) {
-    let salary = positionOffer.baseSalary;
-    if (positionOffer.frequency == Frequency.Annually) {
-      salary /= 12;
-    }
-    if (positionOffer.salaryType == IncomeType.GROSS) {
-      salary = this.afterTaxIncome(salary);
-    }
-
-    // TODO: add currency conversion
-    salary += (salary * positionOffer.annualBonusPercentage) / 100;
-
-    return salary;
-  }
-
-  private afterTaxIncome(salary: number) {
-    return CalculatorFactory.get(IncomeType.GROSS).computeTaxRates(
-      new Income('', '', salary, ''),
-      this.taxes(),
-    ).netIncome;
-  }
-
-  private composeNoteAboutEquity(positionOffer: Offer) {
-    let monthlyEquity = 0;
-    let defaultMessage = `with annual bonus included in the above numbers`;
-    if (positionOffer.equity != null && positionOffer.equity > 0) {
-      monthlyEquity = positionOffer.equity / (positionOffer.vestingPeriod * 12);
-    } else {
-      return defaultMessage;
-    }
-
-    return (
-      defaultMessage +
-      `and ~${CurrencySymbol[positionOffer.equityCurrency]}${monthlyEquity.toFixed(2)}/month pre tax or ~${CurrencySymbol[positionOffer.equityCurrency]}${(monthlyEquity * 0.9).toFixed(2)}/month after tax from the equity received in the first ${positionOffer.vestingPeriod * 12} months`
-    );
-  }
+  overview = computed<FinalOfferOverview>(() => {
+    // Without rates (e.g. the request failed) each offer stays in its own currency
+    const rates: ConversionRates = this.conversionRates.hasValue() ? this.conversionRates.value() : {};
+    const overviewOf = (offer: Offer) =>
+      buildOfferOverview(offer, this.taxes(), this.comparisonCurrency(), rates);
+    return compareOffers(overviewOf(this.offers().positionAOffer), overviewOf(this.offers().positionBOffer));
+  });
 }

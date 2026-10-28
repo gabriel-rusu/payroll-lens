@@ -5,8 +5,9 @@
   <!-- Content Canvas -->
   <div class="sm:p-12 p-4 pt-20 sm:pt-10 max-w-7xl mx-auto">
     <header class="mb-12">
-      <h2 class="text-4xl font-extrabold font-headline tracking-tighter text-on-surface mb-2">Salary Calculator</h2>
-      <p class="text-on-surface-variant font-medium">Architecting personal wealth with precision.</p>
+      <h1 class="page-title mb-2">Salary Calculator</h1>
+      <p class="text-on-surface-variant font-medium">Convert between gross and net pay, monthly or annual, under Romanian tax rules,
+        with every deduction and your employer's total cost broken down.</p>
     </header>
     <div class="grid grid-cols-12 gap-8">
       <!-- Left Column: Inputs -->
@@ -98,7 +99,7 @@
               <h4 class="text-on-primary-container text-sm font-bold uppercase tracking-widest mb-2">{{ frequency() == 'Annually' ? 'Monthly' : 'Total' }} Take-home Pay</h4>
               <div class="flex items-baseline gap-2">
                 <span
-                  class="sm:text-6xl md:text-4xl text-4xl font-extrabold font-headline tracking-tighter text-tertiary-fixed">{{ currency() != 'RON' ? currency() : '' }} {{ incomeBreakdown().netIncome != null ? formatted(frequency() == 'Annually' ? incomeBreakdown().netIncome / 12 : incomeBreakdown().netIncome * 12) : '' }} </span>{{ currency() == 'RON' ? currency() : '' }}
+                  class="text-4xl font-extrabold font-headline tracking-tighter text-tertiary-fixed">{{ currency() != 'RON' ? currency() : '' }} {{ incomeBreakdown().netIncome != null ? formatted(frequency() == 'Annually' ? incomeBreakdown().netIncome / 12 : incomeBreakdown().netIncome * 12) : '' }} </span>{{ currency() == 'RON' ? currency() : '' }}
                 <span class="text-xl font-medium opacity-60">{{ frequency() == 'Annually' ? '/ month' : '/ year' }}</span>
               </div>
             </div>

@@ -15,6 +15,7 @@ export type OfferForm = FormGroup<{
   vestingPeriod: FormControl<number>;
   vacationDays: FormControl<number>;
   workPolicy: FormControl<WorkPolicy>;
+  onSiteWorkDays: FormControl<number>;
   healthBenefits: FormControl<HealthBenefits>;
   perks: FormControl<Perk[]>;
 }>;

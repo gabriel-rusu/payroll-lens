@@ -63,3 +63,11 @@
   --font-body: "Inter", sans-serif;
   --font-label: "Inter", sans-serif;
 }
+
+/* Shared heading style for every page's main title: one size on every page and screen,
+   always larger and bolder than the biggest figures (text-4xl, extrabold).
+   Unlayered on purpose: the Tailwind CDN script in index.html injects an unlayered h1-h6 reset
+   that would override anything inside @layer. */
+.page-title {
+  @apply font-headline text-5xl font-black tracking-tight text-on-surface;
+}
