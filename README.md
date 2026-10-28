@@ -141,8 +141,6 @@ src/app/
 public/taxes.json Romanian tax rates used by the calculators
 ```
 
-The visual language is described in [DESIGN.md](DESIGN.md).
-
 ## ⛏️ Built Using <a name = "built_using"></a>
 
 - [Angular 21](https://angular.dev/): signals, standalone components, reactive forms, service worker
