@@ -12,12 +12,16 @@ export class StorageService {
       // @ts-ignore
       let previousItems = JSON.parse(localStorage.getItem(key));
       if (previousItems && previousItems instanceof Array) {
-        previousItems = previousItems.push(value);
+        previousItems.push(value);
       } else {
         previousItems = [previousItems, value];
       }
       localStorage.setItem(key, JSON.stringify(previousItems));
     }
+  }
+
+  set(key: string, value: any) {
+    localStorage.setItem(key, JSON.stringify(value));
   }
 
   get(key: string) {
@@ -27,5 +31,9 @@ export class StorageService {
     } else {
       return null;
     }
+  }
+
+  remove(key: string) {
+    localStorage.removeItem(key);
   }
 }

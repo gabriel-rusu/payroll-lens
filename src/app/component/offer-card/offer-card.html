@@ -1,0 +1,94 @@
+@let offer = this.offer();
+@if (offer.isWinner) {
+  <!-- Winner Badge -->
+  <div class="absolute top-0 right-0 bg-tertiary-fixed px-6 py-2 rounded-bl-xl flex items-center gap-2">
+    <span class="material-symbols-outlined text-on-tertiary-fixed text-sm" data-icon="stars"
+          style="font-variation-settings: 'FILL' 1;">stars</span>
+    <span class="text-[10px] font-bold uppercase tracking-widest text-on-tertiary-fixed">Recommended</span>
+  </div>
+}
+<!-- Header -->
+<div class="pb-2">
+  <div class="flex justify-between items-start mb-4">
+    <span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase"
+          [class]="labelCss()">{{ label() }}</span>
+  </div>
+  <h3 class="font-headline text-3xl font-bold text-on-surface">{{ offer.jobTitle }}</h3>
+  <p class="font-body text-on-surface-variant text-sm">{{ offer.companyName }}</p>
+</div>
+<!-- Gross Salary -->
+<div class="min-h-36 py-8 flex flex-col justify-center">
+  <div class="font-headline text-4xl font-extrabold tracking-tight text-on-surface">
+    {{ offer.baseCompensation | money: offer.baseCompensationCurrency }}
+  </div>
+  @if (offer.wins.baseCompensation) {
+    <div class="flex items-center gap-2 text-xs text-on-tertiary-container font-bold mt-1">
+      <span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+      +{{ offer.baseCompensationDelta! | money: offer.baseCompensationCurrency }}/month higher
+    </div>
+  } @else {
+    <div class="text-xs text-on-surface-variant mt-1">{{ offer.baseCompensationNote }}</div>
+  }
+</div>
+<!-- Net Salary -->
+<div class="min-h-36 py-8 flex flex-col justify-center">
+  <div class="font-headline text-4xl font-extrabold tracking-tight text-on-surface">
+    {{ offer.takeHomePay | money: offer.baseCompensationCurrency }}
+  </div>
+  @if (offer.wins.takeHomePay) {
+    <div class="text-xs text-on-tertiary-container font-bold mt-1">
+      WINNER: +{{ offer.takeHomePayDelta! | money: offer.baseCompensationCurrency }}/month
+    </div>
+  }
+  <div class="text-xs text-on-surface-variant mt-1" [title]="offer.takeHomePayNote"
+       [class]="offer.wins.takeHomePay ? 'line-clamp-1' : 'line-clamp-2'">
+    {{ offer.takeHomePayNote }}
+  </div>
+</div>
+<!-- Benefits -->
+<div class="min-h-36 py-8 flex items-center border-t border-outline-variant/20">
+  <div class="flex flex-wrap gap-2">
+    @for (perk of offer.perks; track perk.name) {
+      <span class="px-3 py-1.5 rounded-sm text-xs flex items-center gap-1.5"
+            [class]="offer.wins.perks
+              ? 'bg-tertiary-fixed/30 border border-tertiary-fixed/40 font-semibold'
+              : 'bg-surface-container-highest font-medium'">
+        <span class="material-symbols-outlined text-base"
+              [attr.data-icon]="perk.iconName">{{ perk.iconSymbol }}</span> {{ perk.name }}
+      </span>
+    } @empty {
+      <span class="text-xs text-on-surface-variant">No perks listed</span>
+    }
+  </div>
+</div>
+<!-- Work Policy -->
+<div class="min-h-36 py-8 flex items-center">
+  <div class="flex items-center gap-3">
+    <span class="material-symbols-outlined text-2xl"
+          [class]="offer.wins.workPolicy ? 'text-on-tertiary-container' : 'text-primary'"
+          [style.font-variation-settings]="offer.wins.workPolicy ? '\'FILL\' 1' : null"
+          [attr.data-icon]="workPolicySymbol()">{{ workPolicySymbol() }}</span>
+    <div>
+      <div class="font-bold text-on-surface">{{ offer.workPolicy }}</div>
+      <div class="text-xs"
+           [class]="offer.wins.workPolicy ? 'text-on-tertiary-container font-bold' : 'text-on-surface-variant'">
+        @switch (offer.workPolicy) {
+          @case (WorkPolicy.Hybrid) { {{ offer.onSiteWorkDays }} days in-office }
+          @case (WorkPolicy.Remote) { Work from anywhere }
+          @case (WorkPolicy.OnSite) { Work in-office required }
+        }
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Vacation -->
+<div class="min-h-36 py-8 flex items-center">
+  <div class="font-headline text-3xl font-bold text-on-surface">{{ offer.pto }} <span
+    class="text-sm font-body font-normal text-on-surface-variant">Days</span></div>
+  @if (offer.wins.pto) {
+    <div
+      class="ml-4 bg-tertiary-fixed px-2 py-0.5 rounded text-[10px] font-black uppercase text-on-tertiary-fixed">
+      Winner
+    </div>
+  }
+</div>

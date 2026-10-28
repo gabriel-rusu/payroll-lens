@@ -2,9 +2,8 @@ import { Component, computed, OnInit, signal, WritableSignal } from '@angular/co
 import { SideNavBar } from '../../component/side-nav-bar/side-nav-bar';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { DecimalPipe, NgClass } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
 import { Tax } from '../../model/tax';
+import { TaxService } from '../../service/tax.service';
 import { CalculatorFactory } from '../../strategy/calculator.factory';
 import { IncomeType, TaxType } from '../../util/constants';
 import { Income } from '../../model/income';
@@ -36,13 +35,10 @@ export class SalaryCalculator implements OnInit {
   private employerTotal: number = 0;
   private exchangeRates: ExchangeRate[] = [];
 
-  constructor(private httpClient: HttpClient, private exchangeService: ExchangeService) {}
+  constructor(private taxService: TaxService, private exchangeService: ExchangeService) {}
 
   ngOnInit(): void {
-    this.httpClient
-      .get<Tax[]>('./taxes.json')
-      .pipe(map((res) => res.map((tax) => Tax.from(tax))))
-      .subscribe({
+    this.taxService.taxes$.subscribe({
         next: (taxes: Tax[]) => {
           this.taxes.set(taxes);
           this.compute(taxes);
