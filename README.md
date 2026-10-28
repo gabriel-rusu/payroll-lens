@@ -6,6 +6,7 @@
 
 <div align="center">
 
+[![Deploy](https://github.com/gabriel-rusu/payroll-lens/actions/workflows/deploy-cloudflare.yml/badge.svg?branch=main)](https://github.com/gabriel-rusu/payroll-lens/actions/workflows/deploy-cloudflare.yml)
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
 [![GitHub Issues](https://img.shields.io/github/issues/gabriel-rusu/payroll-lens.svg)](https://github.com/gabriel-rusu/payroll-lens/issues)
 [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/gabriel-rusu/payroll-lens.svg)](https://github.com/gabriel-rusu/payroll-lens/pulls)
@@ -123,7 +124,8 @@ bun run deploy
 ```
 
 The `_redirects` file copied into the build sends every route to `index.html`, so refreshing a page like `/offer-comparison` works.
-See [DEPLOYMENT.md](DEPLOYMENT.md) for the full guide: API token setup, manual uploads and custom domains.
+The workflow needs one repository secret, `CLOUDFLARE_API_TOKEN`: a Cloudflare API token with the
+**Account → Cloudflare Pages → Edit** permission, added under **Settings → Secrets and variables → Actions**.
 
 ## 🗂️ Project Structure <a name = "structure"></a>
 
